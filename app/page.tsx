@@ -49,7 +49,7 @@ const sections = [
     id: "salon",
     title: "Private Salons",
     subtitle: "Intimate dining rooms for those moments that require absolute discretion.",
-    image: "/images/salon.jpg",
+    image: "/images/private1.png",
   },
 ]
 
