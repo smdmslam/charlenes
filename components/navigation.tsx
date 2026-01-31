@@ -656,7 +656,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
                                   <input type="radio" name="membership" value="founder" className="mr-3 accent-gold" />
-                                  <span className="text-cream">Founder</span>
+                                  <span className="text-cream">Founder <span className="text-cream/70">(100 max.)</span></span>
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>
