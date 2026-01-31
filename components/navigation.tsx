@@ -3,6 +3,10 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown, ChevronUp } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface NavigationProps {
   sections: Array<{ id: string; title: string }>
@@ -14,6 +18,8 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [isAboutOpen, setIsAboutOpen] = useState(false)
+  const [isExperienceOpen, setIsExperienceOpen] = useState(false)
+  const [isMembershipOpen, setIsMembershipOpen] = useState(false)
   return (
     <>
       {/* Top header */}
@@ -183,7 +189,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   {/* THE EXPERIENCE */}
                   <button
                     onClick={() => {
-                      // TODO: Navigate to experience section
+                      setIsExperienceOpen(true)
                       setIsMenuOpen(false)
                     }}
                     className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
@@ -194,12 +200,12 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   {/* MEMBERSHIP */}
                   <button
                     onClick={() => {
-                      // TODO: Navigate to membership section
+                      setIsMembershipOpen(true)
                       setIsMenuOpen(false)
                     }}
                     className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
                   >
-                    MEMBERSHIP
+                    Apply for Membership
                   </button>
 
                   {/* GALLERY */}
@@ -308,31 +314,11 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   </div>
                   
                   <p className="text-lg md:text-xl text-cream/90 leading-relaxed italic pl-8 md:pl-12 border-l-2 border-gold/30">
-                    "A cultural hospitality platform at the intersection of luxury, art, cuisine, and high-trust global relationships—built for people defined by intellect, achievement, and discretion rather than pedigree alone."
+                    "A cultural hospitality platform at the intersection of luxury, art, cuisine, and high-trust global relationships—built for people defined by intellect, achievement, and discretion."
                   </p>
                   
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
                     A place that reflects the evolution of culture itself: global, intelligent, emotionally resonant, and unmistakably rare. In the heart of Mayfair, we propose a new kind of cultural hospitality platform—one that is not designed to follow precedent, but to extend it.
-                  </p>
-                  
-                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
-                    The project is structured as a layered experience.
-                  </p>
-                  
-                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
-                    At street level, Charlene's opens with a Michelin-calibre restaurant that engages the city directly — confident, composed, and uncompromising in quality. It establishes the tone of the house: serious cuisine, intelligent energy, and quiet relevance.
-                  </p>
-                  
-                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
-                    Ascending through the building, the atmosphere shifts. Members' bars, lounges, and salons are arranged as a sequence of increasingly private spaces, designed for conversation, continuity, and discretion rather than spectacle. Service becomes more anticipatory, more personal — shaped by familiarity rather than formality.
-                  </p>
-                  
-                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
-                    At the upper levels, private dining rooms and salons provide a setting for focused engagement: hosting, negotiation, celebration, and retreat. Each space is conceived as part of a coherent journey, where architecture, art, and hospitality work together to support long-form presence.
-                  </p>
-                  
-                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
-                    The result is a layered experience — open where it should be, protected where it must be — allowing members to move fluidly between public vitality and private assurance within a single, unified house.
                   </p>
                   
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
@@ -423,6 +409,315 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       </p>
                     </div>
                   </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Experience Modal */}
+      <AnimatePresence>
+        {isExperienceOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
+              onClick={() => setIsExperienceOpen(false)}
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[103] flex items-center justify-center p-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-background border border-gold/20 max-w-3xl w-full max-h-[80vh] overflow-y-auto">
+                {/* Close Button */}
+                <div className="sticky top-0 bg-background border-b border-gold/20 flex justify-end p-6">
+                  <button
+                    onClick={() => setIsExperienceOpen(false)}
+                    className="p-2 text-cream hover:text-gold transition-colors duration-300"
+                    aria-label="Close"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                
+                {/* Content */}
+                <div className="p-8 md:p-12 space-y-6 font-sans">
+                  <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-8">
+                    THE EXPERIENCE
+                  </h1>
+                  
+                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
+                    The project is structured as a layered experience.
+                  </p>
+                  
+                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
+                    At street level, Charlene's opens with a Michelin-calibre restaurant that engages the city directly — confident, composed, and uncompromising in quality. It establishes the tone of the house: serious cuisine, intelligent energy, and quiet relevance.
+                  </p>
+                  
+                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
+                    Ascending through the building, the atmosphere shifts. Members' bars, lounges, and salons are arranged as a sequence of increasingly private spaces, designed for conversation, continuity, and discretion rather than spectacle. Service becomes more anticipatory, more personal — shaped by familiarity rather than formality.
+                  </p>
+                  
+                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
+                    At the upper levels, private dining rooms and salons provide a setting for focused engagement: hosting, negotiation, celebration, and retreat. Each space is conceived as part of a coherent journey, where architecture, art, and hospitality work together to support long-form presence.
+                  </p>
+                  
+                  <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
+                    The result is a layered experience — open where it should be, protected where it must be — allowing members to move fluidly between public vitality and private assurance within a single, unified house.
+                  </p>
+                  
+                  {/* CTA Button */}
+                  <div className="pt-8 mt-8 border-t border-gold/20">
+                    <button
+                      onClick={() => {
+                        setIsExperienceOpen(false)
+                        setIsMembershipOpen(true)
+                      }}
+                      className="w-full py-4 px-8 border border-gold/50 text-cream hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase tracking-[0.2em] text-sm font-light"
+                    >
+                      Apply for Membership
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Apply for Membership Modal */}
+      <AnimatePresence>
+        {isMembershipOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
+              onClick={() => setIsMembershipOpen(false)}
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[103] flex items-center justify-center p-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-background border border-gold/20 max-w-3xl w-full max-h-[80vh] overflow-y-auto">
+                {/* Close Button */}
+                <div className="sticky top-0 bg-background border-b border-gold/20 flex justify-end p-6">
+                  <button
+                    onClick={() => setIsMembershipOpen(false)}
+                    className="p-2 text-cream hover:text-gold transition-colors duration-300"
+                    aria-label="Close"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                
+                {/* Content */}
+                <div className="p-8 md:p-12 space-y-8 font-sans">
+                  <div className="text-center mb-8">
+                    <h1 className="text-4xl md:text-5xl font-light tracking-[0.1em] text-cream mb-2">
+                      Charlene's
+                    </h1>
+                    <h2 className="text-3xl md:text-4xl font-light tracking-[0.1em] text-gold">
+                      Application for Membership
+                    </h2>
+                  </div>
+                  
+                  <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                    {/* Full Name and Gender */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="fullName" className="text-cream">Full Name</Label>
+                        <Input id="fullName" name="fullName" className="bg-background border-gold/20 text-cream" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="gender" className="text-cream">Gender</Label>
+                        <Select name="gender">
+                          <SelectTrigger className="bg-background border-gold/20 text-cream">
+                            <SelectValue placeholder="Select gender" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="male">Male</SelectItem>
+                            <SelectItem value="female">Female</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                            <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    
+                    {/* Address */}
+                    <div className="space-y-2">
+                      <Label htmlFor="address" className="text-cream">Address</Label>
+                      <Textarea id="address" name="address" rows={3} className="bg-background border-gold/20 text-cream" />
+                    </div>
+                    
+                    {/* Country */}
+                    <div className="space-y-2">
+                      <Label htmlFor="country" className="text-cream">Country</Label>
+                      <Input id="country" name="country" className="bg-background border-gold/20 text-cream" />
+                    </div>
+                    
+                    {/* Telephone 1 and Telephone 2 */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="telephone1" className="text-cream">Telephone 1</Label>
+                        <Input id="telephone1" name="telephone1" type="tel" className="bg-background border-gold/20 text-cream" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="telephone2" className="text-cream">Telephone 2</Label>
+                        <Input id="telephone2" name="telephone2" type="tel" className="bg-background border-gold/20 text-cream" />
+                      </div>
+                    </div>
+                    
+                    {/* Email and LinkedIn */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="email" className="text-cream">Email</Label>
+                        <Input id="email" name="email" type="email" className="bg-background border-gold/20 text-cream" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="linkedin" className="text-cream">LinkedIn (URL)</Label>
+                        <Input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/..." className="bg-background border-gold/20 text-cream" />
+                      </div>
+                    </div>
+                    
+                    {/* Date of Birth and Nationality */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="dateOfBirth" className="text-cream">Date of Birth</Label>
+                        <Input id="dateOfBirth" name="dateOfBirth" type="date" className="bg-background border-gold/20 text-cream" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="nationality" className="text-cream">Nationality</Label>
+                        <Input id="nationality" name="nationality" className="bg-background border-gold/20 text-cream" />
+                      </div>
+                    </div>
+                    
+                    {/* Occupation and Company Name */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="occupation" className="text-cream">Occupation</Label>
+                        <Input id="occupation" name="occupation" className="bg-background border-gold/20 text-cream" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="companyName" className="text-cream">Company Name</Label>
+                        <Input id="companyName" name="companyName" className="bg-background border-gold/20 text-cream" />
+                      </div>
+                    </div>
+                    
+                    {/* Company Address */}
+                    <div className="space-y-2">
+                      <Label htmlFor="companyAddress" className="text-cream">Company Address</Label>
+                      <Textarea id="companyAddress" name="companyAddress" rows={3} className="bg-background border-gold/20 text-cream" />
+                    </div>
+                    
+                    {/* Personal Interests */}
+                    <div className="space-y-2">
+                      <Label htmlFor="personalInterests" className="text-cream">Personal Interests</Label>
+                      <Textarea id="personalInterests" name="personalInterests" rows={4} className="bg-background border-gold/20 text-cream" />
+                    </div>
+                    
+                    {/* Membership Selection */}
+                    <div className="space-y-4 pt-4 border-t border-gold/20">
+                      <Label className="text-cream text-lg">Membership Type</Label>
+                      
+                      {/* Membership Table */}
+                      <div className="overflow-x-auto">
+                        <table className="w-full border-collapse">
+                          <thead>
+                            <tr className="border-b border-gold/20">
+                              <th className="text-left py-3 px-4 text-cream font-light uppercase tracking-[0.1em] text-sm">Membership</th>
+                              <th className="text-right py-3 px-4 text-cream font-light uppercase tracking-[0.1em] text-sm">Annual Fee</th>
+                              <th className="text-right py-3 px-4 text-cream font-light uppercase tracking-[0.1em] text-sm">Membership Fee</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="border-b border-gold/10">
+                              <td className="py-3 px-4">
+                                <label className="flex items-center cursor-pointer">
+                                  <input type="radio" name="membership" value="founder" className="mr-3 accent-gold" />
+                                  <span className="text-cream">Founder</span>
+                                </label>
+                              </td>
+                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£10,000</td>
+                            </tr>
+                            <tr className="border-b border-gold/10">
+                              <td className="py-3 px-4">
+                                <label className="flex items-center cursor-pointer">
+                                  <input type="radio" name="membership" value="standard" className="mr-3 accent-gold" />
+                                  <span className="text-cream">Standard</span>
+                                </label>
+                              </td>
+                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£1,500</td>
+                            </tr>
+                            <tr className="border-b border-gold/10">
+                              <td className="py-3 px-4">
+                                <label className="flex items-center cursor-pointer">
+                                  <input type="radio" name="membership" value="premium" className="mr-3 accent-gold" />
+                                  <span className="text-cream">Premium</span>
+                                </label>
+                              </td>
+                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£3,000</td>
+                            </tr>
+                            <tr>
+                              <td className="py-3 px-4">
+                                <label className="flex items-center cursor-pointer">
+                                  <input type="radio" name="membership" value="vip" className="mr-3 accent-gold" />
+                                  <span className="text-cream">VIP</span>
+                                </label>
+                              </td>
+                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£5,000</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                      {/* Membership Fee Note */}
+                      <p className="text-sm text-cream/70 italic mt-4">
+                        * Membership Fees are charged one time only.
+                      </p>
+                    </div>
+                    
+                    {/* Personal Biography */}
+                    <div className="space-y-2 pt-4 border-t border-gold/20">
+                      <Label htmlFor="personalBiography" className="text-cream">Personal Biography</Label>
+                      <Textarea id="personalBiography" name="personalBiography" rows={6} className="bg-background border-gold/20 text-cream" placeholder="Please provide a brief biography..." />
+                    </div>
+                    
+                    {/* Submit Button */}
+                    <div className="pt-6">
+                      <button
+                        type="submit"
+                        className="w-full py-4 px-8 border border-gold/50 text-cream hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase tracking-[0.2em] text-sm font-light"
+                      >
+                        Submit Application
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </motion.div>
