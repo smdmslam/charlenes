@@ -19,26 +19,17 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'London Private Members | Mayfair',
-  description: 'A cultural work, built to last in the heart of London. An invitation-only members club in Mayfair.',
-  keywords: ['private members club', 'Mayfair', 'London', 'luxury', 'exclusive'],
+  title: "Charlene's | Private Members Club | Mayfair",
+  description: "A cultural work, built to last in the heart of London. An invitation-only members club in Mayfair.",
+  keywords: ['private members club', 'Mayfair', 'London', 'luxury', 'exclusive', "Charlene's"],
   openGraph: {
-    title: 'London Private Members | Mayfair',
-    description: 'A cultural work, built to last in the heart of London.',
+    title: "Charlene's | Private Members Club | Mayfair",
+    description: "A cultural work, built to last in the heart of London.",
     type: 'website',
   },
-  generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/favicon.svg',
-        type: 'image/svg+xml',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
     apple: '/apple-icon.png',
   },
 }

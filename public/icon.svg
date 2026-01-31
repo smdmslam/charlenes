@@ -1,4 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#1a3a2e"/>
-  <text x="16" y="23" font-family="Georgia, 'Cormorant Garamond', serif" font-size="20" font-weight="600" fill="#d4af37" text-anchor="middle" dominant-baseline="middle">C</text>
+  <rect width="32" height="32" fill="#729588"/>
+  <text x="16" y="16" font-family="Georgia, 'Cormorant Garamond', serif" font-size="22" font-weight="600" fill="#ffffff" text-anchor="middle" dominant-baseline="central">C</text>
 </svg>
