@@ -885,6 +885,16 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <p>Switzerland</p>
                         <p>Grosspeter Tower, Grosspeteranlage 29</p>
                         <p>4052 Basel</p>
+                        <p>
+                          <a 
+                            href="https://www.dmwfinancegroup.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-gold hover:text-gold-muted transition-colors duration-300 underline"
+                          >
+                            www.dmwfinancegroup.com
+                          </a>
+                        </p>
                       </div>
                     </div>
                   </div>
