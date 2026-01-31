@@ -20,6 +20,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isExperienceOpen, setIsExperienceOpen] = useState(false)
   const [isMembershipOpen, setIsMembershipOpen] = useState(false)
+  const [isPhilanthropyOpen, setIsPhilanthropyOpen] = useState(false)
   return (
     <>
       {/* Top header */}
@@ -208,6 +209,17 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     Apply for Membership
                   </button>
 
+                  {/* PHILANTHROPY */}
+                  <button
+                    onClick={() => {
+                      setIsPhilanthropyOpen(true)
+                      setIsMenuOpen(false)
+                    }}
+                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                  >
+                    Philanthropy
+                  </button>
+
                   {/* GALLERY */}
                   <div className="flex flex-col gap-4">
                     <button
@@ -309,7 +321,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   {/* Opening Message */}
                   <div className="mb-8">
                     <p className="text-xl md:text-2xl text-cream font-light tracking-[0.1em]">
-                      Charlene's is scheduled to open January 2027
+                      Charlene's is scheduled to open March 2027
                     </p>
                   </div>
                   
@@ -322,11 +334,11 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   </p>
                   
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
-                    Technology plays a role. Advanced personalization and operational intelligence are embedded quietly, enabling anticipatory service, comfort, and emotional ease—felt rather than seen. The experience is inclusive by design, consciously welcoming women, families, collectors, and global members whose expectations extend beyond the conventions of legacy clubs.
+                    Technology plays a role including advanced personalization and operational intelligence enabling anticipatory service, comfort, and emotional ease. The experience is inviting and comfortable by design, consciously welcoming members whose expectations extend beyond the conventions of legacy clubs.
                   </p>
                   
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
-                    The project is conceived for durability. The operating platform and capital structure are clearly delineated, governance is institutional in nature, and the ambition is long-term. This is not a lifestyle concept built for trend cycles, but a cultural asset designed to mature, evolve, and remain relevant across generations. It is a deliberate act of creation—rooted in place, elevated by art, and guided by a belief in human creativity as the ultimate luxury.
+                    The project is conceived for durability. The operating platform and capital structure are clearly delineated, governance is institutional in nature, and the ambition is long-term. This is not a lifestyle concept built for trend cycles, but a cultural asset designed to mature, evolve, and remain relevant across generations. It is a deliberate act of creation—rooted in place, elevated by art, and guided by a belief in human creativity is luxury.
                   </p>
                   
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
@@ -718,6 +730,88 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       </button>
                     </div>
                   </form>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Philanthropy Modal */}
+      <AnimatePresence>
+        {isPhilanthropyOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
+              onClick={() => setIsPhilanthropyOpen(false)}
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[103] flex items-center justify-center p-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-background border border-gold/20 max-w-3xl w-full max-h-[80vh] overflow-y-auto">
+                {/* Close Button */}
+                <div className="sticky top-0 bg-background border-b border-gold/20 flex justify-end p-6">
+                  <button
+                    onClick={() => setIsPhilanthropyOpen(false)}
+                    className="p-2 text-cream hover:text-gold transition-colors duration-300"
+                    aria-label="Close"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                
+                {/* Content */}
+                <div className="p-8 md:p-12 space-y-8 font-sans">
+                  <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-8">
+                    Philanthropy
+                  </h1>
+                  
+                  <div className="space-y-8">
+                    {/* Healthcare Focused */}
+                    <div>
+                      <h2 className="text-lg md:text-xl text-gold mb-4 uppercase tracking-[0.1em]">Healthcare Focused</h2>
+                      <ul className="space-y-2 text-cream/80">
+                        <li>St. Jude Children's Research Hospital</li>
+                        <li>Cancer Research UK</li>
+                        <li>British Heart Foundation</li>
+                        <li>Macmillan Cancer Support</li>
+                      </ul>
+                    </div>
+                    
+                    {/* Arts and Culture */}
+                    <div>
+                      <h2 className="text-lg md:text-xl text-gold mb-4 uppercase tracking-[0.1em]">Arts and Culture</h2>
+                      <ul className="space-y-2 text-cream/80">
+                        <li>Royal Opera House</li>
+                        <li>London Symphony Orchestra</li>
+                        <li>Royal Shakespeare Company</li>
+                        <li>Tate</li>
+                        <li>Museum of Pop Culture (MoPOP), Seattle</li>
+                      </ul>
+                    </div>
+                    
+                    {/* Arts in Health / Art & Healing */}
+                    <div>
+                      <h2 className="text-lg md:text-xl text-gold mb-4 uppercase tracking-[0.1em]">Arts in Health / Art & Healing</h2>
+                      <ul className="space-y-2 text-cream/80">
+                        <li>National Organization for Arts in Health (NOAH)</li>
+                        <li>Women With Wings Foundation</li>
+                        <li>UCLA Art & Global Health Center</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
