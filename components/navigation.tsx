@@ -21,6 +21,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isExperienceOpen, setIsExperienceOpen] = useState(false)
   const [isMembershipOpen, setIsMembershipOpen] = useState(false)
   const [isPhilanthropyOpen, setIsPhilanthropyOpen] = useState(false)
+  const [isContactOpen, setIsContactOpen] = useState(false)
   return (
     <>
       {/* Top header */}
@@ -266,6 +267,17 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       )}
                     </AnimatePresence>
                   </div>
+
+                  {/* CONTACT */}
+                  <button
+                    onClick={() => {
+                      setIsContactOpen(true)
+                      setIsMenuOpen(false)
+                    }}
+                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                  >
+                    Contact
+                  </button>
                 </nav>
               </div>
             </motion.div>
@@ -810,6 +822,70 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <li>Women With Wings Foundation</li>
                         <li>UCLA Art & Global Health Center</li>
                       </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Contact Modal */}
+      <AnimatePresence>
+        {isContactOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
+              onClick={() => setIsContactOpen(false)}
+            />
+            
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[103] flex items-center justify-center p-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-background border border-gold/20 max-w-3xl w-full max-h-[80vh] overflow-y-auto">
+                {/* Close Button */}
+                <div className="sticky top-0 bg-background border-b border-gold/20 flex justify-end p-6">
+                  <button
+                    onClick={() => setIsContactOpen(false)}
+                    className="p-2 text-cream hover:text-gold transition-colors duration-300"
+                    aria-label="Close"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                
+                {/* Content */}
+                <div className="p-8 md:p-12 space-y-6 font-sans">
+                  <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-8">
+                    Contact
+                  </h1>
+                  
+                  <div className="space-y-8 text-cream/80">
+                    <div>
+                      <h2 className="text-lg md:text-xl text-gold mb-3 uppercase tracking-[0.1em]">Email</h2>
+                      <p className="text-cream/80 text-base md:text-lg">clientservice@charlenes.co.uk</p>
+                    </div>
+                    
+                    <div>
+                      <h2 className="text-lg md:text-xl text-gold mb-3 uppercase tracking-[0.1em]">Swiss Design & Management Partner</h2>
+                      <div className="space-y-1 text-cream/80 text-base md:text-lg">
+                        <p>DMW Finance Group</p>
+                        <p>Switzerland</p>
+                        <p>Grosspeter Tower, Grosspeteranlage 29</p>
+                        <p>4052 Basel</p>
+                      </div>
                     </div>
                   </div>
                 </div>
