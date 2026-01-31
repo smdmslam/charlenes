@@ -890,7 +890,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             href="https://www.dmwfinancegroup.com" 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-gold hover:text-gold-muted transition-colors duration-300 underline"
+                            className="text-gold hover:text-gold-muted transition-colors duration-300 no-underline"
                           >
                             www.dmwfinancegroup.com
                           </a>
