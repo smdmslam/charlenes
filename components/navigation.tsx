@@ -303,7 +303,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   {/* Opening Message */}
                   <div className="mb-8">
                     <p className="text-xl md:text-2xl text-cream font-light tracking-[0.1em]">
-                      Charlene's is scheduled to open December 2026
+                      Charlene's is scheduled to open January 2027
                     </p>
                   </div>
                   
