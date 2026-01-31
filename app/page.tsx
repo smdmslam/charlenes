@@ -31,7 +31,7 @@ const sections = [
     id: "terrace",
     title: "Garden Terrace",
     subtitle: "A secret garden suspended above Mayfair. Where the city fades and tranquility begins.",
-    image: "/images/terrace.jpg",
+    image: "/images/terrace1.png",
   },
   {
     id: "staircase",
