@@ -35,10 +35,15 @@ export const metadata: Metadata = {
     description: "A cultural work, built to last in the heart of London.",
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      {
+        url: '/favicon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
     shortcut: '/favicon.svg',
-    apple: '/apple-icon.png',
   },
+  metadataBase: new URL('https://www.charlenes.co.uk'),
 }
 
 export default function RootLayout({
