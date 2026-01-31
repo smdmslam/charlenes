@@ -25,23 +25,8 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               Charlene's
             </span>
             <span className="text-xs tracking-[0.4em] text-gold-muted uppercase">
-              Private Members
+              LONDON MAYFAIR
             </span>
-          </motion.div>
-
-          {/* Soft Launch Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="hidden md:flex items-center gap-4"
-          >
-            <div className="flex items-center gap-3 px-4 py-2 border border-gold/20 backdrop-blur-sm">
-              <span className="text-xs tracking-[0.3em] text-gold-muted uppercase">
-                By Invitation Only
-              </span>
-              <div className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-            </div>
           </motion.div>
         </div>
       </header>
