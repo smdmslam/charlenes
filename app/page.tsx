@@ -37,13 +37,13 @@ const sections = [
     id: "staircase",
     title: "The Staircase",
     subtitle: "Architecture as art. A grand ascent through curated contemporary works.",
-    image: "/images/staircase.jpg",
+    image: "/images/staircase1.png",
   },
   {
     id: "lounge",
     title: "Members Lounge",
     subtitle: "Privacy, hierarchy, and service that moves beyond the traditional private club model.",
-    image: "/images/lounge.jpg",
+    image: "/images/memberslounge1.quantease_a_super_posh_english_private_members_club_Members_Lou_5e4a8c52-605c-48e6-993e-9d08397b5b2b.png",
   },
   {
     id: "salon",
