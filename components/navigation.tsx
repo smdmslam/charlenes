@@ -311,7 +311,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                 {/* Content */}
                 <div className="p-8 md:p-12 space-y-6 font-sans">
                   <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-4">
-                    ABOUT
+                    About This Project
                   </h1>
                   
                   <h2 className="text-4xl md:text-5xl font-light tracking-[0.1em] text-cream mb-4">
