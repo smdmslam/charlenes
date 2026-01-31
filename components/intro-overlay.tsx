@@ -41,7 +41,7 @@ export function IntroOverlay({ isVisible, onComplete }: IntroOverlayProps) {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-4xl md:text-6xl font-light tracking-[0.2em] text-cream"
               >
-                LONDON
+                Charlene's
               </motion.h1>
               
               <motion.div

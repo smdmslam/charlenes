@@ -22,7 +22,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             className="flex flex-col"
           >
             <span className="text-2xl md:text-3xl font-light tracking-[0.15em] text-cream">
-              LONDON
+              Charlene's
             </span>
             <span className="text-xs tracking-[0.4em] text-gold-muted uppercase">
               Private Members
