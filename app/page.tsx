@@ -19,13 +19,13 @@ const sections = [
     id: "dining",
     title: "Michelin Dining",
     subtitle: "World-class gastronomy anchors the ground floor—open to the city, uncompromising in quality.",
-    image: "/images/dining.jpg",
+    image: "/images/dining1.png",
   },
   {
     id: "bar",
     title: "Members Bar",
     subtitle: "Intimate conversations over rare spirits. A sanctuary of refined taste and quiet luxury.",
-    image: "/images/bar.jpg",
+    image: "/images/bar1.png",
   },
   {
     id: "terrace",

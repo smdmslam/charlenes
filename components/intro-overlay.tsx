@@ -57,16 +57,7 @@ export function IntroOverlay({ isVisible, onComplete }: IntroOverlayProps) {
                 transition={{ duration: 0.8, delay: 0.7 }}
                 className="text-sm tracking-[0.4em] text-gold-muted uppercase"
               >
-                Private Members
-              </motion.p>
-              
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="mt-8 text-xs tracking-[0.3em] text-muted-foreground uppercase"
-              >
-                Mayfair
+                LONDON MAYFAIR
               </motion.p>
             </motion.div>
           </div>
