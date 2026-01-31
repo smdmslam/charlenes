@@ -26,6 +26,13 @@ export const metadata: Metadata = {
     title: "Charlene's | Private Members Club | Mayfair",
     description: "A cultural work, built to last in the heart of London.",
     type: 'website',
+    url: 'https://www.charlenes.co.uk',
+    siteName: "Charlene's",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Charlene's | Private Members Club | Mayfair",
+    description: "A cultural work, built to last in the heart of London.",
   },
   icons: {
     icon: '/favicon.svg',
