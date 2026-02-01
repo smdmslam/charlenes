@@ -19,19 +19,19 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "Charlene's | Private Members Club | Mayfair",
+  title: "Curzon House | Private Members Club | Mayfair",
   description: "A cultural work, built to last in the heart of London. An invitation-only members club in Mayfair.",
-  keywords: ['private members club', 'Mayfair', 'London', 'luxury', 'exclusive', "Charlene's"],
+  keywords: ['private members club', 'Mayfair', 'London', 'luxury', 'exclusive', "Curzon House"],
   openGraph: {
-    title: "Charlene's | Private Members Club | Mayfair",
+    title: "Curzon House | Private Members Club | Mayfair",
     description: "A cultural work, built to last in the heart of London.",
     type: 'website',
     url: 'https://www.charlenes.co.uk',
-    siteName: "Charlene's",
+    siteName: "Curzon House",
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Charlene's | Private Members Club | Mayfair",
+    title: "Curzon House | Private Members Club | Mayfair",
     description: "A cultural work, built to last in the heart of London.",
   },
   icons: {

@@ -37,7 +37,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             aria-label="Navigate to home"
           >
             <span className="text-2xl md:text-3xl font-light tracking-[0.15em] text-cream">
-              Charlene's
+              Curzon House
             </span>
             <span className="text-xs tracking-[0.4em] text-gold-muted uppercase">
               LONDON MAYFAIR
@@ -331,13 +331,13 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   </h1>
                   
                   <h2 className="text-4xl md:text-5xl font-light tracking-[0.1em] text-cream mb-4">
-                    Charlene's
+                    Curzon House
                   </h2>
                   
                   {/* Opening Message */}
                   <div className="mb-8">
                     <p className="text-xl md:text-2xl text-cream font-light tracking-[0.1em]">
-                      Charlene's is scheduled to open March 2027
+                      Curzon House is scheduled to open March 2027
                     </p>
                   </div>
                   
@@ -490,7 +490,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   </p>
                   
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
-                    At street level, Charlene's opens with a Michelin-calibre restaurant that engages the city directly — confident, composed, and uncompromising in quality. It establishes the tone of the house: serious cuisine, intelligent energy, and quiet relevance.
+                    At street level, Curzon House opens with a Michelin-calibre restaurant that engages the city directly — confident, composed, and uncompromising in quality. It establishes the tone of the house: serious cuisine, intelligent energy, and quiet relevance.
                   </p>
                   
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
@@ -563,7 +563,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                 <div className="p-8 md:p-12 space-y-8 font-sans">
                   <div className="text-center mb-8">
                     <h1 className="text-4xl md:text-5xl font-light tracking-[0.1em] text-cream mb-2">
-                      Charlene's
+                      Curzon House
                     </h1>
                     <h2 className="text-3xl md:text-4xl font-light tracking-[0.1em] text-gold">
                       Application for Membership
