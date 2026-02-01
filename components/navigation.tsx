@@ -59,44 +59,48 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
       </header>
 
       {/* Side navigation dots */}
-      <nav className="fixed right-8 md:right-12 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col gap-4">
-        {sections.map((section, index) => (
+      {sections.map((section, index) => {
+        const verticalOffset = (index - (sections.length - 1) / 2) * 2.5 // Increased vertical spacing between dots
+        return (
           <motion.button
             key={section.id}
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
             onClick={() => onNavigate(index)}
-            className="group flex items-center gap-3 cursor-pointer"
+            className="group fixed left-8 md:left-12 z-50 hidden md:flex items-center gap-3 cursor-pointer"
+            style={{
+              top: `calc(50% + ${verticalOffset}rem)`,
+              transform: `translateY(-50%)`,
+            }}
             aria-label={`Navigate to ${section.title}`}
           >
-            {/* Label (appears on hover) */}
-            <span className="text-xs tracking-[0.2em] text-gold-muted uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-right">
-              {section.title}
-            </span>
-            
             {/* Dot */}
             <div className="relative w-2 h-2">
               <motion.div
-                className="absolute inset-0 rounded-full bg-gold"
+                className="absolute inset-0 rounded-full bg-cream"
                 initial={false}
                 animate={{
                   scale: activeIndex === index ? 1 : 0.5,
-                  opacity: activeIndex === index ? 1 : 0.3,
+                  opacity: activeIndex === index ? 1 : 0.4,
                 }}
                 transition={{ duration: 0.3 }}
               />
               {activeIndex === index && (
                 <motion.div
-                  layoutId="nav-ring"
-                  className="absolute -inset-1.5 rounded-full border border-gold/50"
+                  layoutId={`nav-ring-${index}`}
+                  className="absolute -inset-1.5 rounded-full border border-cream/50"
                   transition={{ duration: 0.3 }}
                 />
               )}
             </div>
+            {/* Label (appears on hover) */}
+            <span className="text-xs tracking-[0.2em] text-gold-muted uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-left">
+              {section.title}
+            </span>
           </motion.button>
-        ))}
-      </nav>
+        )
+      })}
 
       {/* Bottom navigation bar - mobile */}
       <motion.nav
