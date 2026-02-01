@@ -39,7 +39,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             <span className="text-2xl md:text-3xl font-light tracking-[0.15em] text-cream">
               Curzon House
             </span>
-            <span className="text-xs tracking-[0.4em] text-gold-muted uppercase">
+            <span className="text-xs tracking-[0.4em] text-gold uppercase" style={{ textShadow: '0 0 10px rgba(191, 155, 88, 0.5)' }}>
               LONDON MAYFAIR
             </span>
           </motion.button>
@@ -95,7 +95,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               )}
             </div>
             {/* Label (appears on hover) */}
-            <span className="text-xs tracking-[0.2em] text-gold-muted uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-left">
+            <span className="text-xs tracking-[0.2em] text-gold uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-left" style={{ textShadow: '0 0 10px rgba(191, 155, 88, 0.5)' }}>
               {section.title}
             </span>
           </motion.button>
@@ -118,11 +118,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               aria-label={`Navigate to ${section.title}`}
             >
               <div
-                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                  activeIndex === index
+                className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${activeIndex === index
                     ? "bg-gold scale-150"
                     : "bg-gold/30 scale-100"
-                }`}
+                  }`}
               />
             </button>
           ))}
@@ -157,7 +156,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[100]"
               onClick={() => setIsMenuOpen(false)}
             />
-            
+
             {/* Modal Panel */}
             <motion.div
               initial={{ x: "100%" }}
@@ -177,7 +176,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   <X className="w-6 h-6" />
                 </button>
               </div>
-              
+
               {/* Menu Content */}
               <div className="px-8 pb-8">
                 <nav className="flex flex-col gap-8">
@@ -238,7 +237,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <ChevronDown className="w-5 h-5" />
                       )}
                     </button>
-                    
+
                     {/* Gallery Submenu */}
                     <AnimatePresence>
                       {isGalleryOpen && (
@@ -257,11 +256,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                   onNavigate(index)
                                   setIsMenuOpen(false)
                                 }}
-                                className={`text-left text-base tracking-[0.1em] uppercase transition-colors duration-300 ${
-                                  activeIndex === index
+                                className={`text-left text-base tracking-[0.1em] uppercase transition-colors duration-300 ${activeIndex === index
                                     ? "text-gold"
                                     : "text-cream/70 hover:text-gold-muted"
-                                }`}
+                                  }`}
                               >
                                 {section.title}
                               </button>
@@ -302,7 +300,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
               onClick={() => setIsAboutOpen(false)}
             />
-            
+
             {/* Modal Content */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -323,44 +321,44 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     <X className="w-6 h-6" />
                   </button>
                 </div>
-                
+
                 {/* Content */}
                 <div className="p-8 md:p-12 space-y-6 font-sans">
                   <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-4">
                     About This Project
                   </h1>
-                  
+
                   <h2 className="text-4xl md:text-5xl font-light tracking-[0.1em] text-cream mb-4">
                     Curzon House
                   </h2>
-                  
+
                   {/* Opening Message */}
                   <div className="mb-8">
                     <p className="text-xl md:text-2xl text-cream font-light tracking-[0.1em]">
                       Curzon House is scheduled to open March 2027
                     </p>
                   </div>
-                  
+
                   <p className="text-lg md:text-xl text-cream/90 leading-relaxed italic pl-8 md:pl-12 border-l-2 border-gold/30">
                     "A cultural hospitality platform at the intersection of luxury, art, cuisine, and high-trust global relationships—built for people defined by intellect, achievement, and discretion."
                   </p>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
                     A place that reflects the evolution of culture itself: global, intelligent, emotionally resonant, and unmistakably rare. In the heart of Mayfair, we propose a new kind of cultural hospitality platform—one that is not designed to follow precedent, but to extend it.
                   </p>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
                     Technology plays a role including advanced personalization and operational intelligence enabling anticipatory service, comfort, and emotional ease. The experience is inviting and comfortable by design, consciously welcoming members whose expectations extend beyond the conventions of legacy clubs.
                   </p>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
                     The project is conceived for durability. The operating platform and capital structure are clearly delineated, governance is institutional in nature, and the ambition is long-term. This is not a lifestyle concept built for trend cycles, but a cultural asset designed to mature, evolve, and remain relevant across generations. It is a deliberate act of creation—rooted in place, elevated by art, and guided by a belief in human creativity is luxury.
                   </p>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
                     We present this opportunity to members who recognize that the most valuable asset are people whose lives tell an interesting story.
                   </p>
-                  
+
                   {/* Timeline */}
                   <div className="mt-12 space-y-8">
                     <h3 className="text-2xl md:text-3xl font-light tracking-[0.15em] text-gold uppercase mb-8">
@@ -369,7 +367,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     <div className="relative pb-8 md:pb-16">
                       {/* Timeline Line */}
                       <div className="absolute top-6 left-0 right-0 h-0.5 bg-gold/30 hidden md:block" />
-                      
+
                       {/* Timeline Phases */}
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6 relative">
                         {/* Phase I */}
@@ -385,7 +383,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             </div>
                           </div>
                         </div>
-                        
+
                         {/* Phase II */}
                         <div className="relative">
                           <div className="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-gold rounded-full border-2 border-background hidden md:block z-10" />
@@ -399,7 +397,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             </div>
                           </div>
                         </div>
-                        
+
                         {/* Phase III */}
                         <div className="relative">
                           <div className="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-gold rounded-full border-2 border-background hidden md:block z-10" />
@@ -413,7 +411,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             </div>
                           </div>
                         </div>
-                        
+
                         {/* Phase IV */}
                         <div className="relative">
                           <div className="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-gold rounded-full border-2 border-background hidden md:block z-10" />
@@ -429,7 +427,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Caption */}
                     <div className="text-center pt-6 border-t border-gold/10">
                       <p className="text-sm text-gold-muted italic tracking-[0.1em]">
@@ -457,7 +455,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
               onClick={() => setIsExperienceOpen(false)}
             />
-            
+
             {/* Modal Content */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -478,33 +476,33 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     <X className="w-6 h-6" />
                   </button>
                 </div>
-                
+
                 {/* Content */}
                 <div className="p-8 md:p-12 space-y-6 font-sans">
                   <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-8">
                     THE EXPERIENCE
                   </h1>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
                     The project is structured as a layered experience.
                   </p>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
                     At street level, Curzon House opens with a Michelin-calibre restaurant that engages the city directly — confident, composed, and uncompromising in quality. It establishes the tone of the house: serious cuisine, intelligent energy, and quiet relevance.
                   </p>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
                     Ascending through the building, the atmosphere shifts. Members' bars, lounges, and salons are arranged as a sequence of increasingly private spaces, designed for conversation, continuity, and discretion rather than spectacle. Service becomes more anticipatory, more personal — shaped by familiarity rather than formality.
                   </p>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
                     At the upper levels, private dining rooms and salons provide a setting for focused engagement: hosting, negotiation, celebration, and retreat. Each space is conceived as part of a coherent journey, where architecture, art, and hospitality work together to support long-form presence.
                   </p>
-                  
+
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans pl-8 md:pl-12 border-l-2 border-gold/20">
                     The result is a layered experience — open where it should be, protected where it must be — allowing members to move fluidly between public vitality and private assurance within a single, unified house.
                   </p>
-                  
+
                   {/* CTA Button */}
                   <div className="pt-8 mt-8 border-t border-gold/20">
                     <button
@@ -537,7 +535,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
               onClick={() => setIsMembershipOpen(false)}
             />
-            
+
             {/* Modal Content */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -558,7 +556,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     <X className="w-6 h-6" />
                   </button>
                 </div>
-                
+
                 {/* Content */}
                 <div className="p-8 md:p-12 space-y-8 font-sans">
                   <div className="text-center mb-8">
@@ -569,7 +567,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       Application for Membership
                     </h2>
                   </div>
-                  
+
                   <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                     {/* Full Name and Gender */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -592,19 +590,19 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         </Select>
                       </div>
                     </div>
-                    
+
                     {/* Address */}
                     <div className="space-y-2">
                       <Label htmlFor="address" className="text-cream">Address</Label>
                       <Textarea id="address" name="address" rows={3} className="bg-background border-gold/20 text-cream" />
                     </div>
-                    
+
                     {/* Country */}
                     <div className="space-y-2">
                       <Label htmlFor="country" className="text-cream">Country</Label>
                       <Input id="country" name="country" className="bg-background border-gold/20 text-cream" />
                     </div>
-                    
+
                     {/* Telephone 1 and Telephone 2 */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -616,7 +614,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <Input id="telephone2" name="telephone2" type="tel" className="bg-background border-gold/20 text-cream" />
                       </div>
                     </div>
-                    
+
                     {/* Email and LinkedIn */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -628,7 +626,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <Input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/..." className="bg-background border-gold/20 text-cream" />
                       </div>
                     </div>
-                    
+
                     {/* Date of Birth and Nationality */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -640,7 +638,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <Input id="nationality" name="nationality" className="bg-background border-gold/20 text-cream" />
                       </div>
                     </div>
-                    
+
                     {/* Occupation and Company Name */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -652,23 +650,23 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <Input id="companyName" name="companyName" className="bg-background border-gold/20 text-cream" />
                       </div>
                     </div>
-                    
+
                     {/* Company Address */}
                     <div className="space-y-2">
                       <Label htmlFor="companyAddress" className="text-cream">Company Address</Label>
                       <Textarea id="companyAddress" name="companyAddress" rows={3} className="bg-background border-gold/20 text-cream" />
                     </div>
-                    
+
                     {/* Personal Interests */}
                     <div className="space-y-2">
                       <Label htmlFor="personalInterests" className="text-cream">Personal Interests</Label>
                       <Textarea id="personalInterests" name="personalInterests" rows={4} className="bg-background border-gold/20 text-cream" />
                     </div>
-                    
+
                     {/* Membership Selection */}
                     <div className="space-y-4 pt-4 border-t border-gold/20">
                       <Label className="text-cream text-lg">Membership Type</Label>
-                      
+
                       {/* Membership Table */}
                       <div className="overflow-x-auto">
                         <table className="w-full border-collapse">
@@ -723,19 +721,19 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                           </tbody>
                         </table>
                       </div>
-                      
+
                       {/* Membership Fee Note */}
                       <p className="text-sm text-cream/70 italic mt-4">
                         * Membership Fees are charged one time only.
                       </p>
                     </div>
-                    
+
                     {/* Personal Biography */}
                     <div className="space-y-2 pt-4 border-t border-gold/20">
                       <Label htmlFor="personalBiography" className="text-cream">Personal Biography</Label>
                       <Textarea id="personalBiography" name="personalBiography" rows={6} className="bg-background border-gold/20 text-cream" placeholder="Please provide a brief biography..." />
                     </div>
-                    
+
                     {/* Submit Button */}
                     <div className="pt-6">
                       <button
@@ -766,7 +764,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
               onClick={() => setIsPhilanthropyOpen(false)}
             />
-            
+
             {/* Modal Content */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -787,13 +785,13 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     <X className="w-6 h-6" />
                   </button>
                 </div>
-                
+
                 {/* Content */}
                 <div className="p-8 md:p-12 space-y-8 font-sans">
                   <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-8">
                     Philanthropy
                   </h1>
-                  
+
                   <div className="space-y-8">
                     {/* Healthcare Focused */}
                     <div>
@@ -805,7 +803,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <li>Macmillan Cancer Support</li>
                       </ul>
                     </div>
-                    
+
                     {/* Arts and Culture */}
                     <div>
                       <h2 className="text-lg md:text-xl text-gold mb-4 uppercase tracking-[0.1em]">Arts and Culture</h2>
@@ -817,7 +815,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <li>Museum of Pop Culture (MoPOP), Seattle</li>
                       </ul>
                     </div>
-                    
+
                     {/* Arts in Health / Art & Healing */}
                     <div>
                       <h2 className="text-lg md:text-xl text-gold mb-4 uppercase tracking-[0.1em]">Arts in Health / Art & Healing</h2>
@@ -848,7 +846,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
               onClick={() => setIsContactOpen(false)}
             />
-            
+
             {/* Modal Content */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -869,19 +867,19 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     <X className="w-6 h-6" />
                   </button>
                 </div>
-                
+
                 {/* Content */}
                 <div className="p-8 md:p-12 space-y-6 font-sans">
                   <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-8">
                     Contact
                   </h1>
-                  
+
                   <div className="space-y-8 text-cream/80">
                     <div>
                       <h2 className="text-lg md:text-xl text-gold mb-3 uppercase tracking-[0.1em]">Email</h2>
                       <p className="text-cream/80 text-base md:text-lg">clientservice@charlenes.co.uk</p>
                     </div>
-                    
+
                     <div>
                       <h2 className="text-lg md:text-xl text-gold mb-3 uppercase tracking-[0.1em]">Swiss Design & Management Partner</h2>
                       <div className="space-y-1 text-cream/80 text-base md:text-lg">
@@ -890,9 +888,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <p>Grosspeter Tower, Grosspeteranlage 29</p>
                         <p>4052 Basel</p>
                         <p>
-                          <a 
-                            href="https://www.dmwfinancegroup.com" 
-                            target="_blank" 
+                          <a
+                            href="https://www.dmwfinancegroup.com"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="text-gold hover:text-gold-muted transition-colors duration-300 no-underline"
                           >
