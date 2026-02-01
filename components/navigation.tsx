@@ -189,7 +189,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     }}
                     className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
                   >
-                    ABOUT
+                    ABOUT THIS PROJECT
                   </button>
 
                   {/* THE EXPERIENCE */}
