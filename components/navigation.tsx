@@ -428,9 +428,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       <div className="relative">
                         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-gold rounded-full border-2 border-background hidden md:block z-10" />
                         <div className="pt-8 md:pt-12">
-                          <div className="text-base md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase I</div>
-                          <div className="text-base md:text-lg text-cream mb-4 font-light text-center md:text-left">Jan–Mar 2026</div>
-                          <div className="text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
+                          <div className="text-xl md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase I</div>
+                          <div className="text-lg md:text-lg text-cream mb-4 font-light text-center md:text-left">Jan–Mar 2026</div>
+                          <div className="text-sm md:text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
                             <div>Formation</div>
                             <div>Concept finalised</div>
                             <div>Founding Circle</div>
@@ -442,9 +442,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       <div className="relative">
                         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-gold rounded-full border-2 border-background hidden md:block z-10" />
                         <div className="pt-8 md:pt-12">
-                          <div className="text-base md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase II</div>
-                          <div className="text-base md:text-lg text-cream mb-4 font-light text-center md:text-left">Apr–Jun 2026</div>
-                          <div className="text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
+                          <div className="text-xl md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase II</div>
+                          <div className="text-lg md:text-lg text-cream mb-4 font-light text-center md:text-left">Apr–Jun 2026</div>
+                          <div className="text-sm md:text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
                             <div>Design & Curation</div>
                             <div>Architecture & interiors</div>
                             <div>Partners appointed</div>
@@ -456,9 +456,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       <div className="relative">
                         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-gold rounded-full border-2 border-background hidden md:block z-10" />
                         <div className="pt-8 md:pt-12">
-                          <div className="text-base md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase III</div>
-                          <div className="text-base md:text-lg text-cream mb-4 font-light text-center md:text-left">Jul–Nov 2026</div>
-                          <div className="text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
+                          <div className="text-xl md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase III</div>
+                          <div className="text-lg md:text-lg text-cream mb-4 font-light text-center md:text-left">Jul–Nov 2026</div>
+                          <div className="text-sm md:text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
                             <div>Build & Preparation</div>
                             <div>Construction & fit-out</div>
                             <div>Staff training</div>
@@ -470,9 +470,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       <div className="relative">
                         <div className="absolute top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-gold rounded-full border-2 border-background hidden md:block z-10" />
                         <div className="pt-8 md:pt-12">
-                          <div className="text-base md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase IV</div>
-                          <div className="text-base md:text-lg text-cream mb-4 font-light text-center md:text-left">Dec 2026 – Q1 2027</div>
-                          <div className="text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
+                          <div className="text-xl md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase IV</div>
+                          <div className="text-lg md:text-lg text-cream mb-4 font-light text-center md:text-left">Dec 2026 – Q1 2027</div>
+                          <div className="text-sm md:text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
                             <div>Opening</div>
                             <div>Members' preview</div>
                             <div>Full operations</div>
