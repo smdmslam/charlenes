@@ -1062,7 +1062,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   <div className="space-y-8 text-cream/80">
                     <div>
                       <h2 className="text-lg md:text-xl text-gold mb-3 uppercase tracking-[0.1em]">Email</h2>
-                      <p className="text-cream/80 text-base md:text-lg">clientservice@charlenes.co.uk</p>
+                      <p className="text-cream/80 text-base md:text-lg">smdm@dmwfinancegroup.com</p>
                     </div>
 
                     <div>
