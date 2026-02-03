@@ -20,6 +20,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isTimelineOpen, setIsTimelineOpen] = useState(false)
   const [isExperienceOpen, setIsExperienceOpen] = useState(false)
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const [isMembershipOpen, setIsMembershipOpen] = useState(false)
   const [isPhilanthropyOpen, setIsPhilanthropyOpen] = useState(false)
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -212,6 +213,17 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
                   >
                     THE EXPERIENCE
+                  </button>
+
+                  {/* HISTORY */}
+                  <button
+                    onClick={() => {
+                      setIsHistoryOpen(true)
+                      setIsMenuOpen(false)
+                    }}
+                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                  >
+                    History
                   </button>
 
                   {/* MEMBERSHIP */}
@@ -567,6 +579,126 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     >
                       Apply for Membership
                     </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* History Modal */}
+      <AnimatePresence>
+        {isHistoryOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[102]"
+              onClick={() => setIsHistoryOpen(false)}
+            />
+
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[103] flex items-center justify-center p-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-background border border-gold/20 max-w-3xl w-full max-h-[80vh] overflow-y-auto">
+                {/* Close Button */}
+                <div className="sticky top-0 bg-background border-b border-gold/20 flex justify-end p-6">
+                  <button
+                    onClick={() => setIsHistoryOpen(false)}
+                    className="p-2 text-cream hover:text-gold transition-colors duration-300"
+                    aria-label="Close"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                {/* Content */}
+                <div className="p-8 md:p-12 space-y-8 font-sans">
+                  <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-6">
+                    History
+                  </h1>
+
+                  {/* Main Title */}
+                  <h2 className="text-xl md:text-2xl font-light tracking-[0.1em] text-cream mb-6">
+                    Curzon Street: From Georgian Elegance to Cultural Powerhouse
+                  </h2>
+
+                  {/* Introduction */}
+                  <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+                    Curzon Street has long been synonymous with London's most exclusive and culturally refined corners. What began as aristocratic real estate in the 18th century evolved into a street where literary giants, politicians, and creative visionaries shaped British culture—and where that legacy continues to define luxury and taste today.
+                  </p>
+
+                  {/* The Aristocratic Foundation */}
+                  <div className="space-y-4 pt-4 border-t border-gold/10">
+                    <h3 className="text-lg md:text-xl font-light tracking-[0.1em] text-gold uppercase">
+                      The Aristocratic Foundation
+                    </h3>
+                    <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+                      The street emerged during London's westward expansion in the late 17th and early 18th centuries, as Mayfair transformed from open fields into an enclave of power. Named after the Curzon family—an Anglo-Norman dynasty with deep English roots—the street quickly became home to Britain's elite. Members of Parliament, future Prime Ministers like Benjamin Disraeli (who lived there until 1881), and influential diplomats like Lord Macartney chose Curzon Street as their London base. These weren't casual residents; they were the architects of British political and intellectual life, and their presence stamped the street with an authority it has never lost.
+                    </p>
+                    <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+                      The Georgian townhouses that line Curzon Street, predominantly dating from the 1750s-60s and largely Grade II listed, still reflect this heritage. Post-World War II redevelopment converted many into luxury apartments, but the facades remained—a deliberate choice to preserve the street's aristocratic character even as its function evolved.
+                    </p>
+                  </div>
+
+                  {/* Literature's Favorite Address */}
+                  <div className="space-y-4 pt-4 border-t border-gold/10">
+                    <h3 className="text-lg md:text-xl font-light tracking-[0.1em] text-gold uppercase">
+                      Literature's Favorite Address
+                    </h3>
+                    <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+                      Oscar Wilde understood Curzon Street's symbolic power. He placed his most memorable characters there: Lord Henry Wotton from <em className="text-cream/90">The Picture of Dorian Gray</em> and Mrs Erlynne from <em className="text-cream/90">Lady Windermere's Fan</em> (specifically at 84A Curzon Street). Roald Dahl and William Makepeace Thackeray also set scenes on this street. Through their fiction, these authors transformed Curzon into shorthand for sophisticated West End society—a literary code that readers immediately recognized as the seat of elegance and moral complexity.
+                    </p>
+                  </div>
+
+                  {/* The Modern Cultural Hub */}
+                  <div className="space-y-4 pt-4 border-t border-gold/10">
+                    <h3 className="text-lg md:text-xl font-light tracking-[0.1em] text-gold uppercase">
+                      The Modern Cultural Hub
+                    </h3>
+                    <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+                      The Curzon Mayfair Cinema, built between 1963-66, represents one of London's most significant post-war cinema buildings and stands as a Grade II listed structure. For over 90 years, it hosted West End film premieres and shaped London's film culture—until its closure in 2025 due to redevelopment by landlord Fantasio. The cinema's departure marks a pivotal moment in the street's evolution, as the historic venue transitions toward a new vision that includes a members' club and restaurant alongside a reimagined cinema.
+                    </p>
+                    <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+                      Beyond the cinema, Curzon Street anchors one of the world's densest concentrations of visual culture. Over 130 art galleries operate within the broader Mayfair and St James area, positioning the street as a nexus for contemporary and fine art.
+                    </p>
+                  </div>
+
+                  {/* Luxury Reimagined */}
+                  <div className="space-y-4 pt-4 border-t border-gold/10">
+                    <h3 className="text-lg md:text-xl font-light tracking-[0.1em] text-gold uppercase">
+                      Luxury Reimagined
+                    </h3>
+                    <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+                      Recent developments demonstrate how Curzon Street maintains its prestige while embracing modern luxury. 60 Curzon, an eight-storey residential building designed by French architect Thierry W. Despont, features 32 Art Deco-inspired residences that marry contemporary amenities with classical aesthetics. The building occupies the site of the historic Mirabelle restaurant, which operated from 1936 and attracted everyone from Winston Churchill to Leonardo DiCaprio—illustrating how the street's legendary venues continue to shape London's cultural memory even as they evolve.
+                    </p>
+                  </div>
+
+                  {/* The Mayfair Context */}
+                  <div className="space-y-4 pt-4 border-t border-gold/10">
+                    <h3 className="text-lg md:text-xl font-light tracking-[0.1em] text-gold uppercase">
+                      The Mayfair Context
+                    </h3>
+                    <p className="text-base md:text-lg text-cream/80 leading-relaxed">
+                      Curzon Street cannot be understood in isolation. It sits at the heart of Mayfair, London's most exclusive district, which takes its name from the annual May Fair held from 1686 to 1764 at Shepherd Market—between Piccadilly and Curzon Street itself. Today, Mayfair houses major corporate headquarters, the highest concentration of five-star hotels and restaurants in London, and properties that serve as benchmarks for global luxury living.
+                    </p>
+                  </div>
+
+                  {/* Closing */}
+                  <div className="pt-4 border-t border-gold/10">
+                    <p className="text-base md:text-lg text-cream/80 leading-relaxed italic pl-4 md:pl-6 border-l-2 border-gold/30">
+                      In essence, Curzon Street remains what it has always been: a barometer of London's cultural and social aspirations, a place where history and innovation coexist, and where exclusivity is measured not just in price tags but in access to taste, refinement, and influence.
+                    </p>
                   </div>
                 </div>
               </div>
