@@ -91,7 +91,7 @@
 }
 
 @layer base {
-  * {
+  :not(.brochure-container):not(.brochure-container *) {
     @apply border-border outline-ring/50;
   }
   html {

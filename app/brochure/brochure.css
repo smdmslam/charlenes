@@ -1,19 +1,5 @@
 /* Brochure Print Styles */
 
-/* Override global border from app/globals.css line 95 */
-@layer base {
-  .brochure-container,
-  .brochure-container *,
-  .brochure-page,
-  .brochure-page * {
-    border: none !important;
-    border-right: none !important;
-    border-left: none !important;
-    border-top: none !important;
-    border-bottom: none !important;
-  }
-}
-
 .brochure-container {
   max-width: 100%;
   margin: 0;
@@ -243,6 +229,8 @@
   padding: 4rem 3rem;
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(191, 155, 88, 0.3);
+  border-color: rgba(191, 155, 88, 0.3) !important;
 }
 
 .section-title {
@@ -283,7 +271,7 @@
 .opening-message {
   font-size: 1.5rem;
   font-weight: 300;
-  color: var(--cream);
+  color: var(--gold);
   margin-bottom: 1rem;
   letter-spacing: 0.05em;
 }
@@ -591,6 +579,8 @@
     padding: 0;
     margin: 0;
     border-right: none !important;
+    box-shadow: none !important;
+    outline: none !important;
   }
 
   .cover-page {
@@ -658,6 +648,8 @@
   .toc-page,
   .contact-page {
     padding: 2rem 1.5rem;
+    border: 1px solid rgba(191, 155, 88, 0.3) !important;
+    border-color: rgba(191, 155, 88, 0.3) !important;
   }
 
   .cover-page {
@@ -685,6 +677,10 @@
   .section-paragraph,
   .section-subtitle {
     color: #1a1a1a;
+  }
+
+  .opening-message {
+    color: #8b7355;
   }
 
   .section-quote {
