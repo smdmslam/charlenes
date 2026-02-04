@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
 import { submitMembershipApplication } from "@/lib/membership-service"
+import { AuthSignIn } from "@/components/auth-signin"
+import { AuthSignUp } from "@/components/auth-signup"
 
 interface NavigationProps {
   sections: Array<{ id: string; title: string }>
@@ -26,6 +28,8 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isMembershipOpen, setIsMembershipOpen] = useState(false)
   const [isPhilanthropyOpen, setIsPhilanthropyOpen] = useState(false)
   const [isContactOpen, setIsContactOpen] = useState(false)
+  const [isSignInOpen, setIsSignInOpen] = useState(false)
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false)
   
   // Form state
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -312,6 +316,28 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   >
                     Contact
                   </button>
+
+                  {/* AUTHENTICATION */}
+                  <div className="pt-4 border-t border-gold/20">
+                    <button
+                      onClick={() => {
+                        setIsSignInOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300 w-full"
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsSignUpOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300 w-full mt-4"
+                    >
+                      Sign Up
+                    </button>
+                  </div>
                 </nav>
               </div>
             </motion.div>
@@ -1202,6 +1228,18 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
           </>
         )}
       </AnimatePresence>
+
+      {/* Auth Modals */}
+      <AuthSignIn
+        isOpen={isSignInOpen}
+        onClose={() => setIsSignInOpen(false)}
+        onSwitchToSignUp={() => setIsSignUpOpen(true)}
+      />
+      <AuthSignUp
+        isOpen={isSignUpOpen}
+        onClose={() => setIsSignUpOpen(false)}
+        onSwitchToSignIn={() => setIsSignInOpen(true)}
+      />
     </>
   )
 }
