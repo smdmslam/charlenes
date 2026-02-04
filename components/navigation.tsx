@@ -11,6 +11,8 @@ import { useToast } from "@/hooks/use-toast"
 import { submitMembershipApplication } from "@/lib/membership-service"
 import { AuthSignIn } from "@/components/auth-signin"
 import { AuthSignUp } from "@/components/auth-signup"
+import { useAuth } from "@/contexts/auth-context"
+import { logout, getAuthErrorMessage } from "@/lib/auth-service"
 
 interface NavigationProps {
   sections: Array<{ id: string; title: string }>
@@ -36,6 +38,24 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [gender, setGender] = useState<string>("")
   const [membershipType, setMembershipType] = useState<string>("")
   const { toast } = useToast()
+  const { user } = useAuth()
+
+  const handleSignOut = async () => {
+    try {
+      await logout()
+      toast({
+        title: "Signed Out",
+        description: "You have been successfully signed out.",
+      })
+      setIsMenuOpen(false)
+    } catch (error: any) {
+      toast({
+        title: "Sign Out Failed",
+        description: getAuthErrorMessage(error),
+        variant: "destructive",
+      })
+    }
+  }
   return (
     <>
       {/* Top header */}
@@ -319,24 +339,30 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
                   {/* AUTHENTICATION */}
                   <div className="pt-4 border-t border-gold/20">
-                    <button
-                      onClick={() => {
-                        setIsSignInOpen(true)
-                        setIsMenuOpen(false)
-                      }}
-                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300 w-full"
-                    >
-                      Sign In
-                    </button>
-                    <button
-                      onClick={() => {
-                        setIsSignUpOpen(true)
-                        setIsMenuOpen(false)
-                      }}
-                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300 w-full mt-4"
-                    >
-                      Sign Up
-                    </button>
+                    {user ? (
+                      <>
+                        <div className="mb-4">
+                          <p className="text-cream/70 text-sm mb-1">Signed in as</p>
+                          <p className="text-cream text-base">{user.email || user.displayName || "Member"}</p>
+                        </div>
+                        <button
+                          onClick={handleSignOut}
+                          className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300 w-full"
+                        >
+                          Sign Out
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setIsSignInOpen(true)
+                          setIsMenuOpen(false)
+                        }}
+                        className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300 w-full"
+                      >
+                        Sign In
+                      </button>
+                    )}
                   </div>
                 </nav>
               </div>

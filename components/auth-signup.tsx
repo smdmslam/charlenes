@@ -18,7 +18,8 @@ export function AuthSignUp({ isOpen, onClose, onSwitchToSignIn }: AuthSignUpProp
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-  const [displayName, setDisplayName] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -49,10 +50,13 @@ export function AuthSignUp({ isOpen, onClose, onSwitchToSignIn }: AuthSignUpProp
     setIsLoading(true)
 
     try {
+      // Combine first and last name for displayName
+      const displayName = [firstName.trim(), lastName.trim()].filter(Boolean).join(" ") || undefined
+      
       await signUp({ 
         email, 
         password, 
-        displayName: displayName || undefined 
+        displayName
       })
       toast({
         title: "Account Created!",
@@ -61,7 +65,8 @@ export function AuthSignUp({ isOpen, onClose, onSwitchToSignIn }: AuthSignUpProp
       setEmail("")
       setPassword("")
       setConfirmPassword("")
-      setDisplayName("")
+      setFirstName("")
+      setLastName("")
       onClose()
     } catch (error: any) {
       toast({
@@ -120,18 +125,33 @@ export function AuthSignUp({ isOpen, onClose, onSwitchToSignIn }: AuthSignUpProp
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="signup-name" className="text-cream">
-                Full Name (Optional)
-              </Label>
-              <Input
-                id="signup-name"
-                type="text"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                className="bg-background border-gold/20 text-cream"
-                placeholder="Your full name"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="signup-first-name" className="text-cream">
+                  First Name (Optional)
+                </Label>
+                <Input
+                  id="signup-first-name"
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="bg-background border-gold/20 text-cream"
+                  placeholder="First name"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="signup-last-name" className="text-cream">
+                  Last Name (Optional)
+                </Label>
+                <Input
+                  id="signup-last-name"
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="bg-background border-gold/20 text-cream"
+                  placeholder="Last name"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
