@@ -870,7 +870,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                   <span className="text-cream">Founder <span className="text-cream/70">(150 max.)</span></span>
                                 </label>
                               </td>
-                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£2,500</td>
                               <td className="text-right py-3 px-4 text-cream">£10,000</td>
                             </tr>
                             <tr className="border-b border-gold/10">
