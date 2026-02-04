@@ -161,11 +161,12 @@
 }
 
 .cover-date {
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 300;
   letter-spacing: 0.1em;
   color: var(--cream);
-  opacity: 0.9;
+  opacity: 1;
+  margin-top: 1rem;
 }
 
 /* Table of Contents */

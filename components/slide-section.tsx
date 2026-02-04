@@ -58,6 +58,13 @@ export function SlideSection({ id, title, subtitle, image, index, isActive }: Sl
             <p className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-lg">
               {subtitle}
             </p>
+            
+            {/* Opening Date - Only show on entrance/hero slide */}
+            {id === "entrance" && (
+              <p className="mt-6 text-sm md:text-base text-gold font-light tracking-[0.1em] uppercase">
+                Scheduled to open March 2027
+              </p>
+            )}
           </motion.div>
         </div>
       </div>

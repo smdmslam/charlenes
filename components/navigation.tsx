@@ -867,7 +867,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
                                   <input type="radio" name="membership" value="founder" className="mr-3 accent-gold" />
-                                  <span className="text-cream">Founder <span className="text-cream/70">(100 max.)</span></span>
+                                  <span className="text-cream">Founder <span className="text-cream/70">(150 max.)</span></span>
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>
@@ -915,7 +915,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
                     {/* Personal Biography */}
                     <div className="space-y-2 pt-4 border-t border-gold/20">
-                      <Label htmlFor="personalBiography" className="text-cream">Personal Biography</Label>
+                      <Label htmlFor="personalBiography" className="text-cream">Personal Biography ("Tell us your story")</Label>
                       <Textarea id="personalBiography" name="personalBiography" rows={6} className="bg-background border-gold/20 text-cream" placeholder="Please provide a brief biography..." />
                     </div>
 
