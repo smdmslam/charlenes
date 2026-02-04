@@ -2,6 +2,7 @@ import React from "react"
 import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({ 
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body className={`${cormorant.variable} font-serif antialiased`}>
         {children}
         <Analytics />
+        <Toaster />
       </body>
     </html>
   )

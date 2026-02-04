@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useToast } from "@/hooks/use-toast"
+import { submitMembershipApplication } from "@/lib/membership-service"
 
 interface NavigationProps {
   sections: Array<{ id: string; title: string }>
@@ -24,6 +26,12 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isMembershipOpen, setIsMembershipOpen] = useState(false)
   const [isPhilanthropyOpen, setIsPhilanthropyOpen] = useState(false)
   const [isContactOpen, setIsContactOpen] = useState(false)
+  
+  // Form state
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [gender, setGender] = useState<string>("")
+  const [membershipType, setMembershipType] = useState<string>("")
+  const { toast } = useToast()
   return (
     <>
       {/* Top header */}
@@ -753,7 +761,81 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     </h2>
                   </div>
 
-                  <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                  <form 
+                    className="space-y-6" 
+                    onSubmit={async (e) => {
+                      e.preventDefault()
+                      setIsSubmitting(true)
+
+                      try {
+                        const formData = new FormData(e.currentTarget)
+                        
+                        // Validate required fields
+                        const requiredFields = ['fullName', 'gender', 'address', 'country', 'telephone1', 'email', 'dateOfBirth', 'nationality', 'occupation', 'companyName', 'companyAddress', 'membership']
+                        const missingFields = requiredFields.filter(field => {
+                          if (field === 'membership') {
+                            return !membershipType
+                          }
+                          if (field === 'gender') {
+                            return !gender
+                          }
+                          return !formData.get(field)
+                        })
+
+                        if (missingFields.length > 0) {
+                          toast({
+                            title: "Missing Required Fields",
+                            description: `Please fill in all required fields: ${missingFields.join(', ')}`,
+                            variant: "destructive",
+                          })
+                          setIsSubmitting(false)
+                          return
+                        }
+
+                        // Collect form data
+                        const application = {
+                          fullName: formData.get('fullName') as string,
+                          gender: gender,
+                          address: formData.get('address') as string,
+                          country: formData.get('country') as string,
+                          telephone1: formData.get('telephone1') as string,
+                          telephone2: formData.get('telephone2') as string || undefined,
+                          email: formData.get('email') as string,
+                          linkedin: formData.get('linkedin') as string || undefined,
+                          dateOfBirth: formData.get('dateOfBirth') as string,
+                          nationality: formData.get('nationality') as string,
+                          occupation: formData.get('occupation') as string,
+                          companyName: formData.get('companyName') as string,
+                          companyAddress: formData.get('companyAddress') as string,
+                          personalInterests: formData.get('personalInterests') as string || undefined,
+                          personalBiography: formData.get('personalBiography') as string || undefined,
+                          membershipType: membershipType as "founder" | "standard" | "premium" | "vip",
+                        }
+
+                        // Submit to Firebase
+                        const docId = await submitMembershipApplication(application)
+
+                        toast({
+                          title: "Application Submitted Successfully",
+                          description: "Thank you for your interest in Curzon House. We will review your application and get back to you soon.",
+                        })
+
+                        // Reset form
+                        e.currentTarget.reset()
+                        setGender("")
+                        setMembershipType("")
+                      } catch (error) {
+                        console.error("Error submitting application:", error)
+                        toast({
+                          title: "Submission Failed",
+                          description: "There was an error submitting your application. Please try again or contact us directly.",
+                          variant: "destructive",
+                        })
+                      } finally {
+                        setIsSubmitting(false)
+                      }
+                    }}
+                  >
                     {/* Full Name and Gender */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -762,7 +844,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="gender" className="text-cream">Gender</Label>
-                        <Select name="gender">
+                        <Select name="gender" value={gender} onValueChange={setGender}>
                           <SelectTrigger className="bg-background border-gold/20 text-cream">
                             <SelectValue placeholder="Select gender" />
                           </SelectTrigger>
@@ -866,7 +948,14 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <tr className="border-b border-gold/10">
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
-                                  <input type="radio" name="membership" value="founder" className="mr-3 accent-gold" />
+                                  <input 
+                                    type="radio" 
+                                    name="membership" 
+                                    value="founder" 
+                                    checked={membershipType === "founder"}
+                                    onChange={(e) => setMembershipType(e.target.value)}
+                                    className="mr-3 accent-gold" 
+                                  />
                                   <span className="text-cream">Founder <span className="text-cream/70">(150 max.)</span></span>
                                 </label>
                               </td>
@@ -876,7 +965,14 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <tr className="border-b border-gold/10">
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
-                                  <input type="radio" name="membership" value="standard" className="mr-3 accent-gold" />
+                                  <input 
+                                    type="radio" 
+                                    name="membership" 
+                                    value="standard" 
+                                    checked={membershipType === "standard"}
+                                    onChange={(e) => setMembershipType(e.target.value)}
+                                    className="mr-3 accent-gold" 
+                                  />
                                   <span className="text-cream">Standard</span>
                                 </label>
                               </td>
@@ -886,7 +982,14 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <tr className="border-b border-gold/10">
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
-                                  <input type="radio" name="membership" value="premium" className="mr-3 accent-gold" />
+                                  <input 
+                                    type="radio" 
+                                    name="membership" 
+                                    value="premium" 
+                                    checked={membershipType === "premium"}
+                                    onChange={(e) => setMembershipType(e.target.value)}
+                                    className="mr-3 accent-gold" 
+                                  />
                                   <span className="text-cream">Premium</span>
                                 </label>
                               </td>
@@ -896,7 +999,14 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <tr>
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
-                                  <input type="radio" name="membership" value="vip" className="mr-3 accent-gold" />
+                                  <input 
+                                    type="radio" 
+                                    name="membership" 
+                                    value="vip" 
+                                    checked={membershipType === "vip"}
+                                    onChange={(e) => setMembershipType(e.target.value)}
+                                    className="mr-3 accent-gold" 
+                                  />
                                   <span className="text-cream">VIP</span>
                                 </label>
                               </td>
@@ -923,9 +1033,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     <div className="pt-6">
                       <button
                         type="submit"
-                        className="w-full py-4 px-8 border border-gold/50 text-cream hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase tracking-[0.2em] text-sm font-light"
+                        disabled={isSubmitting}
+                        className="w-full py-4 px-8 border border-gold/50 text-cream hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase tracking-[0.2em] text-sm font-light disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Submit Application
+                        {isSubmitting ? "Submitting..." : "Submit Application"}
                       </button>
                     </div>
                   </form>
