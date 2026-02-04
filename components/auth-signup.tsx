@@ -29,6 +29,15 @@ export function AuthSignUp({ isOpen, onClose, onSwitchToSignIn }: AuthSignUpProp
     e.preventDefault()
 
     // Validation
+    if (!firstName.trim() || !lastName.trim()) {
+      toast({
+        title: "Name Required",
+        description: "Please enter both first name and last name.",
+        variant: "destructive",
+      })
+      return
+    }
+
     if (password !== confirmPassword) {
       toast({
         title: "Password Mismatch",
@@ -128,26 +137,28 @@ export function AuthSignUp({ isOpen, onClose, onSwitchToSignIn }: AuthSignUpProp
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="signup-first-name" className="text-cream">
-                  First Name (Optional)
+                  First Name *
                 </Label>
                 <Input
                   id="signup-first-name"
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  required
                   className="bg-background border-gold/20 text-cream"
                   placeholder="First name"
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="signup-last-name" className="text-cream">
-                  Last Name (Optional)
+                  Last Name *
                 </Label>
                 <Input
                   id="signup-last-name"
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  required
                   className="bg-background border-gold/20 text-cream"
                   placeholder="Last name"
                 />

@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast"
 import { submitMembershipApplication } from "@/lib/membership-service"
 import { AuthSignIn } from "@/components/auth-signin"
 import { AuthSignUp } from "@/components/auth-signup"
+import { MemberProfile } from "@/components/member-profile"
 import { useAuth } from "@/contexts/auth-context"
 import { logout, getAuthErrorMessage } from "@/lib/auth-service"
 
@@ -32,6 +33,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isContactOpen, setIsContactOpen] = useState(false)
   const [isSignInOpen, setIsSignInOpen] = useState(false)
   const [isSignUpOpen, setIsSignUpOpen] = useState(false)
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
   
   // Form state
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -345,6 +347,15 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                           <p className="text-cream/70 text-sm mb-1">Signed in as</p>
                           <p className="text-cream text-base">{user.email || user.displayName || "Member"}</p>
                         </div>
+                        <button
+                          onClick={() => {
+                            setIsProfileOpen(true)
+                            setIsMenuOpen(false)
+                          }}
+                          className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300 w-full mb-4"
+                        >
+                          Profile
+                        </button>
                         <button
                           onClick={handleSignOut}
                           className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300 w-full"
@@ -1265,6 +1276,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
         isOpen={isSignUpOpen}
         onClose={() => setIsSignUpOpen(false)}
         onSwitchToSignIn={() => setIsSignInOpen(true)}
+      />
+      <MemberProfile
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
       />
     </>
   )
