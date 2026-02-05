@@ -22,7 +22,7 @@ export function SlideSection({ id, title, subtitle, image, index, isActive }: Sl
       <div className="absolute inset-0">
         <Image
           src={image || "/placeholder.svg"}
-          alt={title}
+          alt={`${title} at Curzon House - Private Members Club Mayfair`}
           fill
           className="object-cover"
           priority={index < 2}
@@ -30,7 +30,7 @@ export function SlideSection({ id, title, subtitle, image, index, isActive }: Sl
         {/* Dark overlay for text readability */}
         <div className={`absolute inset-0 bg-gradient-to-r ${id === "entrance" ? "from-background/50 via-background/20 to-transparent" : "from-background/90 via-background/50 to-transparent"}`} />
         <div className={`absolute inset-0 bg-gradient-to-t ${id === "entrance" ? "from-background/40 via-transparent to-background/15" : "from-background/80 via-transparent to-background/30"}`} />
-        
+
         {/* Glossy overlay effect */}
         <div className="absolute inset-0 glossy-overlay opacity-30" />
       </div>
@@ -48,17 +48,17 @@ export function SlideSection({ id, title, subtitle, image, index, isActive }: Sl
             <span className="mb-4 block text-sm tracking-[0.3em] text-gold-muted uppercase">
               {String(index + 1).padStart(2, '0')}
             </span>
-            
+
             {/* Title */}
             <h2 className="mb-4 text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-cream">
               {title}
             </h2>
-            
+
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-foreground/70 font-light leading-relaxed max-w-lg">
               {subtitle}
             </p>
-            
+
             {/* Opening Date - Only show on entrance/hero slide */}
             {id === "entrance" && (
               <p className="mt-6 text-sm md:text-base text-gold font-light tracking-[0.1em] uppercase">

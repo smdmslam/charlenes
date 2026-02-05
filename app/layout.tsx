@@ -6,7 +6,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { AuthProvider } from '@/contexts/auth-context'
 import './globals.css'
 
-const cormorant = Cormorant_Garamond({ 
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-serif"
@@ -21,20 +21,44 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "Curzon House | Private Members Club | Mayfair",
-  description: "A cultural work, built to last in the heart of London. An invitation-only members club in Mayfair.",
-  keywords: ['private members club', 'Mayfair', 'London', 'luxury', 'exclusive', "Curzon House"],
+  title: {
+    default: "Curzon House | Private Members Club | Mayfair",
+    template: "%s | Curzon House"
+  },
+  description: "A cultural work, built to last in the heart of London. An invitation-only members club in Mayfair, offering exclusive access to luxury and London's elite.",
+  keywords: ['private members club', 'Mayfair', 'London', 'luxury', 'exclusive', 'Curzon House', 'London networking', 'elite lifestyle'],
+  authors: [{ name: 'Curzon House' }],
+  creator: 'Curzon House',
+  publisher: 'Curzon House',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: "Curzon House | Private Members Club | Mayfair",
-    description: "A cultural work, built to last in the heart of London.",
+    description: "A cultural work, built to last in the heart of London. An invitation-only members club in Mayfair.",
     type: 'website',
     url: 'https://www.charlenes.co.uk',
     siteName: "Curzon House",
+    locale: 'en_GB',
+    images: [
+      {
+        url: '/images/hero-entrance.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Curzon House Entrance - Private Members Club in Mayfair',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: "Curzon House | Private Members Club | Mayfair",
     description: "A cultural work, built to last in the heart of London.",
+    images: ['/images/hero-entrance.jpg'],
+  },
+  alternates: {
+    canonical: 'https://www.charlenes.co.uk',
   },
   icons: {
     icon: [
@@ -44,9 +68,30 @@ export const metadata: Metadata = {
       },
     ],
     shortcut: '/favicon.svg',
+    apple: '/apple-icon.png',
   },
   metadataBase: new URL('https://www.charlenes.co.uk'),
 }
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Curzon House',
+  url: 'https://www.charlenes.co.uk',
+  logo: 'https://www.charlenes.co.uk/favicon.svg',
+  description: 'An invitation-only private members club in Mayfair, London.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Mayfair',
+    addressRegion: 'London',
+    addressCountry: 'GB',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Membership Inquiry',
+  },
+}
+
 
 export default function RootLayout({
   children,
@@ -55,6 +100,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${cormorant.variable} font-serif antialiased`}>
         <AuthProvider>
           {children}

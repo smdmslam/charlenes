@@ -33,24 +33,24 @@ export function IntroOverlay({ isVisible, onComplete }: IntroOverlayProps) {
                 transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute -inset-12 border border-gold/20 rounded-full"
               />
-              
+
               {/* Main text */}
-              <motion.h1
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-4xl md:text-6xl font-light tracking-[0.2em] text-cream"
               >
                 Curzon House
-              </motion.h1>
-              
+              </motion.div>
+
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="my-4 h-px w-32 mx-auto bg-gradient-to-r from-transparent via-gold to-transparent"
               />
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}

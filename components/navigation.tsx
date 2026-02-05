@@ -34,7 +34,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isSignInOpen, setIsSignInOpen] = useState(false)
   const [isSignUpOpen, setIsSignUpOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
-  
+
   // Form state
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [gender, setGender] = useState<string>("")
@@ -72,12 +72,14 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             className="flex flex-col text-left cursor-pointer hover:opacity-80 transition-opacity duration-300"
             aria-label="Navigate to home"
           >
-            <span className="text-2xl md:text-3xl font-light tracking-[0.15em] text-cream">
-              Curzon House
-            </span>
-            <span className="text-xs tracking-[0.4em] text-gold uppercase" style={{ textShadow: '0 0 10px rgba(191, 155, 88, 0.5)' }}>
-              LONDON MAYFAIR
-            </span>
+            <div className="flex flex-col text-left">
+              <h1 className="text-2xl md:text-3xl font-light tracking-[0.15em] text-cream leading-tight">
+                Curzon House
+              </h1>
+              <span className="text-xs tracking-[0.4em] text-gold uppercase" style={{ textShadow: '0 0 10px rgba(191, 155, 88, 0.5)' }}>
+                LONDON MAYFAIR
+              </span>
+            </div>
           </motion.button>
 
           {/* Hamburger Menu */}
@@ -824,15 +826,15 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     </h2>
                   </div>
 
-                  <form 
-                    className="space-y-6" 
+                  <form
+                    className="space-y-6"
                     onSubmit={async (e) => {
                       e.preventDefault()
                       setIsSubmitting(true)
 
                       try {
                         const formData = new FormData(e.currentTarget)
-                        
+
                         // Validate required fields
                         const requiredFields = ['fullName', 'gender', 'address', 'country', 'telephone1', 'email', 'dateOfBirth', 'nationality', 'occupation', 'companyName', 'companyAddress', 'membership']
                         const missingFields = requiredFields.filter(field => {
@@ -1011,13 +1013,13 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <tr className="border-b border-gold/10">
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
-                                  <input 
-                                    type="radio" 
-                                    name="membership" 
-                                    value="founder" 
+                                  <input
+                                    type="radio"
+                                    name="membership"
+                                    value="founder"
                                     checked={membershipType === "founder"}
                                     onChange={(e) => setMembershipType(e.target.value)}
-                                    className="mr-3 accent-gold" 
+                                    className="mr-3 accent-gold"
                                   />
                                   <span className="text-cream">Founder <span className="text-cream/70">(150 max.)</span></span>
                                 </label>
@@ -1028,13 +1030,13 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <tr className="border-b border-gold/10">
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
-                                  <input 
-                                    type="radio" 
-                                    name="membership" 
-                                    value="standard" 
+                                  <input
+                                    type="radio"
+                                    name="membership"
+                                    value="standard"
                                     checked={membershipType === "standard"}
                                     onChange={(e) => setMembershipType(e.target.value)}
-                                    className="mr-3 accent-gold" 
+                                    className="mr-3 accent-gold"
                                   />
                                   <span className="text-cream">Standard</span>
                                 </label>
@@ -1045,13 +1047,13 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <tr className="border-b border-gold/10">
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
-                                  <input 
-                                    type="radio" 
-                                    name="membership" 
-                                    value="premium" 
+                                  <input
+                                    type="radio"
+                                    name="membership"
+                                    value="premium"
                                     checked={membershipType === "premium"}
                                     onChange={(e) => setMembershipType(e.target.value)}
-                                    className="mr-3 accent-gold" 
+                                    className="mr-3 accent-gold"
                                   />
                                   <span className="text-cream">Premium</span>
                                 </label>
@@ -1062,13 +1064,13 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <tr>
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
-                                  <input 
-                                    type="radio" 
-                                    name="membership" 
-                                    value="vip" 
+                                  <input
+                                    type="radio"
+                                    name="membership"
+                                    value="vip"
                                     checked={membershipType === "vip"}
                                     onChange={(e) => setMembershipType(e.target.value)}
-                                    className="mr-3 accent-gold" 
+                                    className="mr-3 accent-gold"
                                   />
                                   <span className="text-cream">VIP</span>
                                 </label>
