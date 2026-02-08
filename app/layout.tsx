@@ -39,12 +39,12 @@ export const metadata: Metadata = {
     title: "Curzon House | Private Members Club | Mayfair",
     description: "A cultural work, built to last in the heart of London. An invitation-only members club in Mayfair.",
     type: 'website',
-    url: 'https://www.charlenes.co.uk',
+    url: 'https://www.thecurzonhouse.co.uk',
     siteName: "Curzon House",
     locale: 'en_GB',
     images: [
       {
-        url: '/images/hero-entrance.jpg',
+        url: 'https://www.thecurzonhouse.co.uk/images/hero-entrance.jpg',
         width: 1200,
         height: 630,
         alt: 'Curzon House Entrance - Private Members Club in Mayfair',
@@ -55,10 +55,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Curzon House | Private Members Club | Mayfair",
     description: "A cultural work, built to last in the heart of London.",
-    images: ['/images/hero-entrance.jpg'],
+    images: ['https://www.thecurzonhouse.co.uk/images/hero-entrance.jpg'],
   },
   alternates: {
-    canonical: 'https://www.charlenes.co.uk',
+    canonical: 'https://www.thecurzonhouse.co.uk',
   },
   icons: {
     icon: [
@@ -70,15 +70,15 @@ export const metadata: Metadata = {
     shortcut: '/favicon.svg',
     apple: '/apple-icon.png',
   },
-  metadataBase: new URL('https://www.charlenes.co.uk'),
+  metadataBase: new URL('https://www.thecurzonhouse.co.uk'),
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Curzon House',
-  url: 'https://www.charlenes.co.uk',
-  logo: 'https://www.charlenes.co.uk/favicon.svg',
+  url: 'https://www.thecurzonhouse.co.uk',
+  logo: 'https://www.thecurzonhouse.co.uk/favicon.svg',
   description: 'An invitation-only private members club in Mayfair, London.',
   address: {
     '@type': 'PostalAddress',

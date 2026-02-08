@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://www.charlenes.co.uk/sitemap.xml',
+        sitemap: 'https://www.thecurzonhouse.co.uk/sitemap.xml',
     }
 }

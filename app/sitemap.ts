@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://www.charlenes.co.uk'
+    const baseUrl = 'https://www.thecurzonhouse.co.uk'
 
     // You would typically fetch dynamic routes from a DB here
     // For now, we'll list the static pages
