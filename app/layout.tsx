@@ -44,10 +44,10 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     images: [
       {
-        url: 'https://www.thecurzonhouse.co.uk/images/hero-entrance.jpg',
+        url: 'https://www.thecurzonhouse.co.uk/images/Lobby 1.png',
         width: 1200,
         height: 630,
-        alt: 'Curzon House Entrance - Private Members Club in Mayfair',
+        alt: 'Curzon House Lobby - Private Members Club in Mayfair',
       },
     ],
   },
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Curzon House | Private Members Club | Mayfair",
     description: "A cultural work, built to last in the heart of London.",
-    images: ['https://www.thecurzonhouse.co.uk/images/hero-entrance.jpg'],
+    images: ['https://www.thecurzonhouse.co.uk/images/Lobby 1.png'],
   },
   alternates: {
     canonical: 'https://www.thecurzonhouse.co.uk',
