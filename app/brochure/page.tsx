@@ -13,7 +13,7 @@ const brochureContent = {
     subtitle: "A cultural hospitality platform at the intersection of luxury, art, cuisine, and high-trust global relationships",
     location: "London Mayfair",
     openingDate: "Scheduled to open March 2027",
-    heroImage: "/images/Lobby 1.png",
+    heroImage: "/images/Lobby1.png",
   },
   about: {
     title: "About This Project",
@@ -102,7 +102,7 @@ const brochureContent = {
       {
         title: "The Entrance",
         description: "A discreet doorway in the heart of Mayfair, where London's most discerning gather.",
-        image: "/images/Lobby 1.png",
+        image: "/images/Lobby1.png",
       },
       {
         title: "Michelin Dining",

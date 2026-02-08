@@ -13,7 +13,7 @@ const sections = [
     id: "entrance",
     title: "The Entrance",
     subtitle: "A discreet doorway in the heart of Mayfair, where London's most discerning gather.",
-    image: "/images/Lobby 1.png",
+    image: "/images/Lobby1.png",
   },
   {
     id: "dining",

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Curzon House Digital Brochure",
     description: "A cultural hospitality platform at the intersection of luxury, art, and high-trust relationships.",
-    images: ['/images/Lobby 1.png'],
+    images: ['/images/Lobby1.png'],
   }
 }
 
