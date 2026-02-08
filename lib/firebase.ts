@@ -14,15 +14,14 @@ function validateFirebaseConfig() {
     'NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID',
   ];
 
-  const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+  const missingVars = requiredEnvVars.filter(varName => !process.env[varName] || process.env[varName] === '');
   
   if (missingVars.length > 0) {
-    const errorMsg = `Missing required Firebase environment variables: ${missingVars.join(', ')}. Please check your .env.local file.`;
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error(errorMsg);
-    } else {
-      console.warn('Firebase Config Warning:', errorMsg);
-    }
+    const errorMsg = `Missing required Firebase environment variables: ${missingVars.join(', ')}. Please check your environment configuration.`;
+    // Only log warning, don't throw - let Firebase initialization handle missing config
+    // This prevents the app from crashing if env vars aren't available yet
+    console.warn('Firebase Config Warning:', errorMsg);
+    console.warn('Firebase features may not work correctly without proper configuration.');
   }
 }
 
