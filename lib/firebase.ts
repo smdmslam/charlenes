@@ -2,20 +2,8 @@ import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getFirestore, Firestore, enableIndexedDbPersistence } from "firebase/firestore";
 import { getAuth, Auth } from "firebase/auth";
 
-// Your web app's Firebase configuration
-// All values must be provided via environment variables
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID!,
-};
-
-// Validate that all required environment variables are set
-if (typeof window !== "undefined") {
+// Helper function to validate Firebase config
+function validateFirebaseConfig() {
   const requiredEnvVars = [
     'NEXT_PUBLIC_FIREBASE_API_KEY',
     'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
@@ -29,10 +17,26 @@ if (typeof window !== "undefined") {
   const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
   
   if (missingVars.length > 0) {
-    console.error('Missing required Firebase environment variables:', missingVars);
-    throw new Error(`Missing required Firebase environment variables: ${missingVars.join(', ')}`);
+    const errorMsg = `Missing required Firebase environment variables: ${missingVars.join(', ')}. Please check your .env.local file.`;
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error(errorMsg);
+    } else {
+      console.warn('Firebase Config Warning:', errorMsg);
+    }
   }
 }
+
+// Your web app's Firebase configuration
+// All values must be provided via environment variables
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || '',
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || '',
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || '',
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '',
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '',
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || '',
+};
 
 // Initialize Firebase
 let app: FirebaseApp;
@@ -40,6 +44,9 @@ let db: Firestore;
 let auth: Auth;
 
 if (typeof window !== "undefined") {
+  // Validate config before initializing (only on client side)
+  validateFirebaseConfig();
+  
   // Only initialize on client side
   if (getApps().length === 0) {
     app = initializeApp(firebaseConfig);
