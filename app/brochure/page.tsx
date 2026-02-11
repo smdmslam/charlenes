@@ -69,27 +69,22 @@ const brochureContent = {
       {
         heading: "The Aristocratic Foundation",
         paragraphs: [
-          "The street emerged during London's westward expansion in the late 17th and early 18th centuries, as Mayfair transformed from open fields into an enclave of power. Named after the Curzon family—an Anglo-Norman dynasty with deep English roots—the street quickly became home to Britain's elite. Members of Parliament, future Prime Ministers like Benjamin Disraeli (who lived there until 1881), and influential diplomats like Lord Macartney chose Curzon Street as their London base. These weren't casual residents; they were the architects of British political and intellectual life, and their presence stamped the street with an authority it has never lost.",
-          "The Georgian townhouses that line Curzon Street, predominantly dating from the 1750s-60s and largely Grade II listed, still reflect this heritage. Post-World War II redevelopment converted many into luxury apartments, but the facades remained—a deliberate choice to preserve the street's aristocratic character even as its function evolved.",
+          "Curzon Street emerged during London's westward expansion in the early 18th century, as Mayfair transformed from open fields into an enclave of power. Named after the Curzon family of Kedleston—an Anglo-Norman dynasty—it quickly became home to Britain's elite. At the heart of this development, the House was established in the mid-1750s as a grand Georgian mansion, quickly evolving into one of the area's most significant private residences. In the 1770s, it underwent a neoclassical masterpiece transformation by Robert Adam, who added the distinctive circular dining room that would anchor formal entertaining for centuries to come.",
+          "This was never just a townhouse; it was a fully-fledged London mansion designed for ministerial dinners and aristocratic salons. Residents of the street included future Prime Ministers like Benjamin Disraeli and influential diplomats, whose presence stamped the street with an authority it has never lost. The House stood as a physical manifestation of this power, a stage for the architects of British political and intellectual life.",
         ],
       },
       {
-        heading: "Literature's Favorite Address",
+        heading: "A Stage for Private Splendour",
         paragraphs: [
-          "Oscar Wilde understood Curzon Street's symbolic power. He placed his most memorable characters there: Lord Henry Wotton from The Picture of Dorian Gray and Mrs Erlynne from Lady Windermere's Fan (specifically at 84A Curzon Street). Roald Dahl and William Makepeace Thackeray also set scenes on this street. Through their fiction, these authors transformed Curzon into shorthand for sophisticated West End society—a literary code that readers immediately recognized as the seat of elegance and moral complexity.",
+          "Through the 19th century, the House remained within the highest social echelon, serving as the address for Princess Sophia Matilda, granddaughter of George III. Its rooms hosted royal visitors and political musicales, cementing its reputation as a court-adjacent landmark. In the 1890s, it was expanded further with the addition of a grand ballroom and a first-floor apse, tilting even further into spectacle. It became a byword for private glamour—the kind of place where full-orchestra dances and society weddings defined the London Season.",
+          "This atmosphere was captured by Oscar Wilde, who placed characters in the street to signify sophisticated West End society. Later, it became the heart of 'Curzon Street Baroque,' a term coined to describe the inter-war, intellectually fashionable interiors that blended heritage with a sharp, modern wit. From the literary cameos of The Picture of Dorian Gray to real-world royal levees, the House has always been shorthand for patrician life.",
         ],
       },
       {
-        heading: "The Modern Cultural Hub",
+        heading: "The Evolution of Hospitality",
         paragraphs: [
-          "The Curzon Mayfair Cinema, built between 1963-66, represents one of London's most significant post-war cinema buildings and stands as a Grade II listed structure. For over 90 years, it hosted West End film premieres and shaped London's film culture—until its closure in 2025 due to redevelopment by landlord Fantasio. The cinema's departure marks a pivotal moment in the street's evolution, as the historic venue transitions toward a new vision that includes a members' club and restaurant alongside a reimagined cinema.",
-          "Beyond the cinema, Curzon Street anchors one of the world's densest concentrations of visual culture. Over 130 art galleries operate within the broader Mayfair and St James area, positioning the street as a nexus for contemporary and fine art.",
-        ],
-      },
-      {
-        heading: "Luxury Reimagined",
-        paragraphs: [
-          "Recent developments demonstrate how Curzon Street maintains its prestige while embracing modern luxury. 60 Curzon, an eight-storey residential building designed by French architect Thierry W. Despont, features 32 Art Deco-inspired residences that marry contemporary amenities with classical aesthetics. The building occupies the site of the historic Mirabelle restaurant, which operated from 1936 and attracted everyone from Winston Churchill to Leonardo DiCaprio—illustrating how the street's legendary venues continue to shape London's cultural memory even as they evolve.",
+          "The 20th century saw the property transition from a private salon into a more dynamic cultural hub. When the legendary high-society confectioner Gunter’s occupied the building, it became a serviced entertaining hub, producing elaborate cakes and banqueting for the world's most influential figures. This period bridged the gap between the private residence and the modern club, proving that the House was uniquely suited for high-stakes sociability.",
+          "Even in its later incarnations—hosting the Royal Worcester Porcelain Company and eventually becoming home to one of London's most exclusive gambling clubs in the 1980s—the House maintained its thread of genteel hospitality and late-night assurance. The same rooms that hosted cabinet dinners in the 1770s became the setting for high-stakes gaming and members-only interaction. Today, as it enters its next chapter, it remains a barometer of London's cultural aspirations—a place where history is not just preserved, but reimagined.",
         ],
       },
     ],
