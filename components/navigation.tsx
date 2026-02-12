@@ -904,98 +904,88 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       }
                     }}
                   >
-                    {/* Full Name and Gender */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="fullName" className="text-cream">Full Name</Label>
-                        <Input id="fullName" name="fullName" className="bg-background border-gold/20 text-cream" />
+                    {/* Gender - Top */}
+                    <div className="space-y-2 mb-4">
+                      <Label htmlFor="gender" className="text-cream text-sm">Gender</Label>
+                      <Select name="gender" value={gender} onValueChange={setGender}>
+                        <SelectTrigger className="bg-background border-gold/20 text-cream h-9 text-sm">
+                          <SelectValue placeholder="Select gender" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="male">Male</SelectItem>
+                          <SelectItem value="female">Female</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Basic Information - Compact Layout */}
+                    <div className="space-y-3 pb-4 border-b border-gold/10">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <Label htmlFor="fullName" className="text-cream text-sm">Full Name</Label>
+                          <Input id="fullName" name="fullName" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="dateOfBirth" className="text-cream text-sm">Date of Birth</Label>
+                          <Input id="dateOfBirth" name="dateOfBirth" type="date" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="gender" className="text-cream">Gender</Label>
-                        <Select name="gender" value={gender} onValueChange={setGender}>
-                          <SelectTrigger className="bg-background border-gold/20 text-cream">
-                            <SelectValue placeholder="Select gender" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="male">Male</SelectItem>
-                            <SelectItem value="female">Female</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                            <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                          </SelectContent>
-                        </Select>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div className="space-y-1">
+                          <Label htmlFor="email" className="text-cream text-sm">Email</Label>
+                          <Input id="email" name="email" type="email" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="telephone1" className="text-cream text-sm">Telephone</Label>
+                          <Input id="telephone1" name="telephone1" type="tel" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="telephone2" className="text-cream text-sm">Telephone 2 (Optional)</Label>
+                          <Input id="telephone2" name="telephone2" type="tel" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <Label htmlFor="address" className="text-cream text-sm">Address</Label>
+                          <Textarea id="address" name="address" rows={1} className="bg-background border-gold/20 text-cream text-sm min-h-[36px] resize-y" />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="country" className="text-cream text-sm">Country</Label>
+                          <Input id="country" name="country" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div className="space-y-1">
+                          <Label htmlFor="nationality" className="text-cream text-sm">Nationality</Label>
+                          <Input id="nationality" name="nationality" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="occupation" className="text-cream text-sm">Occupation</Label>
+                          <Input id="occupation" name="occupation" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="linkedin" className="text-cream text-sm">LinkedIn (URL)</Label>
+                          <Input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/..." className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <Label htmlFor="companyName" className="text-cream text-sm">Company Name</Label>
+                          <Input id="companyName" name="companyName" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="companyAddress" className="text-cream text-sm">Company Address</Label>
+                          <Textarea id="companyAddress" name="companyAddress" rows={1} className="bg-background border-gold/20 text-cream text-sm min-h-[36px] resize-y" />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Address */}
-                    <div className="space-y-2">
-                      <Label htmlFor="address" className="text-cream">Address</Label>
-                      <Textarea id="address" name="address" rows={3} className="bg-background border-gold/20 text-cream" />
-                    </div>
-
-                    {/* Country */}
-                    <div className="space-y-2">
-                      <Label htmlFor="country" className="text-cream">Country</Label>
-                      <Input id="country" name="country" className="bg-background border-gold/20 text-cream" />
-                    </div>
-
-                    {/* Telephone 1 and Telephone 2 */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="telephone1" className="text-cream">Telephone 1</Label>
-                        <Input id="telephone1" name="telephone1" type="tel" className="bg-background border-gold/20 text-cream" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="telephone2" className="text-cream">Telephone 2</Label>
-                        <Input id="telephone2" name="telephone2" type="tel" className="bg-background border-gold/20 text-cream" />
-                      </div>
-                    </div>
-
-                    {/* Email and LinkedIn */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="email" className="text-cream">Email</Label>
-                        <Input id="email" name="email" type="email" className="bg-background border-gold/20 text-cream" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="linkedin" className="text-cream">LinkedIn (URL)</Label>
-                        <Input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/..." className="bg-background border-gold/20 text-cream" />
-                      </div>
-                    </div>
-
-                    {/* Date of Birth and Nationality */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="dateOfBirth" className="text-cream">Date of Birth</Label>
-                        <Input id="dateOfBirth" name="dateOfBirth" type="date" className="bg-background border-gold/20 text-cream" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="nationality" className="text-cream">Nationality</Label>
-                        <Input id="nationality" name="nationality" className="bg-background border-gold/20 text-cream" />
-                      </div>
-                    </div>
-
-                    {/* Occupation and Company Name */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="occupation" className="text-cream">Occupation</Label>
-                        <Input id="occupation" name="occupation" className="bg-background border-gold/20 text-cream" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="companyName" className="text-cream">Company Name</Label>
-                        <Input id="companyName" name="companyName" className="bg-background border-gold/20 text-cream" />
-                      </div>
-                    </div>
-
-                    {/* Company Address */}
-                    <div className="space-y-2">
-                      <Label htmlFor="companyAddress" className="text-cream">Company Address</Label>
-                      <Textarea id="companyAddress" name="companyAddress" rows={3} className="bg-background border-gold/20 text-cream" />
-                    </div>
-
-                    {/* Personal Interests */}
-                    <div className="space-y-2">
-                      <Label htmlFor="personalInterests" className="text-cream">Personal Interests</Label>
-                      <Textarea id="personalInterests" name="personalInterests" rows={4} className="bg-background border-gold/20 text-cream" />
+                    {/* Personal Interests - Prominent */}
+                    <div className="space-y-3 pt-6">
+                      <Label htmlFor="personalInterests" className="text-cream text-lg font-light">Personal Interests</Label>
+                      <Textarea id="personalInterests" name="personalInterests" rows={6} className="bg-background border-gold/30 text-cream text-base leading-relaxed" placeholder="Share your passions, hobbies, and interests..." />
                     </div>
 
                     {/* Membership Selection */}
@@ -1057,10 +1047,11 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       </p>
                     </div>
 
-                    {/* Personal Biography */}
-                    <div className="space-y-2 pt-4 border-t border-gold/20">
-                      <Label htmlFor="personalBiography" className="text-cream">Personal Biography ("Tell us your story")</Label>
-                      <Textarea id="personalBiography" name="personalBiography" rows={6} className="bg-background border-gold/20 text-cream" placeholder="Please provide a brief biography..." />
+                    {/* Personal Biography - Prominent */}
+                    <div className="space-y-3 pt-6 border-t border-gold/30">
+                      <Label htmlFor="personalBiography" className="text-cream text-lg font-light">Personal Biography</Label>
+                      <p className="text-cream/80 text-sm italic mb-2">"Tell us your story"</p>
+                      <Textarea id="personalBiography" name="personalBiography" rows={8} className="bg-background border-gold/30 text-cream text-base leading-relaxed" placeholder="Please provide a brief biography..." />
                     </div>
 
                     {/* Submit Button */}
