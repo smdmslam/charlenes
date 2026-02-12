@@ -1013,27 +1013,34 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                           <tbody>
                             <tr className="border-b border-gold/10">
                               <td className="py-3 px-4">
-                                <label className="flex items-center cursor-pointer">
+                                <label className="flex items-start cursor-pointer">
                                   <input
                                     type="radio"
                                     name="membership"
                                     value="founder"
                                     checked={membershipType === "founder"}
                                     onChange={(e) => setMembershipType(e.target.value)}
-                                    className="mr-3 accent-gold"
+                                    className="mr-3 accent-gold mt-1"
                                   />
-                                  <span className="text-cream">Founders Circle <span className="text-cream/70">(150)</span></span>
-                                  <button
-                                    type="button"
-                                    onClick={(e) => {
-                                      e.stopPropagation()
-                                      setIsFoundersCircleOpen(true)
-                                    }}
-                                    className="ml-2 p-1 text-cream/60 hover:text-gold transition-colors"
-                                    aria-label="Learn more about Founders Circle"
-                                  >
-                                    <Info className="w-4 h-4" />
-                                  </button>
+                                  <div className="flex-1">
+                                    <div className="flex items-center">
+                                      <span className="text-cream">Founders Circle <span className="text-cream/70">(150)</span></span>
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation()
+                                          setIsFoundersCircleOpen(true)
+                                        }}
+                                        className="ml-2 p-1 text-cream/60 hover:text-gold transition-colors"
+                                        aria-label="Learn more about Founders Circle"
+                                      >
+                                        <Info className="w-4 h-4" />
+                                      </button>
+                                    </div>
+                                    <div className="text-sm mt-1">
+                                      <span className="text-gold">Pre-sale*</span> <span className="text-cream/70">March 15th, 2026</span>
+                                    </div>
+                                  </div>
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,500</td>
