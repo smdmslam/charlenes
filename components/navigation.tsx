@@ -1308,19 +1308,19 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     </p>
                     
                     <p>
-                      The Founders Circle at Curzon House is built around that scarcity. It is capped at 150 people for a reason that is both practical and psychological: it is small enough that you can know the room, and large enough that the room can surprise you. Each founder arrives with their own gravity – a family office in Dubai, a studio in Paris, a fund in Mayfair, a collection in New York – and the house's job is to quietly bend those orbits toward one another.
+                      The <span className="text-gold">Founders Circle</span> at Curzon House is built around that scarcity. It is capped at <span className="text-gold">150 people</span> for a reason that is both practical and psychological: it is small enough that you can know the room, and large enough that the room can surprise you. Each founder arrives with their own gravity – a family office in Dubai, a studio in Paris, a fund in Mayfair, a collection in New York – and the house's job is to quietly bend those orbits toward one another.
                     </p>
                     
                     <p>
-                      To make that happen, each member is paired with a Personal Introductions Liaison. Think of this as a professionalised version of the best host you have ever known. Their craft is simple but rare: they know who you are, what you are building, what you are curious about, and they spend their days turning cold encounters into warm ones. Software does the counting – social reach, shared interests, overlapping histories – and the liaison does the human part: "You two need to talk," "Sit here tonight," "Stay five more minutes."
+                      To make that happen, each member is paired with a <span className="text-gold">Personal Introductions Liaison</span>. Think of this as a professionalised version of the best host you have ever known. Their craft is simple but rare: they know who you are, what you are building, what you are curious about, and they spend their days turning cold encounters into warm ones. Software does the counting – social reach, shared interests, overlapping histories – and the liaison does the human part: "You two need to talk," "Sit here tonight," "Stay five more minutes."
                     </p>
                     
                     <p>
-                      From there, the effects compound. A Michelin‑calibre restaurant that behaves like a salon, not a trophy. Programming that treats fashion, art, and ideas as working materials, not decorations. A calendar that feels closer to the release schedule of a great luxury house than the noticeboard of a club. Over time, the value of the Founders Circle is not the priority table, the early booking, or even the events; it is the quiet accumulation of conversations that could not have happened anywhere else at 8 p.m. on a Tuesday.
+                      From there, the effects compound. A <span className="text-gold">Michelin‑calibre restaurant</span> that behaves like a salon, not a trophy. Programming that treats fashion, art, and ideas as working materials, not decorations. A calendar that feels closer to the release schedule of a great luxury house than the noticeboard of a club. Over time, the value of the <span className="text-gold">Founders Circle</span> is not the priority table, the early booking, or even the events; it is the quiet accumulation of conversations that could not have happened anywhere else at 8 p.m. on a Tuesday.
                     </p>
                     
                     <p>
-                      The fee – £10,000 to join, £2,500 each year – is there, of course. But for the right 150 people, the price becomes almost incidental. What they are really buying is a long‑term position in a carefully engineered social system: a place in London where the probability of the right encounter is permanently, deliberately tilted in their favour.
+                      The fee – <span className="text-gold">£10,000</span> to join, <span className="text-gold">£2,500</span> each year – is there, of course. But for the right <span className="text-gold">150 people</span>, the price becomes almost incidental. What they are really buying is a long‑term position in a carefully engineered social system: a place in London where the probability of the right encounter is permanently, deliberately tilted in their favour.
                     </p>
                   </div>
                 </div>
