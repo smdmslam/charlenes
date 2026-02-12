@@ -260,17 +260,6 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
                   {/* Bottom Group */}
                   <div className="flex flex-col gap-8">
-                    {/* PROJECT TIMELINE */}
-                    <button
-                      onClick={() => {
-                        setIsTimelineOpen(true)
-                        setIsMenuOpen(false)
-                      }}
-                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
-                    >
-                      PROJECT TIMELINE
-                    </button>
-
                     {/* HISTORY */}
                     <button
                       onClick={() => {
@@ -295,6 +284,17 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
                     {/* Divider */}
                     <div className="border-t border-gold/20"></div>
+
+                    {/* PROJECT TIMELINE */}
+                    <button
+                      onClick={() => {
+                        setIsTimelineOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                    >
+                      PROJECT TIMELINE
+                    </button>
 
                     {/* GALLERY */}
                     <div className="flex flex-col gap-4">
@@ -1060,16 +1060,19 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             </tr>
                             <tr>
                               <td className="py-3 px-4">
-                                <label className="flex items-center cursor-pointer">
+                                <label className="flex items-start cursor-pointer">
                                   <input
                                     type="radio"
                                     name="membership"
                                     value="standard"
                                     checked={membershipType === "standard"}
                                     onChange={(e) => setMembershipType(e.target.value)}
-                                    className="mr-3 accent-gold"
+                                    className="mr-3 accent-gold mt-1"
                                   />
-                                  <span className="text-cream">Standard <span className="text-cream/70">(1000 globally)</span></span>
+                                  <div className="flex-1">
+                                    <div className="text-cream">Standard</div>
+                                    <div className="text-cream/70 text-sm mt-1">Available January 2027</div>
+                                  </div>
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>
