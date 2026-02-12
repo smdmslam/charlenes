@@ -236,10 +236,12 @@ export default function BrochurePage() {
       </div>
 
       {/* About Section */}
-      <div id="about" className="brochure-page content-page">
+      <div id="about" className="brochure-page content-page relative">
+        <div className="absolute top-8 right-12 text-[10px] tracking-[0.2em] text-gold uppercase">
+          {brochureContent.about.openingMessage}
+        </div>
         <h2 className="section-title">{brochureContent.about.title}</h2>
         <div className="section-content">
-          <p className="opening-message">{brochureContent.about.openingMessage}</p>
           <blockquote className="section-quote">{brochureContent.about.quote}</blockquote>
           {brochureContent.about.paragraphs.map((para, idx) => (
             <p key={idx} className="section-paragraph">

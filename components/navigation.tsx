@@ -408,8 +408,11 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               onClick={(e) => e.stopPropagation()}
             >
               <div className="bg-background border border-gold/20 max-w-3xl w-full max-h-[80vh] overflow-y-auto">
-                {/* Close Button */}
-                <div className="sticky top-0 bg-background border-b border-gold/20 flex justify-end p-6">
+                {/* Header */}
+                <div className="sticky top-0 bg-background border-b border-gold/20 flex justify-end items-center px-8 md:px-12 py-4 gap-8">
+                  <span className="text-[10px] md:text-xs tracking-[0.2em] text-gold uppercase font-light">
+                    Curzon House is scheduled to open March 2027
+                  </span>
                   <button
                     onClick={() => setIsAboutOpen(false)}
                     className="p-2 text-cream hover:text-gold transition-colors duration-300"
@@ -429,12 +432,6 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     Curzon House
                   </h2>
 
-                  {/* Opening Message */}
-                  <div className="mb-8">
-                    <p className="text-xl md:text-2xl text-cream font-light tracking-[0.1em]">
-                      Curzon House is scheduled to open March 2027
-                    </p>
-                  </div>
 
                   <p className="text-lg md:text-xl text-cream/90 leading-relaxed italic pl-8 md:pl-12 border-l-2 border-gold/30">
                     "A cultural hospitality platform at the intersection of luxury, art, cuisine, and high-trust global relationships—built for people defined by intellect, achievement, and discretion."
