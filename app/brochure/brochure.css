@@ -39,6 +39,7 @@
 }
 
 @media print {
+
   .no-print,
   .print-controls {
     display: none !important;
@@ -104,12 +105,10 @@
 .cover-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(15, 13, 10, 0.75) 0%,
-    rgba(15, 13, 10, 0.5) 50%,
-    rgba(15, 13, 10, 0.8) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(15, 13, 10, 0.75) 0%,
+      rgba(15, 13, 10, 0.5) 50%,
+      rgba(15, 13, 10, 0.8) 100%);
   z-index: 1;
 }
 
@@ -331,10 +330,10 @@
 }
 
 .phase-period {
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 300;
   color: var(--cream);
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .phase-items {
@@ -347,10 +346,10 @@
 }
 
 .phase-items li {
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 300;
   color: var(--cream);
-  opacity: 0.85;
+  opacity: 0.95;
   padding-left: 1.5rem;
   position: relative;
 }
@@ -556,7 +555,7 @@
     counter-increment: page;
   }
 
-  @page:first {
+  @page: first {
     size: A4;
     margin: 0;
   }
@@ -625,12 +624,10 @@
     height: 297mm;
     margin: 0;
     padding: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(15, 13, 10, 0.75) 0%,
-      rgba(15, 13, 10, 0.5) 50%,
-      rgba(15, 13, 10, 0.8) 100%
-    );
+    background: linear-gradient(to bottom,
+        rgba(15, 13, 10, 0.75) 0%,
+        rgba(15, 13, 10, 0.5) 50%,
+        rgba(15, 13, 10, 0.8) 100%);
   }
 
   .cover-text {

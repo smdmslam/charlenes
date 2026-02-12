@@ -518,7 +518,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <div className="pt-8 md:pt-12">
                           <div className="text-xl md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase I</div>
                           <div className="text-lg md:text-lg text-cream mb-4 font-light text-center md:text-left">Jan–Mar 2026</div>
-                          <div className="text-sm md:text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
+                          <div className="text-base md:text-sm text-cream/90 leading-relaxed space-y-1 text-center md:text-left font-light">
                             <div>Formation</div>
                             <div>Concept finalised</div>
                             <div>Founding Circle</div>
@@ -532,7 +532,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <div className="pt-8 md:pt-12">
                           <div className="text-xl md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase II</div>
                           <div className="text-lg md:text-lg text-cream mb-4 font-light text-center md:text-left">Apr–Jun 2026</div>
-                          <div className="text-sm md:text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
+                          <div className="text-base md:text-sm text-cream/90 leading-relaxed space-y-1 text-center md:text-left font-light">
                             <div>Design & Curation</div>
                             <div>Architecture & interiors</div>
                             <div>Partners appointed</div>
@@ -546,7 +546,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <div className="pt-8 md:pt-12">
                           <div className="text-xl md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase III</div>
                           <div className="text-lg md:text-lg text-cream mb-4 font-light text-center md:text-left">Jul–Nov 2026</div>
-                          <div className="text-sm md:text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
+                          <div className="text-base md:text-sm text-cream/90 leading-relaxed space-y-1 text-center md:text-left font-light">
                             <div>Build & Preparation</div>
                             <div>Construction & fit-out</div>
                             <div>Staff training</div>
@@ -560,7 +560,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <div className="pt-8 md:pt-12">
                           <div className="text-xl md:text-lg text-gold uppercase tracking-[0.2em] mb-3 font-medium text-center md:text-left">Phase IV</div>
                           <div className="text-lg md:text-lg text-cream mb-4 font-light text-center md:text-left">Dec 2026 – Q1 2027</div>
-                          <div className="text-sm md:text-xs text-cream/70 leading-relaxed space-y-1 text-center md:text-left">
+                          <div className="text-base md:text-sm text-cream/90 leading-relaxed space-y-1 text-center md:text-left font-light">
                             <div>Opening</div>
                             <div>Members' preview</div>
                             <div>Full operations</div>
