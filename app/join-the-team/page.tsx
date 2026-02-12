@@ -60,14 +60,23 @@ export default function JoinTheTeamPage() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-16 text-center">
-            <h1 className="text-5xl md:text-6xl font-light tracking-wide text-black mb-6">
-              Join the Team
+            <h1 className="text-5xl md:text-6xl font-light tracking-wide text-black mb-2">
+              Curzon House
             </h1>
-            <p className="text-lg md:text-xl text-black/80 max-w-2xl mx-auto leading-relaxed">
-              Curzon House is built on a dual spine: maison-grade luxury and precision hospitality. 
-              We're assembling a founding team that brings together leaders from global fashion houses, 
-              Michelin-starred restaurants, award-winning clubs, and cultural institutions.
+            <p className="text-sm md:text-base uppercase tracking-[0.2em] text-black/60 mb-8 font-light">
+              Mayfair
             </p>
+            <div className="text-lg md:text-xl text-black/80 max-w-3xl mx-auto leading-relaxed space-y-4">
+              <p>
+                The most powerful institutions are rarely loud. They are carefully composed ecosystems — places where standards are shared, introductions are deliberate, capital is stewarded wisely, risks are understood before they are taken, and excellence compounds quietly over time into legacy.
+              </p>
+              <p>
+                Curzon House is conceived as such an ecosystem. A modern maison grounded in discernment, hospitality, cultural fluency, disciplined judgment, and long-term stewardship.
+              </p>
+              <p>
+                Its founding advisors are drawn from global luxury houses, Michelin-calibre kitchens, architectural studios, cultural institutions, and from those accustomed to structuring complex transactions, safeguarding generational wealth, and guiding institutions through consequence and continuity — not as ornament, but as authors of the house's DNA and its enduring legacy.
+              </p>
+            </div>
           </div>
 
           {/* Advisory Board Section */}
@@ -75,7 +84,7 @@ export default function JoinTheTeamPage() {
             <h2 className="text-3xl md:text-4xl font-light tracking-wide text-black mb-2 text-center">
               Advisory Board
             </h2>
-            <p className="text-center text-black/70 mb-12 text-sm uppercase tracking-wider">
+            <p className="text-center text-black/85 mb-12 text-sm uppercase tracking-wider font-medium">
               Cultural & Strategic Leadership
             </p>
 
@@ -99,19 +108,6 @@ export default function JoinTheTeamPage() {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* C Suite Section Placeholder */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-light tracking-wide text-black mb-2 text-center">
-              C Suite
-            </h2>
-            <p className="text-center text-black/70 mb-12 text-sm uppercase tracking-wider">
-              Operational Leadership
-            </p>
-            <div className="text-center text-black/60">
-              <p className="text-sm">Coming soon</p>
             </div>
           </div>
 
