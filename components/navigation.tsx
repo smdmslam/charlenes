@@ -1024,13 +1024,13 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                     onChange={(e) => setMembershipType(e.target.value)}
                                     className="mr-3 accent-gold"
                                   />
-                                  <span className="text-cream">Founder <span className="text-cream/70">(150 max.)</span></span>
+                                  <span className="text-cream">Founders Circle <span className="text-cream/70">(150)</span></span>
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,500</td>
                               <td className="text-right py-3 px-4 text-cream">£10,000</td>
                             </tr>
-                            <tr className="border-b border-gold/10">
+                            <tr>
                               <td className="py-3 px-4">
                                 <label className="flex items-center cursor-pointer">
                                   <input
@@ -1045,41 +1045,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>
-                              <td className="text-right py-3 px-4 text-cream">£1,500</td>
-                            </tr>
-                            <tr className="border-b border-gold/10">
-                              <td className="py-3 px-4">
-                                <label className="flex items-center cursor-pointer">
-                                  <input
-                                    type="radio"
-                                    name="membership"
-                                    value="premium"
-                                    checked={membershipType === "premium"}
-                                    onChange={(e) => setMembershipType(e.target.value)}
-                                    className="mr-3 accent-gold"
-                                  />
-                                  <span className="text-cream">Premium</span>
-                                </label>
-                              </td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>
-                              <td className="text-right py-3 px-4 text-cream">£3,000</td>
-                            </tr>
-                            <tr>
-                              <td className="py-3 px-4">
-                                <label className="flex items-center cursor-pointer">
-                                  <input
-                                    type="radio"
-                                    name="membership"
-                                    value="vip"
-                                    checked={membershipType === "vip"}
-                                    onChange={(e) => setMembershipType(e.target.value)}
-                                    className="mr-3 accent-gold"
-                                  />
-                                  <span className="text-cream">VIP</span>
-                                </label>
-                              </td>
-                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
-                              <td className="text-right py-3 px-4 text-cream">£5,000</td>
                             </tr>
                           </tbody>
                         </table>

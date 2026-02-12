@@ -356,10 +356,8 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
                     <SelectValue placeholder="Select membership type" />
                   </SelectTrigger>
                   <SelectContent className="z-[250]">
-                    <SelectItem value="founder">Founder</SelectItem>
+                    <SelectItem value="founder">Founders Circle (150)</SelectItem>
                     <SelectItem value="standard">Standard</SelectItem>
-                    <SelectItem value="premium">Premium</SelectItem>
-                    <SelectItem value="vip">VIP</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
