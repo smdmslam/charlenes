@@ -424,18 +424,24 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
                 {/* Content */}
                 <div className="p-8 md:p-12 space-y-6 font-sans">
-                  <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-4">
+                  <h1 className="text-2xl md:text-3xl font-light tracking-[0.2em] text-gold uppercase mb-8">
                     About This Project
                   </h1>
 
-                  <h2 className="text-4xl md:text-5xl font-light tracking-[0.1em] text-cream mb-4">
-                    Curzon House
-                  </h2>
+                  <div className="space-y-1">
+                    <h2 className="text-4xl md:text-5xl font-light tracking-[0.1em] text-cream">
+                      Curzon House
+                    </h2>
+                    <p className="text-sm md:text-base text-cream/60 italic tracking-[0.1em]">
+                      Fraternitas Hereditatis et Luxūs
+                    </p>
+                  </div>
 
-
-                  <p className="text-lg md:text-xl text-cream/90 leading-relaxed italic pl-8 md:pl-12 border-l-2 border-gold/30">
-                    "A cultural hospitality platform at the intersection of luxury, art, cuisine, and high-trust global relationships—built for people defined by intellect, achievement, and discretion."
-                  </p>
+                  <div className="py-8">
+                    <p className="text-lg md:text-xl text-cream/90 leading-relaxed italic pl-8 md:pl-12 border-l-2 border-gold/30">
+                      "A cultural hospitality platform at the intersection of luxury, art, cuisine, and high-trust global relationships—built for people defined by intellect, achievement, and discretion."
+                    </p>
+                  </div>
 
                   <p className="text-base md:text-lg text-cream/80 leading-relaxed font-sans">
                     A place that reflects the evolution of culture itself: global, intelligent, emotionally resonant, and unmistakably rare. In the heart of Mayfair, we propose a new kind of cultural hospitality platform—one that is not designed to follow precedent, but to extend it.

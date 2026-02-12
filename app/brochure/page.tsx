@@ -17,6 +17,8 @@ const brochureContent = {
   },
   about: {
     title: "About This Project",
+    subtitle: "Curzon House",
+    motto: "Fraternitas Hereditatis et Luxūs",
     openingMessage: "Curzon House is scheduled to open March 2027",
     quote: "A cultural hospitality platform at the intersection of luxury, art, cuisine, and high-trust global relationships—built for people defined by intellect, achievement, and discretion.",
     paragraphs: [
@@ -240,9 +242,20 @@ export default function BrochurePage() {
         <div className="absolute top-8 right-12 text-[10px] tracking-[0.2em] text-gold uppercase">
           {brochureContent.about.openingMessage}
         </div>
-        <h2 className="section-title">{brochureContent.about.title}</h2>
-        <div className="section-content">
-          <blockquote className="section-quote">{brochureContent.about.quote}</blockquote>
+        <h2 className="section-title mb-12">{brochureContent.about.title}</h2>
+        <div className="section-content space-y-10">
+          <div className="space-y-1">
+            <h3 className="text-4xl font-light tracking-[0.1em] text-cream">
+              {brochureContent.about.subtitle}
+            </h3>
+            <p className="text-lg text-cream/60 italic tracking-[0.1em]">
+              {brochureContent.about.motto}
+            </p>
+          </div>
+
+          <div className="py-6">
+            <blockquote className="section-quote">{brochureContent.about.quote}</blockquote>
+          </div>
           {brochureContent.about.paragraphs.map((para, idx) => (
             <p key={idx} className="section-paragraph">
               {para}
