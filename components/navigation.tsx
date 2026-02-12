@@ -243,6 +243,17 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       THE EXPERIENCE
                     </button>
 
+                    {/* FOUNDERS CIRCLE */}
+                    <button
+                      onClick={() => {
+                        setIsFoundersCircleOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                    >
+                      Founders Circle | 150
+                    </button>
+
                     {/* MEMBERSHIP */}
                     <button
                       onClick={() => {
