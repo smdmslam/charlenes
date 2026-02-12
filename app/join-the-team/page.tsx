@@ -60,12 +60,9 @@ export default function JoinTheTeamPage() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-16 text-center">
-            <h1 className="text-5xl md:text-6xl font-light tracking-wide text-black mb-2">
-              Curzon House
+            <h1 className="text-4xl md:text-5xl font-light tracking-wide text-black mb-8">
+              Legacy and Excellence
             </h1>
-            <p className="text-sm md:text-base uppercase tracking-[0.2em] text-black/60 mb-8 font-light">
-              Mayfair
-            </p>
             <div className="text-lg md:text-xl text-black/80 max-w-3xl mx-auto leading-relaxed space-y-4">
               <p>
                 The most powerful institutions are rarely loud. They are carefully composed ecosystems — places where standards are shared, introductions are deliberate, capital is stewarded wisely, risks are understood before they are taken, and excellence compounds quietly over time into legacy.

@@ -62,7 +62,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   return (
     <>
       {/* Top header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-8 md:px-16 lg:px-24 py-6">
+      <header className="fixed top-0 left-0 right-0 z-50 px-8 md:px-16 lg:px-24 py-6 bg-cream/95 backdrop-blur-sm">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.button
@@ -74,10 +74,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             aria-label="Navigate to home"
           >
             <div className="flex flex-col text-left">
-              <h1 className="text-2xl md:text-3xl font-light tracking-[0.15em] text-cream leading-tight">
+              <h1 className="text-2xl md:text-3xl font-light tracking-[0.15em] text-black leading-tight">
                 Curzon House
               </h1>
-              <span className="text-xs tracking-[0.4em] text-gold uppercase" style={{ textShadow: '0 0 10px rgba(191, 155, 88, 0.5)' }}>
+              <span className="text-xs tracking-[0.4em] text-black/70 uppercase">
                 LONDON MAYFAIR
               </span>
             </div>
@@ -89,7 +89,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
             onClick={() => setIsMenuOpen(true)}
-            className="p-2 text-cream hover:text-gold transition-colors duration-300"
+            className="p-2 text-black hover:text-gold transition-colors duration-300"
             aria-label="Menu"
           >
             <Menu className="w-6 h-6" />
