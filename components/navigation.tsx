@@ -219,128 +219,140 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               {/* Menu Content */}
               <div className="px-8 pb-8">
                 <nav className="flex flex-col gap-8">
-                  {/* ABOUT */}
-                  <button
-                    onClick={() => {
-                      setIsAboutOpen(true)
-                      setIsMenuOpen(false)
-                    }}
-                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
-                  >
-                    ABOUT THIS PROJECT
-                  </button>
-
-                  {/* PROJECT TIMELINE */}
-                  <button
-                    onClick={() => {
-                      setIsTimelineOpen(true)
-                      setIsMenuOpen(false)
-                    }}
-                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
-                  >
-                    PROJECT TIMELINE
-                  </button>
-
-                  {/* THE EXPERIENCE */}
-                  <button
-                    onClick={() => {
-                      setIsExperienceOpen(true)
-                      setIsMenuOpen(false)
-                    }}
-                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
-                  >
-                    THE EXPERIENCE
-                  </button>
-
-                  {/* HISTORY */}
-                  <button
-                    onClick={() => {
-                      setIsHistoryOpen(true)
-                      setIsMenuOpen(false)
-                    }}
-                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
-                  >
-                    History
-                  </button>
-
-                  {/* MEMBERSHIP */}
-                  <button
-                    onClick={() => {
-                      setIsMembershipOpen(true)
-                      setIsMenuOpen(false)
-                    }}
-                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
-                  >
-                    Apply for Membership
-                  </button>
-
-                  {/* PHILANTHROPY */}
-                  <button
-                    onClick={() => {
-                      setIsPhilanthropyOpen(true)
-                      setIsMenuOpen(false)
-                    }}
-                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
-                  >
-                    Philanthropy
-                  </button>
-
-                  {/* GALLERY */}
-                  <div className="flex flex-col gap-4">
+                  {/* Top Group */}
+                  <div className="flex flex-col gap-8">
+                    {/* ABOUT */}
                     <button
-                      onClick={() => setIsGalleryOpen(!isGalleryOpen)}
-                      className="flex items-center justify-between text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                      onClick={() => {
+                        setIsAboutOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
                     >
-                      <span>GALLERY</span>
-                      {isGalleryOpen ? (
-                        <ChevronUp className="w-5 h-5" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5" />
-                      )}
+                      ABOUT THIS PROJECT
                     </button>
 
-                    {/* Gallery Submenu */}
-                    <AnimatePresence>
-                      {isGalleryOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="flex flex-col gap-4 pl-6 border-l border-gold/20">
-                            {sections.map((section, index) => (
-                              <button
-                                key={section.id}
-                                onClick={() => {
-                                  onNavigate(index)
-                                  setIsMenuOpen(false)
-                                }}
-                                className={`text-left text-base tracking-[0.1em] uppercase transition-colors duration-300 ${activeIndex === index
-                                  ? "text-gold"
-                                  : "text-cream/70 hover:text-gold-muted"
-                                  }`}
-                              >
-                                {section.title}
-                              </button>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    {/* THE EXPERIENCE */}
+                    <button
+                      onClick={() => {
+                        setIsExperienceOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                    >
+                      THE EXPERIENCE
+                    </button>
+
+                    {/* MEMBERSHIP */}
+                    <button
+                      onClick={() => {
+                        setIsMembershipOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                    >
+                      Apply for Membership
+                    </button>
                   </div>
 
-                  {/* CONTACT */}
-                  <button
-                    onClick={() => {
-                      setIsContactOpen(true)
-                      setIsMenuOpen(false)
-                    }}
-                    className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
-                  >
-                    Contact
-                  </button>
+                  {/* Divider */}
+                  <div className="border-t border-gold/20"></div>
+
+                  {/* Bottom Group */}
+                  <div className="flex flex-col gap-8">
+                    {/* PROJECT TIMELINE */}
+                    <button
+                      onClick={() => {
+                        setIsTimelineOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                    >
+                      PROJECT TIMELINE
+                    </button>
+
+                    {/* HISTORY */}
+                    <button
+                      onClick={() => {
+                        setIsHistoryOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                    >
+                      History
+                    </button>
+
+                    {/* PHILANTHROPY */}
+                    <button
+                      onClick={() => {
+                        setIsPhilanthropyOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                    >
+                      Philanthropy
+                    </button>
+
+                    {/* Divider */}
+                    <div className="border-t border-gold/20"></div>
+
+                    {/* GALLERY */}
+                    <div className="flex flex-col gap-4">
+                      <button
+                        onClick={() => setIsGalleryOpen(!isGalleryOpen)}
+                        className="flex items-center justify-between text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                      >
+                        <span>GALLERY</span>
+                        {isGalleryOpen ? (
+                          <ChevronUp className="w-5 h-5" />
+                        ) : (
+                          <ChevronDown className="w-5 h-5" />
+                        )}
+                      </button>
+
+                      {/* Gallery Submenu */}
+                      <AnimatePresence>
+                        {isGalleryOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="flex flex-col gap-4 pl-6 border-l border-gold/20">
+                              {sections.map((section, index) => (
+                                <button
+                                  key={section.id}
+                                  onClick={() => {
+                                    onNavigate(index)
+                                    setIsMenuOpen(false)
+                                  }}
+                                  className={`text-left text-base tracking-[0.1em] uppercase transition-colors duration-300 ${activeIndex === index
+                                    ? "text-gold"
+                                    : "text-cream/70 hover:text-gold-muted"
+                                    }`}
+                                >
+                                  {section.title}
+                                </button>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {/* CONTACT */}
+                    <button
+                      onClick={() => {
+                        setIsContactOpen(true)
+                        setIsMenuOpen(false)
+                      }}
+                      className="text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                    >
+                      Contact
+                    </button>
+                  </div>
 
                   {/* AUTHENTICATION */}
                   <div className="pt-4 border-t border-gold/20">
