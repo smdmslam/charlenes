@@ -1319,7 +1319,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                   
                   <div className="space-y-4 text-cream/90 leading-relaxed">
                     <p>
-                      Imagine a city where most rooms are already full. The restaurants are busy, the clubs are polished, the guest lists are long. But the thing that is actually scarce is not another dining room or another bar; it is the feeling that, when you walk into a place, everyone you meet could change the trajectory of your life.
+                      Imagine a city where most rooms are already full. The restaurants are busy, the clubs are polished, the guest lists are long. But the thing that is actually scarce is not another dining room or another bar; it is the feeling that, when you walk into a place, everyone you meet could change the trajectory of your life — and not only in London.
                     </p>
                     
                     <p>
