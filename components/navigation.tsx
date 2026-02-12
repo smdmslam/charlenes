@@ -983,9 +983,16 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     </div>
 
                     {/* Personal Interests - Prominent */}
-                    <div className="space-y-3 pt-6">
+                    <div className="space-y-3 pt-4">
                       <Label htmlFor="personalInterests" className="text-cream text-lg font-light">Personal Interests</Label>
                       <Textarea id="personalInterests" name="personalInterests" rows={6} className="bg-background border-gold/30 text-cream text-base leading-relaxed" placeholder="Share your passions, hobbies, and interests..." />
+                    </div>
+
+                    {/* Personal Biography - Prominent */}
+                    <div className="space-y-3 pt-6 border-t border-gold/30">
+                      <Label htmlFor="personalBiography" className="text-cream text-lg font-light">Personal Biography</Label>
+                      <p className="text-cream/80 text-sm italic mb-2">"Tell us your story"</p>
+                      <Textarea id="personalBiography" name="personalBiography" rows={8} className="bg-background border-gold/30 text-cream text-base leading-relaxed" placeholder="Please provide a brief biography..." />
                     </div>
 
                     {/* Membership Selection */}
@@ -1045,13 +1052,6 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       <p className="text-sm text-cream/70 italic mt-4">
                         * Membership Fees are charged one time only.
                       </p>
-                    </div>
-
-                    {/* Personal Biography - Prominent */}
-                    <div className="space-y-3 pt-6 border-t border-gold/30">
-                      <Label htmlFor="personalBiography" className="text-cream text-lg font-light">Personal Biography</Label>
-                      <p className="text-cream/80 text-sm italic mb-2">"Tell us your story"</p>
-                      <Textarea id="personalBiography" name="personalBiography" rows={8} className="bg-background border-gold/30 text-cream text-base leading-relaxed" placeholder="Please provide a brief biography..." />
                     </div>
 
                     {/* Submit Button */}
