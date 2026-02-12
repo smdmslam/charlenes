@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown, ChevronUp } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronUp, Info } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -34,6 +34,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isSignInOpen, setIsSignInOpen] = useState(false)
   const [isSignUpOpen, setIsSignUpOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
+  const [isFoundersCircleOpen, setIsFoundersCircleOpen] = useState(false)
 
   // Form state
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -997,7 +998,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
                     {/* Membership Selection */}
                     <div className="space-y-4 pt-4 border-t border-gold/20">
-                      <Label className="text-cream text-lg">Membership Type</Label>
+                      <Label className="text-cream text-lg">Membership Type (waiting list)</Label>
 
                       {/* Membership Table */}
                       <div className="overflow-x-auto">
@@ -1022,6 +1023,17 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                     className="mr-3 accent-gold"
                                   />
                                   <span className="text-cream">Founders Circle <span className="text-cream/70">(150)</span></span>
+                                  <button
+                                    type="button"
+                                    onClick={(e) => {
+                                      e.stopPropagation()
+                                      setIsFoundersCircleOpen(true)
+                                    }}
+                                    className="ml-2 p-1 text-cream/60 hover:text-gold transition-colors"
+                                    aria-label="Learn more about Founders Circle"
+                                  >
+                                    <Info className="w-4 h-4" />
+                                  </button>
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,500</td>
@@ -1038,7 +1050,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                     onChange={(e) => setMembershipType(e.target.value)}
                                     className="mr-3 accent-gold"
                                   />
-                                  <span className="text-cream">Standard</span>
+                                  <span className="text-cream">Standard <span className="text-cream/70">(1000 globally)</span></span>
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>
@@ -1243,6 +1255,73 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
       />
+
+      {/* Founders Circle Description Modal */}
+      <AnimatePresence>
+        {isFoundersCircleOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-background/80 backdrop-blur-sm z-[104]"
+              onClick={() => setIsFoundersCircleOpen(false)}
+            />
+
+            {/* Modal Content */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[105] flex items-center justify-center p-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-background border border-gold/20 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+                {/* Close Button */}
+                <div className="sticky top-0 bg-background border-b border-gold/20 flex justify-end p-6">
+                  <button
+                    onClick={() => setIsFoundersCircleOpen(false)}
+                    className="p-2 text-cream hover:text-gold transition-colors duration-300"
+                    aria-label="Close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Content */}
+                <div className="p-8 space-y-6">
+                  <h2 className="text-cream text-2xl font-light tracking-wide">Founders Circle</h2>
+                  
+                  <div className="space-y-4 text-cream/90 leading-relaxed">
+                    <p>
+                      Imagine a city where most rooms are already full. The restaurants are busy, the clubs are polished, the guest lists are long. But the thing that is actually scarce is not another dining room or another bar; it is the feeling that, when you walk into a place, everyone you meet could change the trajectory of your life.
+                    </p>
+                    
+                    <p>
+                      The Founders Circle at Curzon House is built around that scarcity. It is capped at 150 people for a reason that is both practical and psychological: it is small enough that you can know the room, and large enough that the room can surprise you. Each founder arrives with their own gravity – a family office in Dubai, a studio in Paris, a fund in Mayfair, a collection in New York – and the house's job is to quietly bend those orbits toward one another.
+                    </p>
+                    
+                    <p>
+                      To make that happen, each member is paired with a Personal Introductions Liaison. Think of this as a professionalised version of the best host you have ever known. Their craft is simple but rare: they know who you are, what you are building, what you are curious about, and they spend their days turning cold encounters into warm ones. Software does the counting – social reach, shared interests, overlapping histories – and the liaison does the human part: "You two need to talk," "Sit here tonight," "Stay five more minutes."
+                    </p>
+                    
+                    <p>
+                      From there, the effects compound. A Michelin‑calibre restaurant that behaves like a salon, not a trophy. Programming that treats fashion, art, and ideas as working materials, not decorations. A calendar that feels closer to the release schedule of a great luxury house than the noticeboard of a club. Over time, the value of the Founders Circle is not the priority table, the early booking, or even the events; it is the quiet accumulation of conversations that could not have happened anywhere else at 8 p.m. on a Tuesday.
+                    </p>
+                    
+                    <p>
+                      The fee – £10,000 to join, £2,500 each year – is there, of course. But for the right 150 people, the price becomes almost incidental. What they are really buying is a long‑term position in a carefully engineered social system: a place in London where the probability of the right encounter is permanently, deliberately tilted in their favour.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   )
 }
