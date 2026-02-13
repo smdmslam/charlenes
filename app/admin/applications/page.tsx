@@ -198,163 +198,159 @@ export default function AdminApplicationsPage() {
                   key={app.id}
                   className="bg-white rounded-2xl p-8 shadow-lg border-2 border-black/20"
                 >
-                  {/* Header Section with Photo, Name, and Status */}
-                  <div className="flex items-start gap-6 mb-6 pb-6 border-b-2 border-black/10">
-                    {/* Photo */}
-                    {app.photoUrl && (
-                      <a
-                        href={app.photoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-black/30 hover:border-gold/50 transition-colors cursor-pointer flex-shrink-0"
-                      >
-                        <img
-                          src={app.photoUrl}
-                          alt={app.fullName}
-                          className="w-full h-full object-cover"
-                        />
-                      </a>
-                    )}
-                    
-                    {/* Name and Status */}
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-2xl font-semibold text-black">{app.fullName}</h3>
-                        <span className={`px-4 py-1.5 text-xs rounded-full font-semibold ${
-                          app.status === "hired" ? "bg-green-100 text-green-900" :
-                          app.status === "offer_made" ? "bg-gold/20 text-gold" :
-                          app.status === "set_up_interview" ? "bg-purple-100 text-purple-900" :
-                          app.status === "rejected" ? "bg-red-100 text-red-900" :
-                          app.status === "reviewing" ? "bg-yellow-100 text-yellow-900" :
-                          "bg-gray-200 text-gray-900"
-                        }`}>
-                          {STATUS_OPTIONS.find(o => o.value === app.status)?.label || "Pending"}
-                        </span>
-                      </div>
+                  {/* Header Section with Photo, Name, Contact, and Roles */}
+                  <div className="mb-6 pb-6 border-b-2 border-black/10">
+                    <div className="flex items-start gap-6 mb-4">
+                      {/* Photo */}
+                      {app.photoUrl && (
+                        <a
+                          href={app.photoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-black/30 hover:border-gold/50 transition-colors cursor-pointer flex-shrink-0"
+                        >
+                          <img
+                            src={app.photoUrl}
+                            alt={app.fullName}
+                            className="w-full h-full object-cover"
+                          />
+                        </a>
+                      )}
                       
-                      {/* Contact Info */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                        <p className="text-black/80"><strong className="text-black">Email:</strong> {app.email}</p>
-                        <p className="text-black/80"><strong className="text-black">Phone:</strong> {app.phone}</p>
-                        {app.currentRole && (
-                          <p className="text-black/80"><strong className="text-black">Current Role:</strong> {app.currentRole}</p>
-                        )}
-                        {app.currentCompany && (
-                          <p className="text-black/80"><strong className="text-black">Company:</strong> {app.currentCompany}</p>
-                        )}
-                        {app.linkedin && (
-                          <a
-                            href={app.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-gold hover:underline flex items-center gap-1"
+                      {/* Three Column Layout */}
+                      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* Column 1: Name, Email, Current Role */}
+                        <div>
+                          <h3 className="text-2xl font-semibold text-black mb-3">{app.fullName}</h3>
+                          <div className="space-y-2 text-sm">
+                            <p className="text-black/80"><strong className="text-black">Email:</strong> {app.email}</p>
+                            {app.currentRole && (
+                              <p className="text-black/80"><strong className="text-black">Current Role:</strong> {app.currentRole}</p>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Column 2: Phone, Company */}
+                        <div className="flex items-start pt-8">
+                          <div className="space-y-2 text-sm">
+                            <p className="text-black/80"><strong className="text-black">Phone:</strong> {app.phone}</p>
+                            {app.currentCompany && (
+                              <p className="text-black/80"><strong className="text-black">Company:</strong> {app.currentCompany}</p>
+                            )}
+                            {app.linkedin && (
+                              <a
+                                href={app.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gold hover:underline flex items-center gap-1"
+                              >
+                                LinkedIn <ExternalLink className="w-3 h-3" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Column 3: Status */}
+                        <div className="flex items-start pt-8">
+                          <div className="w-full">
+                            <Label className="text-black font-semibold mb-2 block text-sm">Status</Label>
+                            <Select
+                              value={app.status || "pending"}
+                              onValueChange={(value) => handleStatusChange(app.id!, value as JobApplication["status"])}
+                            >
+                              <SelectTrigger className="bg-white border-2 border-black/30 text-black w-full">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent className="bg-white border-black/20">
+                                {STATUS_OPTIONS.map((option) => (
+                                  <SelectItem 
+                                    key={option.value} 
+                                    value={option.value}
+                                    className="text-black hover:bg-black/5 focus:bg-black/10 cursor-pointer"
+                                  >
+                                    {option.label}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Selected Roles in Header */}
+                    <div>
+                      <h4 className="text-sm font-semibold text-black mb-2 uppercase tracking-wider">
+                        Selected Roles
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {app.selectedRoles.map((role, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1.5 bg-black/80 text-white text-xs font-semibold rounded-md border border-black/30"
                           >
-                            LinkedIn <ExternalLink className="w-3 h-3" />
-                          </a>
-                        )}
+                            {role}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
 
-                  {/* Main Content Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-6">
-                    {/* Left Column - Selected Roles */}
-                    <div className="lg:col-span-1">
-                      <div className="bg-black/5 rounded-lg p-4 border border-black/10">
-                        <h4 className="text-sm font-semibold text-black mb-3 uppercase tracking-wider">
-                          Selected Roles
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {app.selectedRoles.map((role, idx) => (
-                            <span
-                              key={idx}
-                              className="px-3 py-1.5 bg-black/80 text-white text-xs font-semibold rounded-md border border-black/30"
-                            >
-                              {role}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                  {/* Main Content - Motivation and Notes Side by Side */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    {/* Left Column - Motivation */}
+                    <div className="bg-black/5 rounded-lg p-4 border border-black/10 h-full flex flex-col">
+                      <h4 className="text-sm font-semibold text-black mb-3 uppercase tracking-wider">
+                        Motivation
+                      </h4>
+                      <p className="text-sm text-black/80 leading-relaxed flex-1">{app.motivation}</p>
                     </div>
 
-                    {/* Middle Column - Motivation */}
-                    <div className="lg:col-span-1">
-                      <div className="bg-black/5 rounded-lg p-4 border border-black/10 h-full">
-                        <h4 className="text-sm font-semibold text-black mb-3 uppercase tracking-wider">
-                          Motivation
-                        </h4>
-                        <p className="text-sm text-black/80 leading-relaxed">{app.motivation}</p>
-                      </div>
-                    </div>
-
-                    {/* Right Column - Status & Notes */}
-                    <div className="lg:col-span-1 space-y-4">
-                      <div>
-                        <Label className="text-black font-semibold mb-2 block">Status</Label>
-                        <Select
-                          value={app.status || "pending"}
-                          onValueChange={(value) => handleStatusChange(app.id!, value as JobApplication["status"])}
-                        >
-                          <SelectTrigger className="bg-white border-2 border-black/30 text-black">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent className="bg-white border-black/20">
-                            {STATUS_OPTIONS.map((option) => (
-                              <SelectItem 
-                                key={option.value} 
-                                value={option.value}
-                                className="text-black hover:bg-black/5 focus:bg-black/10 cursor-pointer"
-                              >
-                                {option.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div>
-                        <Label className="text-black font-semibold mb-2 block">Notes / Next Steps</Label>
-                        {editingId === app.id ? (
-                          <div className="space-y-2">
-                            <Textarea
-                              value={editingNotes}
-                              onChange={(e) => setEditingNotes(e.target.value)}
-                              rows={4}
-                              className="bg-white border-2 border-black/30 text-black text-sm"
-                              placeholder="Add notes or next steps..."
-                            />
-                            <div className="flex gap-2">
-                              <button
-                                onClick={() => handleNotesSave(app.id!)}
-                                className="px-4 py-2 bg-black text-cream text-sm hover:bg-black/90 transition-colors rounded"
-                              >
-                                Save
-                              </button>
-                              <button
-                                onClick={() => {
-                                  setEditingId(null)
-                                  setEditingNotes("")
-                                }}
-                                className="px-4 py-2 border-2 border-black/30 text-black text-sm hover:bg-black/5 transition-colors rounded"
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          </div>
-                        ) : (
-                          <div>
-                            <p className="text-sm text-black/80 min-h-[60px] p-3 bg-black/5 rounded border-2 border-black/10">
-                              {app.notes || "No notes yet. Click to add."}
-                            </p>
+                    {/* Right Column - Notes */}
+                    <div className="bg-black/5 rounded-lg p-4 border border-black/10 h-full flex flex-col">
+                      <h4 className="text-sm font-semibold text-black mb-3 uppercase tracking-wider">
+                        Notes / Next Steps
+                      </h4>
+                      {editingId === app.id ? (
+                        <div className="flex-1 flex flex-col">
+                          <Textarea
+                            value={editingNotes}
+                            onChange={(e) => setEditingNotes(e.target.value)}
+                            rows={8}
+                            className="bg-white border-2 border-black/30 text-black text-sm flex-1"
+                            placeholder="Add notes or next steps..."
+                          />
+                          <div className="flex gap-2 mt-3">
                             <button
-                              onClick={() => startEditing(app)}
-                              className="mt-2 text-xs text-gold hover:underline font-medium"
+                              onClick={() => handleNotesSave(app.id!)}
+                              className="px-4 py-2 bg-black text-cream text-sm hover:bg-black/90 transition-colors rounded"
                             >
-                              {app.notes ? "Edit Notes" : "Add Notes"}
+                              Save
+                            </button>
+                            <button
+                              onClick={() => {
+                                setEditingId(null)
+                                setEditingNotes("")
+                              }}
+                              className="px-4 py-2 border-2 border-black/30 text-black text-sm hover:bg-black/5 transition-colors rounded"
+                            >
+                              Cancel
                             </button>
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      ) : (
+                        <div className="flex-1 flex flex-col">
+                          <p className="text-sm text-black/80 flex-1 p-3 bg-white rounded border-2 border-black/10">
+                            {app.notes || "No notes yet. Click to add."}
+                          </p>
+                          <button
+                            onClick={() => startEditing(app)}
+                            className="mt-3 text-xs text-gold hover:underline font-medium self-start"
+                          >
+                            {app.notes ? "Edit Notes" : "Add Notes"}
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
 
