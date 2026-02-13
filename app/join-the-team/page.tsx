@@ -1,7 +1,9 @@
 "use client"
 
+import { useState } from "react"
 import { Navigation } from "@/components/navigation"
 import Link from "next/link"
+import { JobApplicationModal } from "@/components/job-application-modal"
 
 const advisoryBoardRoles = [
   {
@@ -52,9 +54,18 @@ const advisoryBoardRoles = [
 ]
 
 export default function JoinTheTeamPage() {
+  const [isApplicationOpen, setIsApplicationOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-cream">
       <Navigation sections={[]} activeIndex={0} onNavigate={() => {}} />
+      
+      {/* Job Application Modal */}
+      <JobApplicationModal
+        isOpen={isApplicationOpen}
+        onClose={() => setIsApplicationOpen(false)}
+        roles={advisoryBoardRoles}
+      />
       
       <div className="pt-24 pb-16 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
@@ -102,9 +113,15 @@ export default function JoinTheTeamPage() {
                   </p>
                   <div className="pt-4 border-t border-black/15">
                     <p className="text-xs uppercase tracking-wider text-black/60 mb-2 font-medium">Requirements</p>
-                    <p className="text-black/70 text-sm leading-relaxed">
+                    <p className="text-black/70 text-sm leading-relaxed mb-4">
                       {role.requirements}
                     </p>
+                    <button
+                      onClick={() => setIsApplicationOpen(true)}
+                      className="w-full py-2 px-4 border border-black/20 text-black hover:bg-black hover:text-cream transition-all duration-300 uppercase tracking-wider text-xs font-light"
+                    >
+                      Apply
+                    </button>
                   </div>
                 </div>
               ))}
@@ -113,12 +130,12 @@ export default function JoinTheTeamPage() {
 
           {/* Contact CTA */}
           <div className="text-center pt-12 border-t border-black/15">
-            <Link
-              href="/contact"
+            <button
+              onClick={() => setIsApplicationOpen(true)}
               className="inline-block px-8 py-3 border-2 border-black/30 text-black hover:bg-black hover:text-cream transition-all duration-300 uppercase tracking-wider text-sm font-light"
             >
-              Get in Touch
-            </Link>
+              Apply Now
+            </button>
           </div>
         </div>
       </div>

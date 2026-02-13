@@ -1,6 +1,7 @@
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getFirestore, Firestore, enableIndexedDbPersistence } from "firebase/firestore";
 import { getAuth, Auth } from "firebase/auth";
+import { getStorage, FirebaseStorage } from "firebase/storage";
 
 // Helper function to validate Firebase config
 function validateFirebaseConfig() {
@@ -41,6 +42,7 @@ const firebaseConfig = {
 let app: FirebaseApp;
 let db: Firestore;
 let auth: Auth;
+let storage: FirebaseStorage;
 
 if (typeof window !== "undefined") {
   // Validate config before initializing (only on client side)
@@ -55,6 +57,7 @@ if (typeof window !== "undefined") {
   
   db = getFirestore(app);
   auth = getAuth(app);
+  storage = getStorage(app);
   
   // Enable offline persistence
   enableIndexedDbPersistence(db).catch((err) => {
@@ -71,7 +74,8 @@ if (typeof window !== "undefined") {
   app = {} as FirebaseApp;
   db = {} as Firestore;
   auth = {} as Auth;
+  storage = {} as FirebaseStorage;
 }
 
-export { app, db, auth };
+export { app, db, auth, storage };
 export default app;
