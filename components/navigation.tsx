@@ -14,6 +14,8 @@ import { AuthSignUp } from "@/components/auth-signup"
 import { MemberProfile } from "@/components/member-profile"
 import { useAuth } from "@/contexts/auth-context"
 import { logout, getAuthErrorMessage } from "@/lib/auth-service"
+import { useAdmin } from "@/hooks/use-admin"
+import Link from "next/link"
 
 interface NavigationProps {
   sections: Array<{ id: string; title: string }>
@@ -42,6 +44,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [membershipType, setMembershipType] = useState<string>("")
   const { toast } = useToast()
   const { user } = useAuth()
+  const { isAdmin } = useAdmin()
 
   const handleSignOut = async () => {
     try {
@@ -375,6 +378,19 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       Join the Team
                     </a>
                   </div>
+
+                  {/* ADMIN - CANDIDATE TRACKER */}
+                  {isAdmin && (
+                    <div className="pt-4 border-t border-gold/20">
+                      <Link
+                        href="/admin/applications"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                      >
+                        Candidate Tracker
+                      </Link>
+                    </div>
+                  )}
 
                   {/* AUTHENTICATION */}
                   <div className="pt-4 border-t border-gold/20">
