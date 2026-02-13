@@ -306,10 +306,6 @@ export default function AdminApplicationsPage() {
                         </h4>
                         <p className="text-sm text-black/70 leading-relaxed">{app.motivation}</p>
                       </div>
-
-                      <div className="text-xs text-black/50">
-                        <p>Submitted: {formatDate(app.submittedAt)}</p>
-                      </div>
                     </div>
 
                     {/* Right Column - Status & Notes */}
@@ -381,6 +377,13 @@ export default function AdminApplicationsPage() {
                         )}
                       </div>
                     </div>
+                  </div>
+                  
+                  {/* Timestamp - Bottom Right */}
+                  <div className="mt-4 flex justify-end">
+                    <p className="text-xs text-black/50">
+                      Submitted: {formatDate(app.submittedAt)}
+                    </p>
                   </div>
                 </div>
               ))
