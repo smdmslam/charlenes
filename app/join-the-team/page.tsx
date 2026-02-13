@@ -59,7 +59,7 @@ export default function JoinTheTeamPage() {
       <div className="pt-24 pb-16 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="mb-16 text-center">
+          <div className="mb-8 text-center">
             <h1 className="text-4xl md:text-5xl font-light tracking-wide text-black mb-8">
               Legacy and Excellence
             </h1>
@@ -113,9 +113,6 @@ export default function JoinTheTeamPage() {
 
           {/* Contact CTA */}
           <div className="text-center pt-12 border-t border-black/15">
-            <p className="text-black/80 mb-6 text-lg">
-              Interested in joining our team?
-            </p>
             <Link
               href="/contact"
               className="inline-block px-8 py-3 border-2 border-black/30 text-black hover:bg-black hover:text-cream transition-all duration-300 uppercase tracking-wider text-sm font-light"
