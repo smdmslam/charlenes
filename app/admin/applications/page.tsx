@@ -51,9 +51,12 @@ export default function AdminApplicationsPage() {
       setApplications(apps)
     } catch (error: any) {
       console.error("Error loading applications:", error)
+      const errorMessage = error.code === "permission-denied" || error.message?.includes("permission")
+        ? "Admin access required. Please ensure your account has the 'admin' custom claim set in Firebase Authentication."
+        : "Failed to load applications. Please check if you have admin access."
       toast({
-        title: "Error",
-        description: "Failed to load applications. Please check if you have admin access.",
+        title: "Access Denied",
+        description: errorMessage,
         variant: "destructive",
       })
     } finally {
@@ -189,6 +192,24 @@ export default function AdminApplicationsPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Left Column - Candidate Info */}
                     <div className="space-y-4">
+                      {/* Photo Preview */}
+                      {app.photoUrl && (
+                        <div className="flex justify-center mb-4">
+                          <a
+                            href={app.photoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-black/20 hover:border-gold/50 transition-colors cursor-pointer"
+                          >
+                            <img
+                              src={app.photoUrl}
+                              alt={app.fullName}
+                              className="w-full h-full object-cover"
+                            />
+                          </a>
+                        </div>
+                      )}
+                      
                       <div>
                         <div className="flex items-center justify-between mb-2">
                           <h3 className="text-xl font-medium text-black">{app.fullName}</h3>
@@ -246,7 +267,7 @@ export default function AdminApplicationsPage() {
                             className="flex items-center gap-2 text-sm text-black/70 hover:text-gold transition-colors"
                           >
                             <User className="w-4 h-4" />
-                            View Photo
+                            View Full Photo
                           </a>
                         )}
                       </div>

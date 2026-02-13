@@ -1,6 +1,13 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return request.auth != null && 
+             (request.auth.token.admin == true || 
+              request.auth.token.email == "s.moralesmed@gmail.com");
+    }
+    
     // Job Applications - CVs and Photos
     match /job-applications/{allPaths=**} {
       // Allow anyone to upload CVs and photos (public form submission)
@@ -31,6 +38,30 @@ service firebase.storage {
       
       // Allow public read access (needed for getDownloadURL after upload)
       allow read: if true;
+    }
+    
+    // Membership Application Documents
+    // Authenticated users upload documents/images (similar to job applications)
+    // Admins can read all documents for evaluation
+    match /membership-applications/{allPaths=**} {
+      // Authenticated users can upload documents and images
+      // File size limits: Documents max 10MB, Images max 5MB
+      allow write: if request.auth != null
+                   && request.resource.size < 10 * 1024 * 1024 // 10MB max
+                   && (
+                     // PDF files
+                     (request.resource.name.matches('.*\\.(pdf)$') && request.resource.contentType.matches('application/pdf'))
+                     ||
+                     // Document files
+                     (request.resource.name.matches('.*\\.(doc|docx)$') && request.resource.contentType.matches('application/(msword|vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document)'))
+                     ||
+                     // Image files
+                     (request.resource.name.matches('.*\\.(jpg|jpeg|png|webp|gif)$') && request.resource.contentType.matches('image/.*'))
+                   );
+      
+      // Authenticated users can read (they'll only access their own via app logic)
+      // Admins can read all for evaluation
+      allow read: if request.auth != null;
     }
     
     // Deny all other access

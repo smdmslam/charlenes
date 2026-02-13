@@ -12,6 +12,13 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.uid == userId;
     }
     
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return isAuthenticated() && 
+             (request.auth.token.admin == true || 
+              request.auth.token.email == "s.moralesmed@gmail.com");
+    }
+    
     // Member Profiles Collection
     // Users can read and write their own profile only
     match /memberProfiles/{userId} {
@@ -24,14 +31,14 @@ service cloud.firestore {
     // Membership Applications Collection
     // Anyone can create an application (for public form)
     // Only authenticated users can read their own applications
-    // Admins can read all (you'll need to set up admin check separately)
+    // Admins can read all
     match /membershipApplications/{applicationId} {
       allow create: if true; // Public form submission
       allow read: if isAuthenticated() && 
                      (resource.data.email == request.auth.token.email || 
-                      request.auth.token.admin == true);
-      allow update: if isAuthenticated() && request.auth.token.admin == true;
-      allow delete: if isAuthenticated() && request.auth.token.admin == true;
+                      isAdmin());
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
     }
     
     // Job Applications Collection
@@ -42,10 +49,10 @@ service cloud.firestore {
       allow create: if true; // Public form submission
       allow read: if isAuthenticated() && 
                      (resource.data.email == request.auth.token.email || 
-                      request.auth.token.admin == true);
-      allow list: if isAuthenticated() && request.auth.token.admin == true; // Allow admins to list all applications
-      allow update: if isAuthenticated() && request.auth.token.admin == true;
-      allow delete: if isAuthenticated() && request.auth.token.admin == true;
+                      isAdmin());
+      allow list: if isAdmin(); // Allow admins to list all applications
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
     }
     
     // Deny all other access by default
