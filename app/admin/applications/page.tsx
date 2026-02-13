@@ -196,127 +196,106 @@ export default function AdminApplicationsPage() {
               filteredApplications.map((app) => (
                 <div
                   key={app.id}
-                  className="bg-white rounded-2xl p-6 md:p-8 shadow-md border border-black/10"
+                  className="bg-white rounded-2xl p-8 shadow-lg border-2 border-black/20"
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Left Column - Candidate Info */}
-                    <div className="space-y-4">
-                      {/* Photo Preview */}
-                      {app.photoUrl && (
-                        <div className="flex justify-center mb-4">
-                          <a
-                            href={app.photoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-black/20 hover:border-gold/50 transition-colors cursor-pointer"
-                          >
-                            <img
-                              src={app.photoUrl}
-                              alt={app.fullName}
-                              className="w-full h-full object-cover"
-                            />
-                          </a>
-                        </div>
-                      )}
-                      
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="text-xl font-medium text-black">{app.fullName}</h3>
-                          <span className={`px-3 py-1 text-xs rounded-full font-medium ${
-                            app.status === "hired" ? "bg-green-100 text-green-800" :
-                            app.status === "offer_made" ? "bg-gold/20 text-gold" :
-                            app.status === "set_up_interview" ? "bg-purple-100 text-purple-800" :
-                            app.status === "rejected" ? "bg-red-100 text-red-800" :
-                            app.status === "reviewing" ? "bg-yellow-100 text-yellow-800" :
-                            "bg-gray-100 text-gray-800"
-                          }`}>
-                            {STATUS_OPTIONS.find(o => o.value === app.status)?.label || "Pending"}
-                          </span>
-                        </div>
-                        <div className="space-y-1 text-sm text-black/70">
-                          <p><strong>Email:</strong> {app.email}</p>
-                          <p><strong>Phone:</strong> {app.phone}</p>
-                          {app.currentRole && (
-                            <p><strong>Current Role:</strong> {app.currentRole}</p>
-                          )}
-                          {app.currentCompany && (
-                            <p><strong>Company:</strong> {app.currentCompany}</p>
-                          )}
-                          {app.linkedin && (
-                            <a
-                              href={app.linkedin}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-gold hover:underline flex items-center gap-1"
-                            >
-                              LinkedIn <ExternalLink className="w-3 h-3" />
-                            </a>
-                          )}
-                        </div>
+                  {/* Header Section with Photo, Name, and Status */}
+                  <div className="flex items-start gap-6 mb-6 pb-6 border-b-2 border-black/10">
+                    {/* Photo */}
+                    {app.photoUrl && (
+                      <a
+                        href={app.photoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-black/30 hover:border-gold/50 transition-colors cursor-pointer flex-shrink-0"
+                      >
+                        <img
+                          src={app.photoUrl}
+                          alt={app.fullName}
+                          className="w-full h-full object-cover"
+                        />
+                      </a>
+                    )}
+                    
+                    {/* Name and Status */}
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-2xl font-semibold text-black">{app.fullName}</h3>
+                        <span className={`px-4 py-1.5 text-xs rounded-full font-semibold ${
+                          app.status === "hired" ? "bg-green-100 text-green-900" :
+                          app.status === "offer_made" ? "bg-gold/20 text-gold" :
+                          app.status === "set_up_interview" ? "bg-purple-100 text-purple-900" :
+                          app.status === "rejected" ? "bg-red-100 text-red-900" :
+                          app.status === "reviewing" ? "bg-yellow-100 text-yellow-900" :
+                          "bg-gray-200 text-gray-900"
+                        }`}>
+                          {STATUS_OPTIONS.find(o => o.value === app.status)?.label || "Pending"}
+                        </span>
                       </div>
-
-                      {/* Files */}
-                      <div className="space-y-2 pt-4 border-t border-black/10">
-                        {app.cvUrl && (
-                          <a
-                            href={app.cvUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm text-black/70 hover:text-gold transition-colors"
-                          >
-                            <Download className="w-4 h-4" />
-                            View CV
-                          </a>
+                      
+                      {/* Contact Info */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                        <p className="text-black/80"><strong className="text-black">Email:</strong> {app.email}</p>
+                        <p className="text-black/80"><strong className="text-black">Phone:</strong> {app.phone}</p>
+                        {app.currentRole && (
+                          <p className="text-black/80"><strong className="text-black">Current Role:</strong> {app.currentRole}</p>
                         )}
-                        {app.photoUrl && (
+                        {app.currentCompany && (
+                          <p className="text-black/80"><strong className="text-black">Company:</strong> {app.currentCompany}</p>
+                        )}
+                        {app.linkedin && (
                           <a
-                            href={app.photoUrl}
+                            href={app.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm text-black/70 hover:text-gold transition-colors"
+                            className="text-gold hover:underline flex items-center gap-1"
                           >
-                            <User className="w-4 h-4" />
-                            View Full Photo
+                            LinkedIn <ExternalLink className="w-3 h-3" />
                           </a>
                         )}
                       </div>
                     </div>
+                  </div>
 
-                    {/* Middle Column - Application Details */}
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="text-sm font-medium text-black/60 mb-2 uppercase tracking-wider">
+                  {/* Main Content Grid */}
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-6">
+                    {/* Left Column - Selected Roles */}
+                    <div className="lg:col-span-1">
+                      <div className="bg-black/5 rounded-lg p-4 border border-black/10">
+                        <h4 className="text-sm font-semibold text-black mb-3 uppercase tracking-wider">
                           Selected Roles
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {app.selectedRoles.map((role, idx) => (
                             <span
                               key={idx}
-                              className="px-3 py-1 bg-black/5 text-black/70 text-xs rounded-full"
+                              className="px-3 py-1.5 bg-black/80 text-white text-xs font-semibold rounded-md border border-black/30"
                             >
                               {role}
                             </span>
                           ))}
                         </div>
                       </div>
+                    </div>
 
-                      <div>
-                        <h4 className="text-sm font-medium text-black/60 mb-2 uppercase tracking-wider">
+                    {/* Middle Column - Motivation */}
+                    <div className="lg:col-span-1">
+                      <div className="bg-black/5 rounded-lg p-4 border border-black/10 h-full">
+                        <h4 className="text-sm font-semibold text-black mb-3 uppercase tracking-wider">
                           Motivation
                         </h4>
-                        <p className="text-sm text-black/70 leading-relaxed">{app.motivation}</p>
+                        <p className="text-sm text-black/80 leading-relaxed">{app.motivation}</p>
                       </div>
                     </div>
 
                     {/* Right Column - Status & Notes */}
-                    <div className="space-y-4">
+                    <div className="lg:col-span-1 space-y-4">
                       <div>
-                        <Label className="text-black mb-2 block">Status</Label>
+                        <Label className="text-black font-semibold mb-2 block">Status</Label>
                         <Select
                           value={app.status || "pending"}
                           onValueChange={(value) => handleStatusChange(app.id!, value as JobApplication["status"])}
                         >
-                          <SelectTrigger className="bg-white border-black/20 text-black">
+                          <SelectTrigger className="bg-white border-2 border-black/30 text-black">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent className="bg-white border-black/20">
@@ -334,20 +313,20 @@ export default function AdminApplicationsPage() {
                       </div>
 
                       <div>
-                        <Label className="text-black mb-2 block">Notes / Next Steps</Label>
+                        <Label className="text-black font-semibold mb-2 block">Notes / Next Steps</Label>
                         {editingId === app.id ? (
                           <div className="space-y-2">
                             <Textarea
                               value={editingNotes}
                               onChange={(e) => setEditingNotes(e.target.value)}
                               rows={4}
-                              className="bg-white border-black/20 text-black text-sm"
+                              className="bg-white border-2 border-black/30 text-black text-sm"
                               placeholder="Add notes or next steps..."
                             />
                             <div className="flex gap-2">
                               <button
                                 onClick={() => handleNotesSave(app.id!)}
-                                className="px-4 py-2 bg-black text-cream text-sm hover:bg-black/90 transition-colors"
+                                className="px-4 py-2 bg-black text-cream text-sm hover:bg-black/90 transition-colors rounded"
                               >
                                 Save
                               </button>
@@ -356,7 +335,7 @@ export default function AdminApplicationsPage() {
                                   setEditingId(null)
                                   setEditingNotes("")
                                 }}
-                                className="px-4 py-2 border border-black/20 text-black text-sm hover:bg-black/5 transition-colors"
+                                className="px-4 py-2 border-2 border-black/30 text-black text-sm hover:bg-black/5 transition-colors rounded"
                               >
                                 Cancel
                               </button>
@@ -364,12 +343,12 @@ export default function AdminApplicationsPage() {
                           </div>
                         ) : (
                           <div>
-                            <p className="text-sm text-black/70 min-h-[60px] p-3 bg-black/5 rounded border border-black/10">
+                            <p className="text-sm text-black/80 min-h-[60px] p-3 bg-black/5 rounded border-2 border-black/10">
                               {app.notes || "No notes yet. Click to add."}
                             </p>
                             <button
                               onClick={() => startEditing(app)}
-                              className="mt-2 text-xs text-gold hover:underline"
+                              className="mt-2 text-xs text-gold hover:underline font-medium"
                             >
                               {app.notes ? "Edit Notes" : "Add Notes"}
                             </button>
@@ -378,10 +357,37 @@ export default function AdminApplicationsPage() {
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Timestamp - Bottom Right */}
-                  <div className="mt-4 flex justify-end">
-                    <p className="text-xs text-black/50">
+
+                  {/* Footer with Files and Timestamp */}
+                  <div className="flex items-center justify-between pt-4 border-t-2 border-black/10">
+                    {/* Files */}
+                    <div className="flex items-center gap-4">
+                      {app.cvUrl && (
+                        <a
+                          href={app.cvUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-sm text-black/80 hover:text-gold transition-colors font-medium"
+                        >
+                          <Download className="w-4 h-4" />
+                          View CV
+                        </a>
+                      )}
+                      {app.photoUrl && (
+                        <a
+                          href={app.photoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-sm text-black/80 hover:text-gold transition-colors font-medium"
+                        >
+                          <User className="w-4 h-4" />
+                          View Full Photo
+                        </a>
+                      )}
+                    </div>
+                    
+                    {/* Timestamp */}
+                    <p className="text-xs text-black/60 font-medium">
                       Submitted: {formatDate(app.submittedAt)}
                     </p>
                   </div>
