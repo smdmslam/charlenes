@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown, ChevronUp, Info } from "lucide-react"
 import { Input } from "@/components/ui/input"
@@ -24,6 +25,11 @@ interface NavigationProps {
 }
 
 export function Navigation({ sections, activeIndex, onNavigate }: NavigationProps) {
+  const pathname = usePathname()
+  
+  // Determine if we're on a light background page
+  const isLightPage = Boolean(pathname && (pathname.startsWith('/join-the-team') || pathname.startsWith('/admin')))
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [isAboutOpen, setIsAboutOpen] = useState(false)
@@ -65,7 +71,11 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   return (
     <>
       {/* Top header */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-8 md:px-16 lg:px-24 py-6 bg-cream/95 backdrop-blur-sm">
+      <header className={`fixed top-0 left-0 right-0 z-50 px-8 md:px-16 lg:px-24 py-6 ${
+        isLightPage 
+          ? 'bg-cream/95 backdrop-blur-sm' 
+          : 'bg-transparent'
+      }`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.button
@@ -77,10 +87,14 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             aria-label="Navigate to home"
           >
             <div className="flex flex-col text-left">
-              <h1 className="text-2xl md:text-3xl font-light tracking-[0.15em] text-black leading-tight">
+              <h1 className={`text-2xl md:text-3xl font-light tracking-[0.15em] leading-tight ${
+                isLightPage ? 'text-black' : 'text-cream'
+              }`}>
                 Curzon House
               </h1>
-              <span className="text-xs tracking-[0.4em] text-black/70 uppercase">
+              <span className={`text-xs tracking-[0.4em] uppercase ${
+                isLightPage ? 'text-black/70' : 'text-gold'
+              }`}>
                 LONDON MAYFAIR
               </span>
             </div>
@@ -92,7 +106,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
             onClick={() => setIsMenuOpen(true)}
-            className="p-2 text-black hover:text-gold transition-colors duration-300"
+            className={`p-2 transition-colors duration-300 ${
+              isLightPage ? 'text-black hover:text-gold' : 'text-cream hover:text-gold'
+            }`}
             aria-label="Menu"
           >
             <Menu className="w-6 h-6" />
