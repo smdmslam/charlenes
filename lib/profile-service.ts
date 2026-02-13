@@ -1,4 +1,6 @@
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "./firebase";
 
 export interface MemberProfile {
   // Personal Information
@@ -21,6 +23,7 @@ export interface MemberProfile {
   // Additional Information
   personalInterests?: string;
   personalBiography?: string;
+  photoUrl?: string;
   
   // Membership Information
   membershipType?: "founder" | "standard" | "premium" | "vip";
@@ -110,6 +113,38 @@ export async function saveProfile(userId: string, profile: Partial<MemberProfile
       throw new Error("You are currently offline. Please check your internet connection and try again.");
     }
     
+    throw error;
+  }
+}
+
+/**
+ * Upload photo file to Firebase Storage
+ */
+export async function uploadProfilePhoto(userId: string, file: File): Promise<string> {
+  if (typeof window === "undefined") {
+    throw new Error("This function can only be called on the client side");
+  }
+
+  try {
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+      throw new Error("Invalid file type. Please upload a JPG, PNG, WEBP, or GIF image.");
+    }
+
+    // Validate file size (5MB max)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      throw new Error("File size exceeds 5MB limit. Please upload a smaller image.");
+    }
+
+    const photoPath = `member-profiles/${userId}/photo_${Date.now()}_${file.name}`;
+    const storageRef = ref(storage, photoPath);
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  } catch (error: any) {
+    console.error("Error uploading profile photo:", error);
     throw error;
   }
 }

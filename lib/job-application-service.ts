@@ -1,4 +1,4 @@
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, getDocs, query, orderBy, updateDoc, doc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
 
@@ -21,7 +21,9 @@ export interface JobApplication {
   
   // Metadata
   submittedAt?: any; // Firestore timestamp
-  status?: "pending" | "reviewing" | "accepted" | "rejected";
+  status?: "pending" | "reviewing" | "accepted" | "rejected" | "offer_made" | "hired";
+  notes?: string; // Admin notes/next steps
+  id?: string; // Document ID
 }
 
 // File type validation
@@ -146,6 +148,60 @@ export async function submitJobApplication(
     }
   } catch (error: any) {
     console.error("Error submitting job application:", error);
+    throw error;
+  }
+}
+
+/**
+ * Get all job applications (admin only)
+ */
+export async function getAllJobApplications(): Promise<JobApplication[]> {
+  if (typeof window === "undefined") {
+    throw new Error("This function can only be called on the client side");
+  }
+
+  try {
+    const applicationsRef = collection(db, "jobApplications");
+    const q = query(applicationsRef, orderBy("submittedAt", "desc"));
+    const querySnapshot = await getDocs(q);
+
+    const applications: JobApplication[] = [];
+    querySnapshot.forEach((doc) => {
+      applications.push({
+        ...doc.data(),
+        id: doc.id,
+      } as JobApplication);
+    });
+
+    return applications;
+  } catch (error) {
+    console.error("Error fetching job applications:", error);
+    throw error;
+  }
+}
+
+/**
+ * Update job application status and notes (admin only)
+ */
+export async function updateJobApplication(
+  applicationId: string,
+  updates: {
+    status?: JobApplication["status"];
+    notes?: string;
+  }
+): Promise<void> {
+  if (typeof window === "undefined") {
+    throw new Error("This function can only be called on the client side");
+  }
+
+  try {
+    const applicationRef = doc(db, "jobApplications", applicationId);
+    await updateDoc(applicationRef, {
+      ...updates,
+      updatedAt: serverTimestamp(),
+    });
+  } catch (error) {
+    console.error("Error updating job application:", error);
     throw error;
   }
 }

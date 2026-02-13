@@ -43,6 +43,7 @@ service cloud.firestore {
       allow read: if isAuthenticated() && 
                      (resource.data.email == request.auth.token.email || 
                       request.auth.token.admin == true);
+      allow list: if isAuthenticated() && request.auth.token.admin == true; // Allow admins to list all applications
       allow update: if isAuthenticated() && request.auth.token.admin == true;
       allow delete: if isAuthenticated() && request.auth.token.admin == true;
     }

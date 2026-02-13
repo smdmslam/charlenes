@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
-import { submitJobApplication } from "@/lib/job-application-service"
+import { submitJobApplication, validateCVFile, validatePhotoFile } from "@/lib/job-application-service"
 
 interface JobApplicationModalProps {
   isOpen: boolean
@@ -60,6 +60,27 @@ export function JobApplicationModal({ isOpen, onClose, roles }: JobApplicationMo
   }
 
   const handleFileChange = (field: "cv" | "photo", file: File | null) => {
+    if (!file) {
+      if (field === "cv") {
+        setCvFile(null)
+      } else {
+        setPhotoFile(null)
+      }
+      return
+    }
+
+    // Validate file
+    const validation = field === "cv" ? validateCVFile(file) : validatePhotoFile(file)
+    
+    if (!validation.valid) {
+      toast({
+        title: "Invalid File",
+        description: validation.error,
+        variant: "destructive",
+      })
+      return
+    }
+
     if (field === "cv") {
       setCvFile(file)
     } else {
@@ -257,7 +278,7 @@ export function JobApplicationModal({ isOpen, onClose, roles }: JobApplicationMo
                         <input
                           id="cv"
                           type="file"
-                          accept=".pdf,.doc,.docx"
+                          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                           required
                           onChange={(e) => handleFileChange("cv", e.target.files?.[0] || null)}
                           className="hidden"
@@ -269,7 +290,7 @@ export function JobApplicationModal({ isOpen, onClose, roles }: JobApplicationMo
                           <FileText className="w-5 h-5 text-black/60" />
                           <div className="flex-1">
                             <p className="text-sm text-black/80">
-                              {cvFile ? cvFile.name : "Upload CV (PDF, DOC, DOCX)"}
+                              {cvFile ? cvFile.name : "Upload CV (PDF, DOC, DOCX - Max 10MB)"}
                             </p>
                           </div>
                           <Upload className="w-4 h-4 text-black/60" />
@@ -284,7 +305,7 @@ export function JobApplicationModal({ isOpen, onClose, roles }: JobApplicationMo
                         <input
                           id="photo"
                           type="file"
-                          accept="image/*"
+                          accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
                           onChange={(e) => handleFileChange("photo", e.target.files?.[0] || null)}
                           className="hidden"
                         />
@@ -295,7 +316,7 @@ export function JobApplicationModal({ isOpen, onClose, roles }: JobApplicationMo
                           <ImageIcon className="w-5 h-5 text-black/60" />
                           <div className="flex-1">
                             <p className="text-sm text-black/80">
-                              {photoFile ? photoFile.name : "Upload Photo (Optional)"}
+                              {photoFile ? photoFile.name : "Upload Photo (JPG, PNG, WEBP, GIF - Max 5MB)"}
                             </p>
                           </div>
                           <Upload className="w-4 h-4 text-black/60" />

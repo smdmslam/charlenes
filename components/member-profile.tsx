@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X } from "lucide-react"
+import { X, Edit, Upload, ImageIcon } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
 import { useAuth } from "@/contexts/auth-context"
-import { getProfile, saveProfile, MemberProfile } from "@/lib/profile-service"
+import { getProfile, saveProfile, uploadProfilePhoto, MemberProfile } from "@/lib/profile-service"
 
 interface MemberProfileProps {
   isOpen: boolean
@@ -21,8 +21,12 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [isEditMode, setIsEditMode] = useState(false)
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(false)
   const [gender, setGender] = useState<string>("")
   const [membershipType, setMembershipType] = useState<string>("")
+  const [photoFile, setPhotoFile] = useState<File | null>(null)
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null)
 
   // Form state
   const [formData, setFormData] = useState<Partial<MemberProfile>>({
@@ -61,6 +65,9 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
         setFormData(profile)
         setGender(profile.gender || "")
         setMembershipType(profile.membershipType || "")
+        setPhotoPreview(profile.photoUrl || null)
+        setPhotoFile(null) // Reset photo file when loading existing profile
+        setIsEditMode(false) // Show view mode if profile exists
       } else {
         // Initialize with user email if no profile exists
         setFormData((prev) => ({
@@ -70,6 +77,9 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
         }))
         setGender("")
         setMembershipType("")
+        setPhotoPreview(null)
+        setPhotoFile(null)
+        setIsEditMode(true) // Show edit mode if no profile exists
       }
     } catch (error: any) {
       console.error("Error loading profile:", error)
@@ -84,17 +94,77 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
     }
   }
 
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
+      if (!allowedTypes.includes(file.type)) {
+        toast({
+          title: "Invalid File Type",
+          description: "Please upload a JPG, PNG, WEBP, or GIF image.",
+          variant: "destructive",
+        })
+        return
+      }
+
+      // Validate file size (5MB max)
+      const maxSize = 5 * 1024 * 1024 // 5MB
+      if (file.size > maxSize) {
+        toast({
+          title: "File Too Large",
+          description: "Please upload an image smaller than 5MB.",
+          variant: "destructive",
+        })
+        return
+      }
+
+      setPhotoFile(file)
+      // Create preview
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPhotoPreview(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) return
 
     setIsSaving(true)
     try {
+      let photoUrl = formData.photoUrl
+
+      // Upload photo if a new one was selected
+      if (photoFile) {
+        setIsUploadingPhoto(true)
+        try {
+          photoUrl = await uploadProfilePhoto(user.uid, photoFile)
+        } catch (error: any) {
+          console.error("Error uploading photo:", error)
+          throw new Error(`Failed to upload photo: ${error.message || "Please try again."}`)
+        } finally {
+          setIsUploadingPhoto(false)
+        }
+      }
+
       await saveProfile(user.uid, {
         ...formData,
         gender,
         membershipType: membershipType as "founder" | "standard" | "premium" | "vip" | undefined,
+        photoUrl,
       })
+
+      // Clear photo file state
+      setPhotoFile(null)
+
+      // Reload profile to get updated data
+      await loadProfile()
+      
+      // Switch to view mode after successful save
+      setIsEditMode(false)
 
       toast({
         title: "Profile Updated",
@@ -153,21 +223,76 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
           </div>
 
           {/* Header */}
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-light tracking-[0.1em] text-cream mb-2">
-              Member Profile
-            </h2>
-            <p className="text-cream/70 text-sm">
-              Update your profile information
-            </p>
+          <div className="flex items-center justify-between">
+            <div className="text-center flex-1">
+              <h2 className="text-3xl md:text-4xl font-light tracking-[0.1em] text-cream mb-2">
+                Member Profile
+              </h2>
+              <p className="text-cream/70 text-sm">
+                {isEditMode ? "Update your profile information" : "Your profile"}
+              </p>
+            </div>
+            {!isEditMode && (
+              <button
+                onClick={() => {
+                  setIsEditMode(true)
+                  // Reset photo file but keep preview of existing photo
+                  setPhotoFile(null)
+                  setPhotoPreview(formData.photoUrl || null)
+                }}
+                className="flex items-center gap-2 px-4 py-2 border border-gold/50 text-cream hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase tracking-[0.1em] text-sm font-light"
+              >
+                <Edit className="w-4 h-4" />
+                Edit
+              </button>
+            )}
           </div>
 
           {isLoading ? (
             <div className="text-center py-12">
               <p className="text-cream/70">Loading profile...</p>
             </div>
-          ) : (
+          ) : isEditMode ? (
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Photo Upload */}
+              <div className="space-y-2">
+                <Label className="text-cream">Profile Photo</Label>
+                <div className="flex items-center gap-6">
+                  {photoPreview && (
+                    <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gold/30">
+                      <img
+                        src={photoPreview}
+                        alt="Profile preview"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="flex-1">
+                    <div className="relative">
+                      <input
+                        id="profile-photo"
+                        type="file"
+                        accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                        onChange={handlePhotoChange}
+                        className="hidden"
+                      />
+                      <label
+                        htmlFor="profile-photo"
+                        className="flex items-center gap-3 p-4 border-2 border-dashed border-gold/30 rounded-lg cursor-pointer hover:border-gold/50 transition-colors bg-background/50"
+                      >
+                        <ImageIcon className="w-5 h-5 text-cream/70" />
+                        <div className="flex-1">
+                          <p className="text-sm text-cream/80">
+                            {photoFile ? photoFile.name : "Upload Photo (JPG, PNG, WEBP, GIF - Max 5MB)"}
+                          </p>
+                        </div>
+                        <Upload className="w-4 h-4 text-cream/70" />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Full Name and Gender */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -381,13 +506,123 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
               <div className="pt-6">
                 <button
                   type="submit"
-                  disabled={isSaving}
+                  disabled={isSaving || isUploadingPhoto}
                   className="w-full py-4 px-8 border border-gold/50 text-cream hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase tracking-[0.2em] text-sm font-light disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSaving ? "Saving..." : "Save Profile"}
+                  {isUploadingPhoto ? "Uploading Photo..." : isSaving ? "Saving..." : "Save Profile"}
                 </button>
               </div>
             </form>
+          ) : (
+            <div className="space-y-6">
+              {/* View Mode - Display Profile */}
+              {formData.photoUrl && (
+                <div className="flex justify-center mb-6">
+                  <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-gold/30">
+                    <img
+                      src={formData.photoUrl}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Full Name</Label>
+                    <p className="text-cream">{formData.fullName || "—"}</p>
+                  </div>
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Gender</Label>
+                    <p className="text-cream capitalize">{gender || "—"}</p>
+                  </div>
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Email</Label>
+                    <p className="text-cream">{formData.email || "—"}</p>
+                  </div>
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Telephone 1</Label>
+                    <p className="text-cream">{formData.telephone1 || "—"}</p>
+                  </div>
+                  {formData.telephone2 && (
+                    <div>
+                      <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Telephone 2</Label>
+                      <p className="text-cream">{formData.telephone2}</p>
+                    </div>
+                  )}
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Date of Birth</Label>
+                    <p className="text-cream">{formData.dateOfBirth || "—"}</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Nationality</Label>
+                    <p className="text-cream">{formData.nationality || "—"}</p>
+                  </div>
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Occupation</Label>
+                    <p className="text-cream">{formData.occupation || "—"}</p>
+                  </div>
+                  {formData.linkedin && (
+                    <div>
+                      <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">LinkedIn</Label>
+                      <a
+                        href={formData.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gold hover:underline"
+                      >
+                        {formData.linkedin}
+                      </a>
+                    </div>
+                  )}
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Company Name</Label>
+                    <p className="text-cream">{formData.companyName || "—"}</p>
+                  </div>
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Membership Type</Label>
+                    <p className="text-cream">
+                      {membershipType === "founder" ? "Founders Circle (150)" : 
+                       membershipType === "standard" ? "Standard" : "—"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4 pt-4 border-t border-gold/20">
+                <div>
+                  <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Address</Label>
+                  <p className="text-cream whitespace-pre-line">{formData.address || "—"}</p>
+                </div>
+                <div>
+                  <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Country</Label>
+                  <p className="text-cream">{formData.country || "—"}</p>
+                </div>
+                {formData.companyAddress && (
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Company Address</Label>
+                    <p className="text-cream whitespace-pre-line">{formData.companyAddress}</p>
+                  </div>
+                )}
+              </div>
+
+              {formData.personalInterests && (
+                <div className="pt-4 border-t border-gold/20">
+                  <Label className="text-cream/70 text-xs uppercase tracking-wider mb-2 block">Personal Interests</Label>
+                  <p className="text-cream leading-relaxed whitespace-pre-line">{formData.personalInterests}</p>
+                </div>
+              )}
+
+              {formData.personalBiography && (
+                <div className="pt-4 border-t border-gold/20">
+                  <Label className="text-cream/70 text-xs uppercase tracking-wider mb-2 block">Personal Biography</Label>
+                  <p className="text-cream leading-relaxed whitespace-pre-line">{formData.personalBiography}</p>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </motion.div>
