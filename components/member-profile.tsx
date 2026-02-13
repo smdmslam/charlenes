@@ -211,27 +211,8 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-background border border-gold/20 w-full max-w-4xl p-8 md:p-12 space-y-6 my-8 max-h-[90vh] overflow-y-auto">
-          {/* Close Button */}
-          <div className="flex justify-end">
-            <button
-              onClick={onClose}
-              className="p-2 text-cream hover:text-gold transition-colors duration-300"
-              aria-label="Close"
-            >
-              <X className="w-6 h-6" />
-            </button>
-          </div>
-
-          {/* Header */}
+          {/* Top Bar - Edit Button (left) and Close Button (right) */}
           <div className="flex items-center justify-between">
-            <div className="text-center flex-1">
-              <h2 className="text-3xl md:text-4xl font-light tracking-[0.1em] text-cream mb-2">
-                Member Profile
-              </h2>
-              <p className="text-cream/70 text-sm">
-                {isEditMode ? "Update your profile information" : "Your profile"}
-              </p>
-            </div>
             {!isEditMode && (
               <button
                 onClick={() => {
@@ -246,6 +227,24 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
                 Edit
               </button>
             )}
+            {isEditMode && <div></div>}
+            <button
+              onClick={onClose}
+              className="p-2 text-cream hover:text-gold transition-colors duration-300"
+              aria-label="Close"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Header */}
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-light tracking-[0.1em] text-cream mb-2">
+              Member Profile
+            </h2>
+            <p className="text-cream/70 text-sm">
+              {isEditMode ? "Update your profile information" : "Your profile"}
+            </p>
           </div>
 
           {isLoading ? (
