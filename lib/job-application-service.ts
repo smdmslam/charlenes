@@ -24,6 +24,43 @@ export interface JobApplication {
   status?: "pending" | "reviewing" | "accepted" | "rejected";
 }
 
+// File type validation
+const CV_ALLOWED_TYPES = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+const CV_ALLOWED_EXTENSIONS = ['.pdf', '.doc', '.docx'];
+const CV_MAX_SIZE = 10 * 1024 * 1024; // 10MB
+
+const PHOTO_ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+const PHOTO_ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+const PHOTO_MAX_SIZE = 5 * 1024 * 1024; // 5MB
+
+export function validateCVFile(file: File): { valid: boolean; error?: string } {
+  const extension = '.' + file.name.split('.').pop()?.toLowerCase();
+  const isValidType = CV_ALLOWED_TYPES.includes(file.type) || CV_ALLOWED_EXTENSIONS.includes(extension);
+  const isValidSize = file.size <= CV_MAX_SIZE;
+
+  if (!isValidType) {
+    return { valid: false, error: 'CV must be a PDF, DOC, or DOCX file' };
+  }
+  if (!isValidSize) {
+    return { valid: false, error: 'CV file size must be less than 10MB' };
+  }
+  return { valid: true };
+}
+
+export function validatePhotoFile(file: File): { valid: boolean; error?: string } {
+  const extension = '.' + file.name.split('.').pop()?.toLowerCase();
+  const isValidType = PHOTO_ALLOWED_TYPES.includes(file.type) || PHOTO_ALLOWED_EXTENSIONS.includes(extension);
+  const isValidSize = file.size <= PHOTO_MAX_SIZE;
+
+  if (!isValidType) {
+    return { valid: false, error: 'Photo must be a JPG, PNG, WEBP, or GIF file' };
+  }
+  if (!isValidSize) {
+    return { valid: false, error: 'Photo file size must be less than 5MB' };
+  }
+  return { valid: true };
+}
+
 export async function uploadFile(
   file: File,
   path: string
@@ -59,33 +96,55 @@ export async function submitJobApplication(
 
     // Upload CV if provided
     if (cvFile) {
-      const cvPath = `job-applications/cvs/${Date.now()}_${cvFile.name}`;
-      cvUrl = await uploadFile(cvFile, cvPath);
+      try {
+        const cvPath = `job-applications/cvs/${Date.now()}_${cvFile.name}`;
+        cvUrl = await uploadFile(cvFile, cvPath);
+      } catch (error: any) {
+        console.error("Error uploading CV:", error);
+        throw new Error(`Failed to upload CV: ${error.message || "Storage permission error"}`);
+      }
     }
 
     // Upload photo if provided
     if (photoFile) {
-      const photoPath = `job-applications/photos/${Date.now()}_${photoFile.name}`;
-      photoUrl = await uploadFile(photoFile, photoPath);
+      try {
+        const photoPath = `job-applications/photos/${Date.now()}_${photoFile.name}`;
+        photoUrl = await uploadFile(photoFile, photoPath);
+      } catch (error: any) {
+        console.error("Error uploading photo:", error);
+        // Photo is optional, so we don't throw - just log the error
+        console.warn("Photo upload failed, but continuing with application submission");
+      }
     }
 
     // Add server timestamp and file URLs
-    const applicationWithFiles = {
+    // Only include file URLs if they exist (Firestore doesn't accept undefined)
+    const applicationWithFiles: any = {
       ...application,
-      cvUrl,
-      photoUrl,
       submittedAt: serverTimestamp(),
       status: "pending" as const,
     };
 
-    // Save to Firestore
-    const docRef = await addDoc(
-      collection(db, "jobApplications"),
-      applicationWithFiles
-    );
+    // Only add file URLs if they exist
+    if (cvUrl) {
+      applicationWithFiles.cvUrl = cvUrl;
+    }
+    if (photoUrl) {
+      applicationWithFiles.photoUrl = photoUrl;
+    }
 
-    return docRef.id;
-  } catch (error) {
+    // Save to Firestore
+    try {
+      const docRef = await addDoc(
+        collection(db, "jobApplications"),
+        applicationWithFiles
+      );
+      return docRef.id;
+    } catch (error: any) {
+      console.error("Error saving to Firestore:", error);
+      throw new Error(`Failed to save application: ${error.message || "Firestore permission error"}`);
+    }
+  } catch (error: any) {
     console.error("Error submitting job application:", error);
     throw error;
   }

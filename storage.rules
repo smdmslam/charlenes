@@ -1,0 +1,27 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Job Applications - CVs and Photos
+    match /job-applications/{allPaths=**} {
+      // Allow anyone to upload CVs and photos (public form submission)
+      // File size limits: CV max 10MB, Photo max 5MB
+      allow write: if request.resource.size < 10 * 1024 * 1024 // 10MB max
+                   && (
+                     // CV files: PDF, DOC, DOCX
+                     (request.resource.name.matches('.*\\.(pdf|doc|docx)$') && request.resource.contentType.matches('application/(pdf|msword|vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document)'))
+                     ||
+                     // Photo files: Images only
+                     (request.resource.name.matches('.*\\.(jpg|jpeg|png|webp|gif)$') && request.resource.contentType.matches('image/.*'))
+                   );
+      
+      // Allow public read access (needed for getDownloadURL after upload)
+      // Files are stored with download URLs in Firestore, so public read is acceptable
+      allow read: if true;
+    }
+    
+    // Deny all other access
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
