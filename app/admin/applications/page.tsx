@@ -340,7 +340,7 @@ export default function AdminApplicationsPage() {
                         </div>
                       ) : (
                         <div className="flex-1 flex flex-col">
-                          <p className="text-sm text-black/80 flex-1 p-3 bg-white rounded border-2 border-black/10">
+                          <p className="text-sm text-black/80 flex-1 p-3 bg-white rounded border-2 border-black/10 whitespace-pre-line">
                             {app.notes || "No notes yet. Click to add."}
                           </p>
                           <button
