@@ -14,7 +14,7 @@ import { format } from "date-fns"
 const STATUS_OPTIONS = [
   { value: "pending", label: "Pending" },
   { value: "reviewing", label: "Reviewing" },
-  { value: "accepted", label: "Accepted" },
+  { value: "set_up_interview", label: "Set Up Interview" },
   { value: "rejected", label: "Rejected" },
   { value: "offer_made", label: "Offer Made" },
   { value: "hired", label: "Hired" },
@@ -158,10 +158,19 @@ export default function AdminApplicationsPage() {
                 <SelectTrigger className="bg-white border-black/20 text-black w-48">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Applications</SelectItem>
+                <SelectContent className="bg-white border-black/20">
+                  <SelectItem 
+                    value="all"
+                    className="text-black hover:bg-black/5 focus:bg-black/10 cursor-pointer"
+                  >
+                    All Applications
+                  </SelectItem>
                   {STATUS_OPTIONS.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
+                    <SelectItem 
+                      key={option.value} 
+                      value={option.value}
+                      className="text-black hover:bg-black/5 focus:bg-black/10 cursor-pointer"
+                    >
                       {option.label}
                     </SelectItem>
                   ))}
@@ -216,7 +225,7 @@ export default function AdminApplicationsPage() {
                           <span className={`px-3 py-1 text-xs rounded-full font-medium ${
                             app.status === "hired" ? "bg-green-100 text-green-800" :
                             app.status === "offer_made" ? "bg-gold/20 text-gold" :
-                            app.status === "accepted" ? "bg-blue-100 text-blue-800" :
+                            app.status === "set_up_interview" ? "bg-purple-100 text-purple-800" :
                             app.status === "rejected" ? "bg-red-100 text-red-800" :
                             app.status === "reviewing" ? "bg-yellow-100 text-yellow-800" :
                             "bg-gray-100 text-gray-800"
@@ -314,9 +323,13 @@ export default function AdminApplicationsPage() {
                           <SelectTrigger className="bg-white border-black/20 text-black">
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="bg-white border-black/20">
                             {STATUS_OPTIONS.map((option) => (
-                              <SelectItem key={option.value} value={option.value}>
+                              <SelectItem 
+                                key={option.value} 
+                                value={option.value}
+                                className="text-black hover:bg-black/5 focus:bg-black/10 cursor-pointer"
+                              >
                                 {option.label}
                               </SelectItem>
                             ))}

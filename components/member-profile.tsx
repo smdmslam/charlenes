@@ -544,12 +544,10 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
                     <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Telephone 1</Label>
                     <p className="text-cream">{formData.telephone1 || "—"}</p>
                   </div>
-                  {formData.telephone2 && (
-                    <div>
-                      <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Telephone 2</Label>
-                      <p className="text-cream">{formData.telephone2}</p>
-                    </div>
-                  )}
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Telephone 2</Label>
+                    <p className="text-cream">{formData.telephone2 || "—"}</p>
+                  </div>
                   <div>
                     <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Date of Birth</Label>
                     <p className="text-cream">{formData.dateOfBirth || "—"}</p>
@@ -564,9 +562,9 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
                     <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Occupation</Label>
                     <p className="text-cream">{formData.occupation || "—"}</p>
                   </div>
-                  {formData.linkedin && (
-                    <div>
-                      <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">LinkedIn</Label>
+                  <div>
+                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">LinkedIn</Label>
+                    {formData.linkedin ? (
                       <a
                         href={formData.linkedin}
                         target="_blank"
@@ -575,8 +573,10 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
                       >
                         {formData.linkedin}
                       </a>
-                    </div>
-                  )}
+                    ) : (
+                      <p className="text-cream">—</p>
+                    )}
+                  </div>
                   <div>
                     <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Company Name</Label>
                     <p className="text-cream">{formData.companyName || "—"}</p>
@@ -600,27 +600,25 @@ export function MemberProfile({ isOpen, onClose }: MemberProfileProps) {
                   <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Country</Label>
                   <p className="text-cream">{formData.country || "—"}</p>
                 </div>
-                {formData.companyAddress && (
-                  <div>
-                    <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Company Address</Label>
-                    <p className="text-cream whitespace-pre-line">{formData.companyAddress}</p>
-                  </div>
-                )}
+                <div>
+                  <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Company Name</Label>
+                  <p className="text-cream">{formData.companyName || "—"}</p>
+                </div>
+                <div>
+                  <Label className="text-cream/70 text-xs uppercase tracking-wider mb-1">Company Address</Label>
+                  <p className="text-cream whitespace-pre-line">{formData.companyAddress || "—"}</p>
+                </div>
               </div>
 
-              {formData.personalInterests && (
-                <div className="pt-4 border-t border-gold/20">
-                  <Label className="text-cream/70 text-xs uppercase tracking-wider mb-2 block">Personal Interests</Label>
-                  <p className="text-cream leading-relaxed whitespace-pre-line">{formData.personalInterests}</p>
-                </div>
-              )}
+              <div className="pt-4 border-t border-gold/20">
+                <Label className="text-cream/70 text-xs uppercase tracking-wider mb-2 block">Personal Interests</Label>
+                <p className="text-cream leading-relaxed whitespace-pre-line">{formData.personalInterests || "—"}</p>
+              </div>
 
-              {formData.personalBiography && (
-                <div className="pt-4 border-t border-gold/20">
-                  <Label className="text-cream/70 text-xs uppercase tracking-wider mb-2 block">Personal Biography</Label>
-                  <p className="text-cream leading-relaxed whitespace-pre-line">{formData.personalBiography}</p>
-                </div>
-              )}
+              <div className="pt-4 border-t border-gold/20">
+                <Label className="text-cream/70 text-xs uppercase tracking-wider mb-2 block">Personal Biography</Label>
+                <p className="text-cream leading-relaxed whitespace-pre-line">{formData.personalBiography || "—"}</p>
+              </div>
             </div>
           )}
         </div>

@@ -21,7 +21,7 @@ export interface JobApplication {
   
   // Metadata
   submittedAt?: any; // Firestore timestamp
-  status?: "pending" | "reviewing" | "accepted" | "rejected" | "offer_made" | "hired";
+  status?: "pending" | "reviewing" | "rejected" | "set_up_interview" | "offer_made" | "hired";
   notes?: string; // Admin notes/next steps
   id?: string; // Document ID
 }
