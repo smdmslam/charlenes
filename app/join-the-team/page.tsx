@@ -71,7 +71,10 @@ export default function JoinTheTeamPage() {
                 Curzon House is conceived as such an ecosystem. A modern maison grounded in discernment, hospitality, cultural fluency, disciplined judgment, and long-term stewardship.
               </p>
               <p>
-                Its founding advisors are drawn from global luxury houses, Michelin-calibre kitchens, architectural studios, cultural institutions, and from those accustomed to structuring complex transactions, safeguarding generational wealth, and guiding institutions through consequence and continuity — not as ornament, but as authors of the house's DNA and its enduring legacy.
+                The official story of a great hotel or club is the architecture, the chef, the brand campaign. The real story is always the handful of people who make the place feel inevitable – the ones who stand at the intersection of coincidence and design and quietly move things around until the right people are in the right room at the right time.
+              </p>
+              <p>
+                These are the individuals who understand that service is a form of authorship, that taste is a kind of operating system, and that an introduction, made at the right moment, is one of the most powerful technologies we have.
               </p>
             </div>
           </div>
