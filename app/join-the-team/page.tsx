@@ -45,8 +45,8 @@ const advisoryBoardRoles = [
     requirements: "Inspired by the best hosts in Monaco and Mayfair. Exceptional interpersonal skills, cultural fluency, and ability to make meaningful connections. Supported by in-house software for social reach and behavioural analysis.",
   },
   {
-    title: "Cohort Captain",
-    description: "Shape programming, partnerships, and membership funnels for specific segments. Build 'silent pipelines' of the right people into Curzon House. Deeply rooted in key cohorts: lifestyle 21–30, classical music enthusiasts, bankers, founders, lawyers, Oxbridge alumni, philanthropists, and deal-makers.",
+    title: "Membership Curation",
+    description: "Shape programming, partnerships, and membership funnels for specific segments. Build 'silent pipelines' of the right people into Curzon House. Deeply rooted in key cohorts: founders and entrepreneurs, professional men and women, wine and food enthusiasts, bankers and lawyers, Oxbridge alumni, classical music lovers, lifestyle 21–30, corporate sponsors, and philanthropic leaders.",
     requirements: "Deep roots in one or more key segments. Ability to shape programming and partnerships for specific communities. Track record of building exclusive networks.",
   },
 ]
@@ -94,7 +94,7 @@ export default function JoinTheTeamPage() {
                   key={index}
                   className="bg-white rounded-2xl p-8 shadow-md border border-black/10 hover:shadow-lg transition-all duration-300 hover:border-gold/40"
                 >
-                  <h3 className="text-xl font-light tracking-wide text-black mb-4 leading-tight">
+                  <h3 className="text-xl font-medium tracking-wide text-black mb-4 leading-tight">
                     {role.title}
                   </h3>
                   <p className="text-black/75 mb-6 leading-relaxed text-sm">
