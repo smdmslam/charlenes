@@ -50,12 +50,13 @@ export function SurveyQuestionRenderer({
 
     case "multiple_choice_multi":
       const selectedValues = Array.isArray(value) ? value : []
+      const maxSelections = question.maxSelections || 3
       
       return (
         <div className="space-y-4">
           {question.options?.map((option) => {
             const isSelected = selectedValues.includes(option.value)
-            const canSelect = selectedValues.length < 3 || isSelected
+            const canSelect = selectedValues.length < maxSelections || isSelected
 
             return (
               <div
