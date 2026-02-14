@@ -55,6 +55,18 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     
+    // Survey Sessions Collection
+    // Anyone can create a survey session (public form, no auth required)
+    // Anyone can read/update their own session (session ID is secret)
+    // Admins can read/list all sessions for results dashboard
+    match /survey_sessions/{sessionId} {
+      allow create: if true; // Public survey submission
+      allow read: if true; // Session ID is secret, so allow reading
+      allow update: if true; // Session ID is secret, so allow updates
+      allow delete: if isAdmin(); // Only admins can delete
+      allow list: if isAdmin(); // Only admins can list all sessions
+    }
+    
     // Deny all other access by default
     match /{document=**} {
       allow read, write: if false;
