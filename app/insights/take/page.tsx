@@ -189,12 +189,12 @@ export default function SurveyTakePage() {
               Insights
             </h1>
             {sessionName && (
-              <p className="text-xs tracking-[0.2em] uppercase text-gold/80 mt-1">
+              <p className="text-xs tracking-[0.2em] uppercase text-gold mt-1">
                 {sessionName}
               </p>
             )}
           </div>
-          <div className="text-sm text-cream/60 tracking-wide">
+          <div className="text-sm text-cream tracking-wide">
             {currentQuestionIndex + 1} / {totalQuestions}
           </div>
         </div>
@@ -213,14 +213,14 @@ export default function SurveyTakePage() {
           >
             {/* Question number and title */}
             <div className="space-y-4">
-              <div className="text-xs tracking-[0.2em] uppercase text-gold/60">
+              <div className="text-xs tracking-[0.2em] uppercase text-gold">
                 Question {currentQuestionIndex + 1}
               </div>
               <h2 className="text-2xl md:text-3xl font-light tracking-[0.1em] text-cream leading-relaxed">
                 {currentQuestion.title}
               </h2>
               {currentQuestion.description && (
-                <p className="text-base text-cream/70 font-light leading-relaxed">
+                <p className="text-base text-cream font-light leading-relaxed">
                   {currentQuestion.description}
                 </p>
               )}
@@ -239,25 +239,25 @@ export default function SurveyTakePage() {
       </div>
 
       {/* Navigation footer */}
-      <footer className="fixed bottom-0 left-0 right-0 z-40 px-8 md:px-16 lg:px-24 py-6 bg-background/80 backdrop-blur-sm border-t border-gold/20">
+      <footer className="fixed bottom-0 left-0 right-0 z-40 px-8 md:px-16 lg:px-24 py-6 bg-background/80 backdrop-blur-sm border-t border-gold/50">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <Button
             onClick={handlePrevious}
             disabled={currentQuestionIndex === 0 || isSaving}
             variant="outline"
-            className="border-gold/20 text-cream hover:bg-gold/10 hover:border-gold disabled:opacity-30"
+            className="border-gold/50 text-cream hover:bg-gold/10 hover:border-gold disabled:opacity-30"
           >
             Previous
           </Button>
 
-          <div className="text-xs text-cream/60 tracking-wide">
+          <div className="text-xs text-cream tracking-wide">
             {isSaving && "Saving..."}
           </div>
 
           <Button
             onClick={handleNext}
             disabled={isSaving}
-            className="border border-gold/50 text-cream bg-transparent hover:bg-gold/10 hover:border-gold uppercase tracking-[0.2em] text-sm font-light"
+            className="border border-gold/70 text-cream bg-transparent hover:bg-gold/10 hover:border-gold uppercase tracking-[0.2em] text-sm font-light"
           >
             {currentQuestionIndex === totalQuestions - 1 ? "Complete" : "Next"}
           </Button>

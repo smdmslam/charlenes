@@ -30,7 +30,7 @@ export function SurveyQuestionRenderer({
           {question.options?.map((option) => (
             <div
               key={option.id}
-              className="flex items-center space-x-3 p-4 border border-gold/20 rounded hover:border-gold/40 transition-colors cursor-pointer"
+              className="flex items-center space-x-3 p-4 border border-gold/50 rounded hover:border-gold/70 transition-colors cursor-pointer"
             >
               <RadioGroupItem
                 value={option.value as string}
@@ -64,8 +64,8 @@ export function SurveyQuestionRenderer({
                   isSelected
                     ? "border-gold bg-gold/10"
                     : canSelect
-                    ? "border-gold/20 hover:border-gold/40 cursor-pointer"
-                    : "border-gold/10 opacity-50 cursor-not-allowed"
+                    ? "border-gold/50 hover:border-gold/70 cursor-pointer"
+                    : "border-gold/30 opacity-50 cursor-not-allowed"
                 }`}
                 onClick={() => {
                   if (!canSelect) return
@@ -92,7 +92,7 @@ export function SurveyQuestionRenderer({
             )
           })}
           {question.description && (
-            <p className="text-sm text-cream/60 mt-2">
+            <p className="text-sm text-cream mt-2">
               {question.description}
             </p>
           )}
@@ -113,7 +113,7 @@ export function SurveyQuestionRenderer({
               step={1}
               className="w-full"
             />
-            <div className="flex justify-between mt-4 text-sm text-cream/70">
+            <div className="flex justify-between mt-4 text-sm text-cream">
               <span>{question.scaleLabels?.min || "1"}</span>
               <span className="text-gold text-lg font-light">
                 {scaleValue[0]}
@@ -131,7 +131,7 @@ export function SurveyQuestionRenderer({
           onChange={(e) => onChange(e.target.value)}
           placeholder={question.placeholder}
           maxLength={question.maxLength}
-          className="bg-background border-gold/20 text-cream placeholder:text-cream/40 h-12 text-base focus-visible:border-gold focus-visible:ring-gold/20"
+          className="bg-background border-gold/50 text-cream placeholder:text-cream/70 h-12 text-base focus-visible:border-gold focus-visible:ring-gold/30"
         />
       )
 
@@ -143,13 +143,13 @@ export function SurveyQuestionRenderer({
           placeholder={question.placeholder}
           maxLength={question.maxLength}
           rows={6}
-          className="bg-background border-gold/20 text-cream placeholder:text-cream/40 text-base leading-relaxed focus-visible:border-gold focus-visible:ring-gold/20 resize-y"
+          className="bg-background border-gold/50 text-cream placeholder:text-cream/70 text-base leading-relaxed focus-visible:border-gold focus-visible:ring-gold/30 resize-y"
         />
       )
 
     default:
       return (
-        <div className="text-cream/60">
+        <div className="text-cream">
           Question type "{question.type}" not yet implemented
         </div>
       )
