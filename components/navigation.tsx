@@ -26,6 +26,7 @@ interface NavigationProps {
 
 export function Navigation({ sections, activeIndex, onNavigate }: NavigationProps) {
   const pathname = usePathname()
+  const isHomePage = pathname === '/'
   
   // Determine if we're on a light background page
   const isLightPage = Boolean(pathname && (pathname.startsWith('/join-the-team') || pathname.startsWith('/admin')))
@@ -78,27 +79,52 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
       }`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.button
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            onClick={() => onNavigate(0)}
-            className="flex flex-col text-left cursor-pointer hover:opacity-80 transition-opacity duration-300"
-            aria-label="Navigate to home"
-          >
-            <div className="flex flex-col text-left">
-              <h1 className={`text-2xl md:text-3xl font-light tracking-[0.15em] leading-tight ${
-                isLightPage ? 'text-black' : 'text-cream'
-              }`}>
-                Curzon House
-              </h1>
-              <span className={`text-xs tracking-[0.4em] uppercase ${
-                isLightPage ? 'text-black/70' : 'text-gold'
-              }`}>
-                LONDON MAYFAIR
-              </span>
-            </div>
-          </motion.button>
+          {isHomePage ? (
+            <motion.button
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              onClick={() => onNavigate(0)}
+              className="flex flex-col text-left cursor-pointer hover:opacity-80 transition-opacity duration-300"
+              aria-label="Navigate to home"
+            >
+              <div className="flex flex-col text-left">
+                <h1 className={`text-2xl md:text-3xl font-light tracking-[0.15em] leading-tight ${
+                  isLightPage ? 'text-black' : 'text-cream'
+                }`}>
+                  Curzon House
+                </h1>
+                <span className={`text-xs tracking-[0.4em] uppercase ${
+                  isLightPage ? 'text-black/70' : 'text-gold'
+                }`}>
+                  LONDON MAYFAIR
+                </span>
+              </div>
+            </motion.button>
+          ) : (
+            <Link href="/">
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="flex flex-col text-left cursor-pointer hover:opacity-80 transition-opacity duration-300"
+                aria-label="Navigate to home"
+              >
+                <div className="flex flex-col text-left">
+                  <h1 className={`text-2xl md:text-3xl font-light tracking-[0.15em] leading-tight ${
+                    isLightPage ? 'text-black' : 'text-cream'
+                  }`}>
+                    Curzon House
+                  </h1>
+                  <span className={`text-xs tracking-[0.4em] uppercase ${
+                    isLightPage ? 'text-black/70' : 'text-gold'
+                  }`}>
+                    LONDON MAYFAIR
+                  </span>
+                </div>
+              </motion.div>
+            </Link>
+          )}
 
           {/* Hamburger Menu */}
           <motion.button
