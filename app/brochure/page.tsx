@@ -61,6 +61,106 @@ const brochureContent = {
         period: "Dec 2026 – Q1 2027",
         items: ["Opening", "Members' preview", "Full operations"],
       },
+      {
+        phase: "Phase V",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase VI",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase VII",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase VIII",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase IX",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase X",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XI",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XII",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XIII",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XIV",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XV",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XVI",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XVII",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XVIII",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XIX",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XX",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XXI",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XXII",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XXIII",
+        period: "TBD",
+        items: ["To be determined"],
+      },
+      {
+        phase: "Phase XXIV",
+        period: "TBD",
+        items: ["To be determined"],
+      },
     ],
     caption: "Built deliberately. Opened quietly. Designed to endure.",
   },
