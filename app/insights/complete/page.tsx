@@ -1,33 +1,31 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { getSurveySession } from "@/lib/survey-service"
 
-export default function SurveyCompletePage() {
+function SurveyCompleteContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get("session")
   const [sessionName, setSessionName] = useState("")
 
   useEffect(() => {
-    if (sessionId) {
-      loadSession()
-    }
-  }, [sessionId])
-
-  const loadSession = async () => {
     if (!sessionId) return
 
-    try {
-      const session = await getSurveySession(sessionId)
-      if (session) {
-        setSessionName(session.name)
+    const loadSession = async () => {
+      try {
+        const session = await getSurveySession(sessionId)
+        if (session) {
+          setSessionName(session.name)
+        }
+      } catch (error) {
+        console.error("Error loading session:", error)
       }
-    } catch (error) {
-      console.error("Error loading session:", error)
     }
-  }
+
+    loadSession()
+  }, [sessionId])
 
   return (
     <main className="min-h-screen bg-background flex items-center justify-center p-8">
@@ -98,5 +96,23 @@ export default function SurveyCompletePage() {
         </motion.div>
       </motion.div>
     </main>
+  )
+}
+
+export default function SurveyCompletePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-background flex items-center justify-center p-8">
+        <div className="w-full max-w-2xl space-y-12 text-center">
+          <div className="h-px w-32 mx-auto bg-gold/60" />
+          <h1 className="text-4xl md:text-5xl font-light tracking-[0.15em] text-cream">
+            Thank You
+          </h1>
+          <div className="h-px w-32 mx-auto bg-gold/60" />
+        </div>
+      </main>
+    }>
+      <SurveyCompleteContent />
+    </Suspense>
   )
 }
