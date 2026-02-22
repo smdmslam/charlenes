@@ -1142,7 +1142,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                   />
                                   <div className="flex-1">
                                     <div className="text-cream">Elite Membership</div>
-                                    <div className="text-cream/70 text-sm mt-1">Founders Rate: £7,500/year (limited to first 150)</div>
+                                    <div className="text-cream/70 text-sm mt-1 space-y-1">
+                                      <div>Founders Rate: £7,500/year for first 150 members</div>
+                                      <div>Transferable membership at standard Elite subscription rates.</div>
+                                    </div>
                                   </div>
                                 </label>
                               </td>
