@@ -4,20 +4,21 @@ import { db } from "./firebase";
 export interface MembershipApplication {
   // Personal Information
   fullName: string;
-  gender: string;
-  address: string;
-  country: string;
+  title: string;
+  address?: string;
+  country?: string;
+  residency: string;
   telephone1: string;
   telephone2?: string;
   email: string;
-  linkedin?: string;
+  linkedin: string;
   dateOfBirth: string;
   nationality: string;
   
   // Professional Information
   occupation: string;
   companyName: string;
-  companyAddress: string;
+  companyAddress?: string;
   
   // Additional Information
   personalInterests?: string;

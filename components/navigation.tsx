@@ -47,7 +47,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
   // Form state
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [gender, setGender] = useState<string>("")
+  const [title, setTitle] = useState<string>("")
   const [membershipType, setMembershipType] = useState<string>("")
   const { toast } = useToast()
   const { user } = useAuth()
@@ -939,13 +939,13 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         const formData = new FormData(e.currentTarget)
 
                         // Validate required fields
-                        const requiredFields = ['fullName', 'gender', 'address', 'country', 'telephone1', 'email', 'dateOfBirth', 'nationality', 'occupation', 'companyName', 'companyAddress', 'membership']
+                        const requiredFields = ['fullName', 'title', 'telephone1', 'email', 'dateOfBirth', 'residency', 'nationality', 'occupation', 'linkedin', 'companyName', 'membership']
                         const missingFields = requiredFields.filter(field => {
                           if (field === 'membership') {
                             return !membershipType
                           }
-                          if (field === 'gender') {
-                            return !gender
+                          if (field === 'title') {
+                            return !title
                           }
                           return !formData.get(field)
                         })
@@ -963,18 +963,19 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         // Collect form data
                         const application = {
                           fullName: formData.get('fullName') as string,
-                          gender: gender,
-                          address: formData.get('address') as string,
-                          country: formData.get('country') as string,
+                          title: title,
+                          address: formData.get('address') as string || undefined,
+                          country: formData.get('country') as string || undefined,
+                          residency: formData.get('residency') as string,
                           telephone1: formData.get('telephone1') as string,
                           telephone2: formData.get('telephone2') as string || undefined,
                           email: formData.get('email') as string,
-                          linkedin: formData.get('linkedin') as string || undefined,
+                          linkedin: formData.get('linkedin') as string,
                           dateOfBirth: formData.get('dateOfBirth') as string,
                           nationality: formData.get('nationality') as string,
                           occupation: formData.get('occupation') as string,
                           companyName: formData.get('companyName') as string,
-                          companyAddress: formData.get('companyAddress') as string,
+                          companyAddress: formData.get('companyAddress') as string || undefined,
                           personalInterests: formData.get('personalInterests') as string || undefined,
                           personalBiography: formData.get('personalBiography') as string || undefined,
                           membershipType: membershipType as "standard" | "elite" | "architect",
@@ -990,7 +991,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
                         // Reset form
                         e.currentTarget.reset()
-                        setGender("")
+                        setTitle("")
                         setMembershipType("")
                       } catch (error) {
                         console.error("Error submitting application:", error)
@@ -1004,24 +1005,32 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       }
                     }}
                   >
-                    {/* Gender - Top */}
-                    <div className="space-y-2 mb-4">
-                      <Label htmlFor="gender" className="text-cream text-sm">Gender</Label>
-                      <Select name="gender" value={gender} onValueChange={setGender}>
-                        <SelectTrigger className="bg-background border-gold/20 text-cream h-9 text-sm">
-                          <SelectValue placeholder="Select gender" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="male">Male</SelectItem>
-                          <SelectItem value="female">Female</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    {/* Basic Information - Compact Layout */}
-                    <div className="space-y-3 pb-4 border-b border-gold/10">
+                    {/* Required Information - Compact Layout */}
+                    <div className="space-y-3 pb-6 border-b border-gold/20">
+                      {/* Salutation - On its own line */}
+                      <div className="space-y-1">
+                        <Label htmlFor="title" className="text-cream text-sm">Salutation</Label>
+                        <Select name="title" value={title} onValueChange={setTitle}>
+                          <SelectTrigger className="bg-background border-gold/20 text-cream h-9 text-sm">
+                            <SelectValue placeholder="Select salutation" />
+                          </SelectTrigger>
+                          <SelectContent className="z-[110]">
+                            <SelectItem value="mr">Mr.</SelectItem>
+                            <SelectItem value="mrs">Mrs.</SelectItem>
+                            <SelectItem value="ms">Ms.</SelectItem>
+                            <SelectItem value="miss">Miss</SelectItem>
+                            <SelectItem value="dr">Dr.</SelectItem>
+                            <SelectItem value="prof">Prof.</SelectItem>
+                            <SelectItem value="sir">Sir</SelectItem>
+                            <SelectItem value="dame">Dame</SelectItem>
+                            <SelectItem value="lord">Lord</SelectItem>
+                            <SelectItem value="lady">Lady</SelectItem>
+                            <SelectItem value="mx">Mx.</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      {/* Row 1: Name, Date of Birth */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="space-y-1">
                           <Label htmlFor="fullName" className="text-cream text-sm">Full Name</Label>
@@ -1032,7 +1041,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                           <Input id="dateOfBirth" name="dateOfBirth" type="date" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      
+                      {/* Row 2: Email, Telephone */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="space-y-1">
                           <Label htmlFor="email" className="text-cream text-sm">Email</Label>
                           <Input id="email" name="email" type="email" className="bg-background border-gold/20 text-cream h-9 text-sm" />
@@ -1041,59 +1052,75 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                           <Label htmlFor="telephone1" className="text-cream text-sm">Telephone</Label>
                           <Input id="telephone1" name="telephone1" type="tel" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
-                        <div className="space-y-1">
-                          <Label htmlFor="telephone2" className="text-cream text-sm">Telephone 2 (Optional)</Label>
-                          <Input id="telephone2" name="telephone2" type="tel" className="bg-background border-gold/20 text-cream h-9 text-sm" />
-                        </div>
                       </div>
+                      
+                      {/* Row 3: Residency, Nationality */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="space-y-1">
-                          <Label htmlFor="address" className="text-cream text-sm">Address</Label>
-                          <Textarea id="address" name="address" rows={1} className="bg-background border-gold/20 text-cream text-sm min-h-[36px] resize-y" />
+                          <Label htmlFor="residency" className="text-cream text-sm">Residency</Label>
+                          <Input id="residency" name="residency" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
-                        <div className="space-y-1">
-                          <Label htmlFor="country" className="text-cream text-sm">Country</Label>
-                          <Input id="country" name="country" className="bg-background border-gold/20 text-cream h-9 text-sm" />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div className="space-y-1">
                           <Label htmlFor="nationality" className="text-cream text-sm">Nationality</Label>
                           <Input id="nationality" name="nationality" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
+                      </div>
+                      
+                      {/* Row 4: Occupation, LinkedIn, Company Name */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div className="space-y-1">
                           <Label htmlFor="occupation" className="text-cream text-sm">Occupation</Label>
                           <Input id="occupation" name="occupation" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
                         <div className="space-y-1">
-                          <Label htmlFor="linkedin" className="text-cream text-sm">LinkedIn (URL)</Label>
+                          <Label htmlFor="linkedin" className="text-cream text-sm">LinkedIn</Label>
                           <Input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/..." className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="space-y-1">
                           <Label htmlFor="companyName" className="text-cream text-sm">Company Name</Label>
                           <Input id="companyName" name="companyName" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
+                      </div>
+                      
+                      {/* Row 5: Address */}
+                      <div className="grid grid-cols-1 gap-3">
                         <div className="space-y-1">
-                          <Label htmlFor="companyAddress" className="text-cream text-sm">Company Address</Label>
-                          <Textarea id="companyAddress" name="companyAddress" rows={1} className="bg-background border-gold/20 text-cream text-sm min-h-[36px] resize-y" />
+                          <Label htmlFor="address" className="text-cream text-sm">Address</Label>
+                          <Textarea id="address" name="address" rows={1} className="bg-background border-gold/20 text-cream text-sm min-h-[36px] resize-y" />
                         </div>
                       </div>
                     </div>
 
-                    {/* Personal Interests - Prominent */}
-                    <div className="space-y-3 pt-4">
-                      <Label htmlFor="personalInterests" className="text-cream text-lg font-light">Personal Interests</Label>
-                      <Textarea id="personalInterests" name="personalInterests" rows={6} className="bg-background border-gold/30 text-cream text-base leading-relaxed" placeholder="Share your passions, hobbies, and interests..." />
+                    {/* Tell us your story - Protagonist Field */}
+                    <div className="space-y-4 pt-8">
+                      <div>
+                        <Label htmlFor="personalBiography" className="text-cream text-2xl font-light tracking-wide">Tell us your story</Label>
+                        <p className="text-cream/70 text-sm mt-1 italic">This is the most important part of your application</p>
+                      </div>
+                      <Textarea 
+                        id="personalBiography" 
+                        name="personalBiography" 
+                        rows={12} 
+                        className="bg-background border-gold/40 text-cream text-lg leading-relaxed placeholder:text-cream/40 focus:border-gold focus:ring-1 focus:ring-gold/50" 
+                        placeholder="Share your journey, your vision, what drives you, and why Curzon House resonates with you..." 
+                      />
                     </div>
 
-                    {/* Personal Biography - Prominent */}
-                    <div className="space-y-3 pt-6 border-t border-gold/30">
-                      <Label htmlFor="personalBiography" className="text-cream text-lg font-light">Personal Biography</Label>
-                      <p className="text-cream/80 text-sm italic mb-2">"Tell us your story"</p>
-                      <Textarea id="personalBiography" name="personalBiography" rows={8} className="bg-background border-gold/30 text-cream text-base leading-relaxed" placeholder="Please provide a brief biography..." />
+                    {/* Personal Interests - Same Styling as Tell us your story */}
+                    <div className="space-y-4 pt-8">
+                      <div>
+                        <Label htmlFor="personalInterests" className="text-cream text-2xl font-light tracking-wide">Personal Interests</Label>
+                        <p className="text-cream/70 text-sm mt-1 italic">Share what you're passionate about</p>
+                      </div>
+                      <Textarea 
+                        id="personalInterests" 
+                        name="personalInterests" 
+                        rows={12} 
+                        className="bg-background border-gold/40 text-cream text-lg leading-relaxed placeholder:text-cream/40 focus:border-gold focus:ring-1 focus:ring-gold/50" 
+                        placeholder="Share your passions, hobbies, and interests..." 
+                      />
                     </div>
+
 
                     {/* Membership Selection */}
                     <div className="space-y-4 pt-4 border-t border-gold/20">
