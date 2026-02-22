@@ -428,6 +428,19 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                     </div>
                   )}
 
+                  {/* SURVEY - Only visible to s.moralesmed@gmail.com */}
+                  {user?.email === "s.moralesmed@gmail.com" && (
+                    <div className="pt-4 border-t border-gold/20">
+                      <Link
+                        href="/insights"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block text-left text-xl tracking-[0.15em] uppercase text-cream hover:text-gold transition-colors duration-300"
+                      >
+                        Survey
+                      </Link>
+                    </div>
+                  )}
+
                   {/* AUTHENTICATION */}
                   <div className="pt-4 border-t border-gold/20">
                     {user ? (
