@@ -1030,20 +1030,20 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         </Select>
                       </div>
                       
-                      {/* Row 1: Name, Date of Birth */}
+                      {/* Row 1: Name, Address */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="space-y-1">
                           <Label htmlFor="fullName" className="text-cream text-sm">Full Name</Label>
                           <Input id="fullName" name="fullName" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
                         <div className="space-y-1">
-                          <Label htmlFor="dateOfBirth" className="text-cream text-sm">Date of Birth</Label>
-                          <Input id="dateOfBirth" name="dateOfBirth" type="date" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                          <Label htmlFor="address" className="text-cream text-sm">Address</Label>
+                          <Textarea id="address" name="address" rows={1} className="bg-background border-gold/20 text-cream text-sm min-h-[36px] resize-y" />
                         </div>
                       </div>
                       
-                      {/* Row 2: Email, Telephone */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {/* Row 2: Email, Telephone, Date of Birth */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div className="space-y-1">
                           <Label htmlFor="email" className="text-cream text-sm">Email</Label>
                           <Input id="email" name="email" type="email" className="bg-background border-gold/20 text-cream h-9 text-sm" />
@@ -1051,6 +1051,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         <div className="space-y-1">
                           <Label htmlFor="telephone1" className="text-cream text-sm">Telephone</Label>
                           <Input id="telephone1" name="telephone1" type="tel" className="bg-background border-gold/20 text-cream h-9 text-sm" />
+                        </div>
+                        <div className="space-y-1">
+                          <Label htmlFor="dateOfBirth" className="text-cream text-sm">Date of Birth</Label>
+                          <Input id="dateOfBirth" name="dateOfBirth" type="date" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
                       </div>
                       
@@ -1066,29 +1070,22 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         </div>
                       </div>
                       
-                      {/* Row 4: Occupation, LinkedIn, Company Name */}
+                      {/* Row 4: Occupation, Company Name, LinkedIn */}
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div className="space-y-1">
                           <Label htmlFor="occupation" className="text-cream text-sm">Occupation</Label>
                           <Input id="occupation" name="occupation" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
                         <div className="space-y-1">
-                          <Label htmlFor="linkedin" className="text-cream text-sm">LinkedIn</Label>
-                          <Input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/..." className="bg-background border-gold/20 text-cream h-9 text-sm" />
-                        </div>
-                        <div className="space-y-1">
                           <Label htmlFor="companyName" className="text-cream text-sm">Company Name</Label>
                           <Input id="companyName" name="companyName" className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
-                      </div>
-                      
-                      {/* Row 5: Address */}
-                      <div className="grid grid-cols-1 gap-3">
                         <div className="space-y-1">
-                          <Label htmlFor="address" className="text-cream text-sm">Address</Label>
-                          <Textarea id="address" name="address" rows={1} className="bg-background border-gold/20 text-cream text-sm min-h-[36px] resize-y" />
+                          <Label htmlFor="linkedin" className="text-cream text-sm">LinkedIn</Label>
+                          <Input id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/..." className="bg-background border-gold/20 text-cream h-9 text-sm" />
                         </div>
                       </div>
+                      
                     </div>
 
                     {/* Tell us your story - Protagonist Field */}
