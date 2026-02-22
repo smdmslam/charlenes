@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -9,11 +9,11 @@ import { getSurveySession, updateSurveySession, saveSurveyAnswer } from "@/lib/s
 import { getAllQuestions, getQuestionById, calculateCompletion, type Question } from "@/lib/survey-questions"
 import { SurveyQuestionRenderer } from "@/components/survey-question-renderer"
 
-export default function SurveyTakePage() {
+function SurveyTakeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { toast } = useToast()
-  
+
   const sessionId = searchParams.get("session")
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, any>>({})
@@ -53,7 +53,7 @@ export default function SurveyTakePage() {
 
       setSessionName(session.name)
       setAnswers(session.answers || {})
-      
+
       // Resume from last question if in progress
       if (session.metadata?.lastQuestionId) {
         const lastIndex = questions.findIndex((q) => q.id === session.metadata?.lastQuestionId)
@@ -264,5 +264,17 @@ export default function SurveyTakePage() {
         </div>
       </footer>
     </main>
+  )
+}
+
+export default function SurveyTakePage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-cream text-lg tracking-wide">Loading...</div>
+      </main>
+    }>
+      <SurveyTakeContent />
+    </Suspense>
   )
 }
