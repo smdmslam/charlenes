@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useToast } from "@/hooks/use-toast"
 import { useAuth } from "@/contexts/auth-context"
-import { getProfile, saveProfile, uploadProfilePhoto, MemberProfile } from "@/lib/profile-service"
+import { getProfile, saveProfile, uploadProfilePhoto, type MemberProfile } from "@/lib/profile-service"
 
 interface MemberProfileProps {
   isOpen: boolean
