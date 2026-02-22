@@ -1186,7 +1186,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-4 px-8 border border-gold/50 text-cream hover:bg-gold/10 hover:border-gold transition-all duration-300 uppercase tracking-[0.2em] text-sm font-light disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full py-4 px-8 border border-gold/50 text-cream hover:bg-gold/10 hover:border-gold active:bg-gold/20 active:scale-[0.98] transition-all duration-300 uppercase tracking-[0.2em] text-sm font-light disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gold/50"
                       >
                         {isSubmitting ? "Submitting..." : "Submit Application"}
                       </button>
