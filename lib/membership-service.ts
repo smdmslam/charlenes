@@ -24,7 +24,7 @@ export interface MembershipApplication {
   personalBiography?: string;
   
   // Membership Selection
-  membershipType: "founder" | "standard" | "premium" | "vip";
+  membershipType: "standard" | "elite" | "architect";
   
   // Metadata
   submittedAt?: any; // Firestore timestamp

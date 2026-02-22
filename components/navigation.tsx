@@ -977,7 +977,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                           companyAddress: formData.get('companyAddress') as string,
                           personalInterests: formData.get('personalInterests') as string || undefined,
                           personalBiography: formData.get('personalBiography') as string || undefined,
-                          membershipType: membershipType as "founder" | "standard" | "premium" | "vip",
+                          membershipType: membershipType as "standard" | "elite" | "architect",
                         }
 
                         // Submit to Firebase
@@ -1116,34 +1116,38 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                   <input
                                     type="radio"
                                     name="membership"
-                                    value="founder"
-                                    checked={membershipType === "founder"}
+                                    value="standard"
+                                    checked={membershipType === "standard"}
                                     onChange={(e) => setMembershipType(e.target.value)}
                                     className="mr-3 accent-gold mt-1"
                                   />
                                   <div className="flex-1">
-                                    <div className="flex items-center">
-                                      <span className="text-cream">Founders Circle <span className="text-cream/70">(150)</span></span>
-                                      <button
-                                        type="button"
-                                        onClick={(e) => {
-                                          e.stopPropagation()
-                                          setIsFoundersCircleOpen(true)
-                                        }}
-                                        className="ml-2 p-1 text-cream/60 hover:text-gold transition-colors"
-                                        aria-label="Learn more about Founders Circle"
-                                      >
-                                        <Info className="w-4 h-4" />
-                                      </button>
-                                    </div>
-                                    <div className="text-sm mt-1">
-                                      <span className="text-gold">Pre-sale*</span> <span className="text-cream/70">March 15th, 2026</span>
-                                    </div>
+                                    <div className="text-cream">Standard Membership</div>
                                   </div>
                                 </label>
                               </td>
-                              <td className="text-right py-3 px-4 text-cream">£2,500</td>
+                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                            </tr>
+                            <tr className="border-b border-gold/10">
+                              <td className="py-3 px-4">
+                                <label className="flex items-start cursor-pointer">
+                                  <input
+                                    type="radio"
+                                    name="membership"
+                                    value="elite"
+                                    checked={membershipType === "elite"}
+                                    onChange={(e) => setMembershipType(e.target.value)}
+                                    className="mr-3 accent-gold mt-1"
+                                  />
+                                  <div className="flex-1">
+                                    <div className="text-cream">Elite Membership</div>
+                                    <div className="text-cream/70 text-sm mt-1">Founders Rate: £7,500/year (limited to first 150)</div>
+                                  </div>
+                                </label>
+                              </td>
                               <td className="text-right py-3 px-4 text-cream">£10,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
                             </tr>
                             <tr>
                               <td className="py-3 px-4">
@@ -1151,18 +1155,17 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                   <input
                                     type="radio"
                                     name="membership"
-                                    value="standard"
-                                    checked={membershipType === "standard"}
+                                    value="architect"
+                                    checked={membershipType === "architect"}
                                     onChange={(e) => setMembershipType(e.target.value)}
                                     className="mr-3 accent-gold mt-1"
                                   />
                                   <div className="flex-1">
-                                    <div className="text-cream">Standard</div>
-                                    <div className="text-cream/70 text-sm mt-1">Available January 2027</div>
+                                    <div className="text-cream">Architect Membership</div>
                                   </div>
                                 </label>
                               </td>
-                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£20,000</td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>
                             </tr>
                           </tbody>
