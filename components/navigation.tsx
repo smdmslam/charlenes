@@ -27,10 +27,10 @@ interface NavigationProps {
 export function Navigation({ sections, activeIndex, onNavigate }: NavigationProps) {
   const pathname = usePathname()
   const isHomePage = pathname === '/'
-  
+
   // Determine if we're on a light background page
   const isLightPage = Boolean(pathname && (pathname.startsWith('/join-the-team') || pathname.startsWith('/admin')))
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [isAboutOpen, setIsAboutOpen] = useState(false)
@@ -72,11 +72,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   return (
     <>
       {/* Top header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 px-8 md:px-16 lg:px-24 py-6 ${
-        isLightPage 
-          ? 'bg-cream/95 backdrop-blur-sm' 
+      <header className={`fixed top-0 left-0 right-0 z-50 px-8 md:px-16 lg:px-24 py-6 ${isLightPage
+          ? 'bg-cream/95 backdrop-blur-sm'
           : 'bg-transparent'
-      }`}>
+        }`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
           {isHomePage ? (
@@ -89,14 +88,12 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
               aria-label="Navigate to home"
             >
               <div className="flex flex-col text-left">
-                <h1 className={`text-2xl md:text-3xl font-light tracking-[0.15em] leading-tight ${
-                  isLightPage ? 'text-black' : 'text-cream'
-                }`}>
+                <h1 className={`text-2xl md:text-3xl font-light tracking-[0.15em] leading-tight ${isLightPage ? 'text-black' : 'text-cream'
+                  }`}>
                   Curzon House
                 </h1>
-                <span className={`text-xs tracking-[0.4em] uppercase ${
-                  isLightPage ? 'text-black/70' : 'text-gold'
-                }`}>
+                <span className={`text-xs tracking-[0.4em] uppercase ${isLightPage ? 'text-black/70' : 'text-gold'
+                  }`}>
                   LONDON MAYFAIR
                 </span>
               </div>
@@ -111,14 +108,12 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                 aria-label="Navigate to home"
               >
                 <div className="flex flex-col text-left">
-                  <h1 className={`text-2xl md:text-3xl font-light tracking-[0.15em] leading-tight ${
-                    isLightPage ? 'text-black' : 'text-cream'
-                  }`}>
+                  <h1 className={`text-2xl md:text-3xl font-light tracking-[0.15em] leading-tight ${isLightPage ? 'text-black' : 'text-cream'
+                    }`}>
                     Curzon House
                   </h1>
-                  <span className={`text-xs tracking-[0.4em] uppercase ${
-                    isLightPage ? 'text-black/70' : 'text-gold'
-                  }`}>
+                  <span className={`text-xs tracking-[0.4em] uppercase ${isLightPage ? 'text-black/70' : 'text-gold'
+                    }`}>
                     LONDON MAYFAIR
                   </span>
                 </div>
@@ -132,9 +127,8 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
             onClick={() => setIsMenuOpen(true)}
-            className={`p-2 transition-colors duration-300 ${
-              isLightPage ? 'text-black hover:text-gold' : 'text-cream hover:text-gold'
-            }`}
+            className={`p-2 transition-colors duration-300 ${isLightPage ? 'text-black hover:text-gold' : 'text-cream hover:text-gold'
+              }`}
             aria-label="Menu"
           >
             <Menu className="w-6 h-6" />
@@ -1396,27 +1390,25 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                 {/* Content */}
                 <div className="p-8 space-y-6">
                   <h2 className="text-cream text-2xl font-light tracking-wide">Founders Circle</h2>
-                  
+
                   <div className="space-y-4 text-cream/90 leading-relaxed">
                     <p>
                       Imagine a city where most rooms are already full. The restaurants are busy, the clubs are polished, the guest lists are long. But the thing that is actually scarce is not another dining room or another bar; it is the feeling that, when you walk into a place, everyone you meet could change the trajectory of your life — and not only in London.
                     </p>
-                    
+
                     <p>
                       The <span className="text-gold">Founders Circle</span> at Curzon House is built around that scarcity. It is capped at <span className="text-gold">150 people</span> for a reason that is both practical and psychological: it is small enough that you can know the room, and large enough that the room can surprise you. Each founder arrives with their own gravity – a family office in Dubai, a studio in Paris, a fund in Mayfair, a collection in New York – and the house's job is to quietly bend those orbits toward one another.
                     </p>
-                    
+
                     <p>
                       To make that happen, each member is paired with a <span className="text-gold">Personal Introductions Liaison</span>. Think of this as a professionalised version of the best host you have ever known. Their craft is simple but rare: they know who you are, what you are building, what you are curious about, and they spend their days turning cold encounters into warm ones. Software does the counting – social reach, shared interests, overlapping histories – and the liaison does the human part: "You two need to talk," "Sit here tonight," "Stay five more minutes."
                     </p>
-                    
+
                     <p>
                       From there, the effects compound. A <span className="text-gold">Michelin‑calibre restaurant</span> that behaves like a salon, not a trophy. Programming that treats fashion, art, and ideas as working materials, not decorations. A calendar that feels closer to the release schedule of a great luxury house than the noticeboard of a club. Over time, the value of the <span className="text-gold">Founders Circle</span> is not the priority table, the early booking, or even the events; it is the quiet accumulation of conversations that could not have happened anywhere else at 8 p.m. on a Tuesday.
                     </p>
-                    
-                    <p>
-                      The fee – <span className="text-gold">£10,000</span> to join, <span className="text-gold">£2,500</span> each year – is there, of course. But for the right <span className="text-gold">150 people</span>, the price becomes almost incidental. What they are really buying is a long‑term position in a carefully engineered social system: a place in London where the probability of the right encounter is permanently, deliberately tilted in their favour.
-                    </p>
+
+
                   </div>
                 </div>
               </div>
