@@ -1127,7 +1127,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>
-                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£2,500</td>
                             </tr>
                             <tr className="border-b border-gold/10">
                               <td className="py-3 px-4">
@@ -1147,7 +1147,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£10,000</td>
-                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£2,500</td>
                             </tr>
                             <tr>
                               <td className="py-3 px-4">
@@ -1166,7 +1166,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£20,000</td>
-                              <td className="text-right py-3 px-4 text-cream">£2,000</td>
+                              <td className="text-right py-3 px-4 text-cream">£2,500</td>
                             </tr>
                           </tbody>
                         </table>
