@@ -73,8 +73,8 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
     <>
       {/* Top header */}
       <header className={`fixed top-0 left-0 right-0 z-50 px-8 md:px-16 lg:px-24 py-6 ${isLightPage
-          ? 'bg-cream/95 backdrop-blur-sm'
-          : 'bg-transparent'
+        ? 'bg-cream/95 backdrop-blur-sm'
+        : 'bg-transparent'
         }`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -1406,6 +1406,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
 
                     <p>
                       From there, the effects compound. A <span className="text-gold">Michelin‑calibre restaurant</span> that behaves like a salon, not a trophy. Programming that treats fashion, art, and ideas as working materials, not decorations. A calendar that feels closer to the release schedule of a great luxury house than the noticeboard of a club. Over time, the value of the <span className="text-gold">Founders Circle</span> is not the priority table, the early booking, or even the events; it is the quiet accumulation of conversations that could not have happened anywhere else at 8 p.m. on a Tuesday.
+                    </p>
+
+                    <p>
+                      Curzon House – a carefully engineered social system: a place in London where the probability of the right encounter is permanently, deliberately tilted in your favour.
                     </p>
 
 
