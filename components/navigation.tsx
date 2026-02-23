@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown, ChevronUp, Info } from "lucide-react"
+import { Menu, X, ChevronDown, ChevronUp, Info, FileText, ImageIcon, Upload } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -49,6 +49,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [title, setTitle] = useState<string>("")
   const [membershipType, setMembershipType] = useState<string>("")
+  const [cvFile, setCvFile] = useState<File | null>(null)
+  const [photoFile, setPhotoFile] = useState<File | null>(null)
+  const [additionalFiles, setAdditionalFiles] = useState<File[]>([])
   const { toast } = useToast()
   const { user } = useAuth()
   const { isAdmin } = useAdmin()
@@ -939,16 +942,45 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         const formData = new FormData(e.currentTarget)
 
                         // Validate required fields
-                        const requiredFields = ['fullName', 'title', 'telephone1', 'email', 'dateOfBirth', 'residency', 'nationality', 'occupation', 'linkedin', 'companyName', 'membership']
-                        const missingFields = requiredFields.filter(field => {
+                        const requiredFields = ['fullName', 'title', 'telephone1', 'email', 'dateOfBirth', 'residency', 'nationality', 'occupation', 'linkedin', 'companyName', 'address', 'personalBiography', 'personalInterests', 'membership']
+                        const missingFields: string[] = []
+                        
+                        // Check form fields
+                        requiredFields.forEach(field => {
                           if (field === 'membership') {
-                            return !membershipType
+                            if (!membershipType) missingFields.push('Membership Type')
+                          } else if (field === 'title') {
+                            if (!title) missingFields.push('Salutation')
+                          } else {
+                            const value = formData.get(field)
+                            if (!value || (typeof value === 'string' && value.trim() === '')) {
+                              // Convert field name to readable label
+                              const labels: { [key: string]: string } = {
+                                'fullName': 'Full Name',
+                                'telephone1': 'Telephone',
+                                'email': 'Email',
+                                'dateOfBirth': 'Date of Birth',
+                                'residency': 'Residency',
+                                'nationality': 'Nationality',
+                                'occupation': 'Occupation',
+                                'linkedin': 'LinkedIn',
+                                'companyName': 'Company Name',
+                                'address': 'Address',
+                                'personalBiography': 'Tell us your story',
+                                'personalInterests': 'Personal Interests'
+                              }
+                              missingFields.push(labels[field] || field)
+                            }
                           }
-                          if (field === 'title') {
-                            return !title
-                          }
-                          return !formData.get(field)
                         })
+
+                        // Check file uploads
+                        if (!cvFile) {
+                          missingFields.push('CV/Resume')
+                        }
+                        if (!photoFile) {
+                          missingFields.push('Photo')
+                        }
 
                         if (missingFields.length > 0) {
                           toast({
@@ -978,11 +1010,17 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                           companyAddress: formData.get('companyAddress') as string || undefined,
                           personalInterests: formData.get('personalInterests') as string || undefined,
                           personalBiography: formData.get('personalBiography') as string || undefined,
+                          subscriptionPreference: formData.get('subscriptionPreference') as string || undefined,
                           membershipType: membershipType as "standard" | "elite" | "architect",
                         }
 
-                        // Submit to Firebase
-                        const docId = await submitMembershipApplication(application)
+                        // Submit to Firebase with file uploads
+                        const docId = await submitMembershipApplication(
+                          application,
+                          cvFile || undefined,
+                          photoFile || undefined,
+                          additionalFiles.length > 0 ? additionalFiles : undefined
+                        )
 
                         toast({
                           title: "Application Submitted Successfully",
@@ -993,6 +1031,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                         e.currentTarget.reset()
                         setTitle("")
                         setMembershipType("")
+                        setCvFile(null)
+                        setPhotoFile(null)
+                        setAdditionalFiles([])
                       } catch (error) {
                         console.error("Error submitting application:", error)
                         toast({
@@ -1011,9 +1052,9 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       <div className="space-y-1">
                         <Label htmlFor="title" className="text-cream text-sm">Salutation</Label>
                         <Select name="title" value={title} onValueChange={setTitle}>
-                          <SelectTrigger className="bg-background border-gold/20 text-cream h-9 text-sm">
+                        <SelectTrigger className="bg-background border-gold/20 text-cream h-9 text-sm">
                             <SelectValue placeholder="Select salutation" />
-                          </SelectTrigger>
+                        </SelectTrigger>
                           <SelectContent className="z-[110]">
                             <SelectItem value="mr">Mr.</SelectItem>
                             <SelectItem value="mrs">Mrs.</SelectItem>
@@ -1026,10 +1067,10 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                             <SelectItem value="lord">Lord</SelectItem>
                             <SelectItem value="lady">Lady</SelectItem>
                             <SelectItem value="mx">Mx.</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      
+                        </SelectContent>
+                      </Select>
+                    </div>
+
                       {/* Row 1: Name, Address */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div className="space-y-1">
@@ -1118,6 +1159,119 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                       />
                     </div>
 
+                    {/* Subscription Preference */}
+                    <div className="space-y-4 pt-8">
+                      <div>
+                        <Label htmlFor="subscriptionPreference" className="text-cream text-2xl font-light tracking-wide">Subscription Preference</Label>
+                        <p className="text-cream/70 text-sm mt-1 italic">Why are you choosing this membership tier and what do you hope to get out of it?</p>
+                      </div>
+                      <Textarea 
+                        id="subscriptionPreference" 
+                        name="subscriptionPreference" 
+                        rows={12} 
+                        className="bg-background border-gold/40 text-cream text-lg leading-relaxed placeholder:text-cream/40 focus:border-gold focus:ring-1 focus:ring-gold/50" 
+                        placeholder="Tell us why you've chosen this membership tier and what you hope to gain from your membership at Curzon House..." 
+                      />
+                    </div>
+
+                    {/* Document Uploads */}
+                    <div className="space-y-4 pt-8 border-t border-gold/20">
+                      <Label className="text-cream text-lg">Documents</Label>
+                      <p className="text-cream/70 text-sm italic mb-4">Upload your CV, photo, and any additional documents</p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* CV Upload */}
+                        <div className="space-y-2">
+                          <Label htmlFor="cv" className="text-cream text-sm">CV/Resume</Label>
+                          <div className="relative">
+                            <input
+                              id="cv"
+                              type="file"
+                              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                              onChange={(e) => setCvFile(e.target.files?.[0] || null)}
+                              className="hidden"
+                            />
+                            <label
+                              htmlFor="cv"
+                              className="flex items-center gap-3 p-4 border-2 border-dashed border-gold/20 rounded-lg cursor-pointer hover:border-gold/40 transition-colors bg-background"
+                            >
+                              <FileText className="w-5 h-5 text-cream/60" />
+                              <div className="flex-1">
+                                <p className="text-sm text-cream/80">
+                                  {cvFile ? cvFile.name : "Upload CV (PDF, DOC, DOCX - Max 10MB)"}
+                                </p>
+                              </div>
+                              <Upload className="w-4 h-4 text-cream/60" />
+                            </label>
+                          </div>
+                        </div>
+
+                        {/* Photo Upload */}
+                        <div className="space-y-2">
+                          <Label htmlFor="photo" className="text-cream text-sm">Photo</Label>
+                          <div className="relative">
+                            <input
+                              id="photo"
+                              type="file"
+                              accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                              onChange={(e) => setPhotoFile(e.target.files?.[0] || null)}
+                              className="hidden"
+                            />
+                            <label
+                              htmlFor="photo"
+                              className="flex items-center gap-3 p-4 border-2 border-dashed border-gold/20 rounded-lg cursor-pointer hover:border-gold/40 transition-colors bg-background"
+                            >
+                              <ImageIcon className="w-5 h-5 text-cream/60" />
+                              <div className="flex-1">
+                                <p className="text-sm text-cream/80">
+                                  {photoFile ? photoFile.name : "Upload Photo (JPG, PNG, WEBP, GIF - Max 5MB)"}
+                                </p>
+                              </div>
+                              <Upload className="w-4 h-4 text-cream/60" />
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Additional Documents */}
+                      <div className="space-y-2">
+                        <Label htmlFor="additionalDocs" className="text-cream text-sm">Additional Documents (Optional)</Label>
+                        <div className="relative">
+                          <input
+                            id="additionalDocs"
+                            type="file"
+                            multiple
+                            accept=".pdf,.doc,.docx,image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                            onChange={(e) => {
+                              const files = Array.from(e.target.files || []);
+                              setAdditionalFiles(files);
+                            }}
+                            className="hidden"
+                          />
+                          <label
+                            htmlFor="additionalDocs"
+                            className="flex items-center gap-3 p-4 border-2 border-dashed border-gold/20 rounded-lg cursor-pointer hover:border-gold/40 transition-colors bg-background"
+                          >
+                            <FileText className="w-5 h-5 text-cream/60" />
+                            <div className="flex-1">
+                              <p className="text-sm text-cream/80">
+                                {additionalFiles.length > 0 
+                                  ? `${additionalFiles.length} file(s) selected` 
+                                  : "Upload additional documents (PDF, DOC, DOCX, Images - Max 10MB each)"}
+                              </p>
+                            </div>
+                            <Upload className="w-4 h-4 text-cream/60" />
+                          </label>
+                        </div>
+                        {additionalFiles.length > 0 && (
+                          <div className="mt-2 space-y-1">
+                            {additionalFiles.map((file, index) => (
+                              <p key={index} className="text-xs text-cream/60 pl-2">{file.name}</p>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
 
                     {/* Membership Selection */}
                     <div className="space-y-4 pt-4 border-t border-gold/20">
@@ -1147,7 +1301,7 @@ export function Navigation({ sections, activeIndex, onNavigate }: NavigationProp
                                   />
                                   <div className="flex-1">
                                     <div className="text-cream">Standard Membership</div>
-                                  </div>
+                                    </div>
                                 </label>
                               </td>
                               <td className="text-right py-3 px-4 text-cream">£2,000</td>

@@ -41,27 +41,22 @@ service firebase.storage {
     }
     
     // Membership Application Documents
-    // Authenticated users upload documents/images (similar to job applications)
-    // Admins can read all documents for evaluation
+    // Allow anyone to upload documents/images (public form submission)
+    // File size limits: Documents max 10MB, Images max 5MB
     match /membership-applications/{allPaths=**} {
-      // Authenticated users can upload documents and images
-      // File size limits: Documents max 10MB, Images max 5MB
-      allow write: if request.auth != null
-                   && request.resource.size < 10 * 1024 * 1024 // 10MB max
+      // Allow anyone to upload CVs, photos, and documents (public form submissions)
+      allow write: if request.resource.size < 10 * 1024 * 1024 // 10MB max
                    && (
-                     // PDF files
-                     (request.resource.name.matches('.*\\.(pdf)$') && request.resource.contentType.matches('application/pdf'))
+                     // CV/Document files: PDF, DOC, DOCX
+                     (request.resource.name.matches('.*\\.(pdf|doc|docx)$') && request.resource.contentType.matches('application/(pdf|msword|vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document)'))
                      ||
-                     // Document files
-                     (request.resource.name.matches('.*\\.(doc|docx)$') && request.resource.contentType.matches('application/(msword|vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document)'))
-                     ||
-                     // Image files
+                     // Photo files: Images only
                      (request.resource.name.matches('.*\\.(jpg|jpeg|png|webp|gif)$') && request.resource.contentType.matches('image/.*'))
                    );
       
-      // Authenticated users can read (they'll only access their own via app logic)
-      // Admins can read all for evaluation
-      allow read: if request.auth != null;
+      // Allow public read access (needed for getDownloadURL after upload)
+      // Files are stored with download URLs in Firestore, so public read is acceptable
+      allow read: if true;
     }
     
     // Deny all other access
